@@ -316,7 +316,8 @@ body {
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
-  line-height: 18px; /* 120% */
+  line-height: 18px;
+  /* 120% */
   letter-spacing: 0.6px;
 }
 @media screen and (min-width: 480px) {
@@ -327,7 +328,8 @@ body {
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
-    line-height: 20px; /* 111.111% */
+    line-height: 20px;
+    /* 111.111% */
     letter-spacing: 1.44px;
   }
 }
@@ -351,7 +353,8 @@ body {
   font-family: "Noto Sans TC", "Figtree", sans-serif;
   font-size: 15px;
   font-weight: 700;
-  line-height: 17px; /* 113.333% */
+  line-height: 17px;
+  /* 113.333% */
   letter-spacing: 0.9px;
   position: relative;
   transition: all 0.3s ease-in-out;
@@ -369,7 +372,8 @@ body {
   .intro-modal__btn--start {
     height: 45px;
     font-size: 17px;
-    line-height: 19px; /* 111.765% */
+    line-height: 19px;
+    /* 111.765% */
     letter-spacing: 0.85px;
   }
 }
@@ -464,7 +468,8 @@ body {
   text-align: left;
   font-style: normal;
   font-weight: 700;
-  line-height: 19px; /* 135.714% */
+  line-height: 19px;
+  /* 135.714% */
   letter-spacing: 0.56px;
 }
 .intro-modal__icon--reminder .text-reminder.visible {
@@ -536,7 +541,8 @@ body {
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 19px; /* 135.714% */
+  line-height: 19px;
+  /* 135.714% */
   letter-spacing: 0.56px;
 }
 .intro-modal__icon--inffits .text-inffits p a {
@@ -622,7 +628,8 @@ body {
   font-size: 15px;
   font-style: normal;
   font-weight: 700 !important;
-  line-height: 17px; /* 113.333% */
+  line-height: 17px;
+  /* 113.333% */
   letter-spacing: 0.9px;
 }
 .image-container:active {
@@ -637,7 +644,8 @@ body {
   font-size: 15px;
   font-style: normal;
   font-weight: 700 !important;
-  line-height: 17px; /* 113.333% */
+  line-height: 17px;
+  /* 113.333% */
   letter-spacing: 0.9px;
 }
 .image-container > div {
@@ -668,7 +676,8 @@ body {
   font-weight: 400 !important;
   line-height: 17px !important;
   letter-spacing: 0.6px !important;
-  white-space: nowrap; /* 強制文字不換行 */
+  white-space: nowrap;
+  /* 強制文字不換行 */
   transition: color 0.3s ease-in-out !important;
 }
 @media screen and (min-width: 480px) {
@@ -755,7 +764,8 @@ body {
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
-  line-height: 17px; /* 113.333% */
+  line-height: 17px;
+  /* 113.333% */
   letter-spacing: 0.9px;
   -ms-flex-positive: 1;
       flex-grow: 1;
@@ -831,7 +841,8 @@ body {
   font-size: 13px;
   font-style: normal;
   font-weight: 500;
-  line-height: 16px; /* 123.077% */
+  line-height: 16px;
+  /* 123.077% */
   letter-spacing: 1.04px;
   transition: all 500ms ease-out;
 }
@@ -902,7 +913,8 @@ body {
   font-style: normal;
   font-size: 15px;
   font-weight: 700;
-  line-height: 18px; /* 120% */
+  line-height: 18px;
+  /* 120% */
   letter-spacing: 0.6px;
   margin-bottom: 0 !important;
   padding-bottom: 3px;
@@ -911,7 +923,8 @@ body {
   .c_header .header-text span {
     text-align: center;
     font-size: 18px;
-    line-height: 20px; /* 117.647% */
+    line-height: 20px;
+    /* 117.647% */
     letter-spacing: 1.44px;
     padding-bottom: 8px;
   }
@@ -923,13 +936,15 @@ body {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 16px; /* 114.286% */
+  line-height: 16px;
+  /* 114.286% */
   letter-spacing: 0.84px;
 }
 @media screen and (min-width: 480px) {
   .c_header .header-text p {
     font-size: 16px;
-    line-height: 18px; /* 112.5% */
+    line-height: 18px;
+    /* 112.5% */
     letter-spacing: 0.8px;
   }
 }
@@ -949,14 +964,16 @@ body {
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
-  line-height: 15px; /* 100% */
+  line-height: 15px;
+  /* 100% */
   letter-spacing: 0.6px;
 }
 @media screen and (min-width: 480px) {
   .loading-text {
     text-align: center;
     font-size: 18px;
-    line-height: 21px; /* 116.667% */
+    line-height: 21px;
+    /* 116.667% */
     letter-spacing: 1.08px;
   }
 }
@@ -1063,7 +1080,8 @@ a.update_delete .item-title.line-ellipsis-2 {
   font-size: 13px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18px; /* 138.462% */
+  line-height: 18px;
+  /* 138.462% */
   letter-spacing: 1.3px;
   font-style: normal;
   overflow: hidden;
@@ -1078,7 +1096,8 @@ a.update_delete .item-title.line-ellipsis-2 {
   a.update_delete .item-title.line-ellipsis-2 {
     margin-bottom: 14px;
     font-size: 15px;
-    line-height: 20px; /* 133.333% */
+    line-height: 20px;
+    /* 133.333% */
     letter-spacing: 1.5px;
   }
 }
@@ -1207,12 +1226,6 @@ a.update_delete .discount-content .item-price--original {
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: -38px;
-  width: 100%;
-  height: 100%;
-  scale: 0.75;
   box-sizing: border-box;
 }
 
@@ -1222,7 +1235,8 @@ a.update_delete .discount-content .item-price--original {
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 19px; /* 135.714% */
+  line-height: 19px;
+  /* 135.714% */
   letter-spacing: 0.28px;
 }
 
@@ -1238,7 +1252,8 @@ a.update_delete .discount-content .item-price--original {
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
-  line-height: 19px; /* 126.667% */
+  line-height: 19px;
+  /* 126.667% */
   letter-spacing: 0.3px;
 }
 
@@ -1260,7 +1275,8 @@ a.update_delete .discount-content .item-price--original {
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 19px; /* 135.714% */
+  line-height: 19px;
+  /* 135.714% */
   letter-spacing: 0.28px;
 }
 
@@ -1272,7 +1288,8 @@ a.update_delete .discount-content .item-price--original {
 
 .intro-coupon-modal__content-container-content {
   box-sizing: border-box;
-  position: relative; /* 讓 ::before 以這個元素定位 */
+  position: relative;
+  /* 讓 ::before 以這個元素定位 */
   display: -ms-flexbox;
   display: flex;
   width: 100%;
@@ -1335,11 +1352,15 @@ a.update_delete .discount-content .item-price--original {
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
-  line-height: 21px; /* 175% */
+  line-height: 21px;
+  /* 175% */
   max-width: 185px;
-  white-space: nowrap; /* 不換行 */
-  overflow: hidden; /* 超出部分隱藏 */
-  text-overflow: ellipsis; /* 用省略號表示超出部分 */
+  white-space: nowrap;
+  /* 不換行 */
+  overflow: hidden;
+  /* 超出部分隱藏 */
+  text-overflow: ellipsis;
+  /* 用省略號表示超出部分 */
 }
 
 .intro-coupon-modal__content-container-content-footer {
@@ -1356,30 +1377,35 @@ a.update_delete .discount-content .item-price--original {
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18px; /* 150% */
+  line-height: 18px;
+  /* 150% */
   letter-spacing: 0.24px;
   text-align: left;
   display: -webkit-box;
-  -webkit-box-orient: vertical; /* 垂直排列 */
-  overflow: auto; /* 超出顯示滾動條 */
-  max-height: 36px; /* 18px * 2 行，對應 line-height */
+  -webkit-box-orient: vertical;
+  /* 垂直排列 */
+  overflow: auto;
+  /* 超出顯示滾動條 */
+  max-height: 36px;
+  /* 18px * 2 行，對應 line-height */
 }
 
 .intro-coupon-modal__content-container-content-footer .intro-coupon-modal__btn--coupon {
   text-align: center;
   font-family: "Noto Sans TC", "Figtree", sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18px; /* 150% */
-  letter-spacing: 0.24px;
+  line-height: 18px;
+  /* 150% */
+  letter-spacing: 0.28px;
   display: -ms-flexbox;
   display: flex;
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
   min-width: fit-content;
-  width: 48px;
-  height: 24px;
+  width: 50px;
+  height: 30px;
   -ms-flex-pack: center;
       justify-content: center;
   -ms-flex-align: center;
@@ -1421,7 +1447,8 @@ a.update_delete .discount-content .item-price--original {
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 19px; /* 135.714% */
+  line-height: 19px;
+  /* 135.714% */
   letter-spacing: 0.28px;
 }
 
@@ -1449,27 +1476,29 @@ a.update_delete .discount-content .item-price--original {
   display: block;
   color: #1e1e19;
   font-family: "Noto Sans TC", "Figtree", sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18px; /* 150% */
-  letter-spacing: 0.72px;
+  line-height: 18px;
+  /* 128.571% */
+  letter-spacing: 0.84px;
 }
 
 .intro-coupon-modal__btn--start {
   border: none;
   color: #fff;
   text-align: center;
-  /* Noto Sans TC 12 */
+  /* Noto Sans TC 14 */
   font-family: "Noto Sans TC", "Figtree", sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18px; /* 150% */
+  line-height: 18px;
+  /* 128.571% */
   display: -ms-flexbox;
   display: flex;
-  width: 91px;
-  height: 27px;
+  width: 90px;
+  height: 30px;
   -ms-flex-pack: center;
       justify-content: center;
   -ms-flex-align: center;
@@ -1516,7 +1545,8 @@ a.update_delete .discount-content .item-price--original {
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 19px; /* 118.75% */
+    line-height: 19px;
+    /* 118.75% */
     letter-spacing: 0.32px;
     padding-bottom: 3px;
   }
@@ -1531,7 +1561,8 @@ a.update_delete .discount-content .item-price--original {
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
-    line-height: 19px; /* 105.556% */
+    line-height: 19px;
+    /* 105.556% */
     letter-spacing: 0.36px;
     padding-bottom: 6px;
   }
@@ -1552,7 +1583,8 @@ a.update_delete .discount-content .item-price--original {
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 19px; /* 118.75% */
+    line-height: 19px;
+    /* 118.75% */
     letter-spacing: 0.32px;
   }
   #intro-coupon-modal__content-coupons {
@@ -1560,7 +1592,8 @@ a.update_delete .discount-content .item-price--original {
     overflow-y: auto;
   }
   .intro-coupon-modal__content-container-content {
-    position: relative; /* 讓 ::before 以這個元素定位 */
+    position: relative;
+    /* 讓 ::before 以這個元素定位 */
     display: -ms-flexbox;
     display: flex;
     width: 100%;
@@ -1614,11 +1647,15 @@ a.update_delete .discount-content .item-price--original {
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
-    line-height: 21px; /* 131.25% */
+    line-height: 21px;
+    /* 131.25% */
     max-width: 320px;
-    white-space: nowrap; /* 不換行 */
-    overflow: hidden; /* 超出部分隱藏 */
-    text-overflow: ellipsis; /* 用省略號表示超出部分 */
+    white-space: nowrap;
+    /* 不換行 */
+    overflow: hidden;
+    /* 超出部分隱藏 */
+    text-overflow: ellipsis;
+    /* 用省略號表示超出部分 */
   }
   .intro-coupon-modal__content-container-content-footer {
     display: -ms-flexbox;
@@ -1635,13 +1672,17 @@ a.update_delete .discount-content .item-price--original {
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
-    line-height: 18px; /* 150% */
+    line-height: 18px;
+    /* 150% */
     letter-spacing: 0.24px;
     padding-right: 8px;
     display: -webkit-box;
-    -webkit-box-orient: vertical; /* 垂直排列 */
-    overflow: auto; /* 超出顯示滾動條 */
-    max-height: 36px; /* 18px * 2 行，對應 line-height */
+    -webkit-box-orient: vertical;
+    /* 垂直排列 */
+    overflow: auto;
+    /* 超出顯示滾動條 */
+    max-height: 36px;
+    /* 18px * 2 行，對應 line-height */
   }
   .intro-coupon-modal__content-container-content-footer .intro-coupon-modal__btn--coupon {
     /* Noto Sans TC 16 */
@@ -1649,7 +1690,8 @@ a.update_delete .discount-content .item-price--original {
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 22px; /* 137.5% */
+    line-height: 22px;
+    /* 137.5% */
     letter-spacing: 0.32px;
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -1691,7 +1733,8 @@ a.update_delete .discount-content .item-price--original {
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 19px; /* 118.75% */
+    line-height: 19px;
+    /* 118.75% */
     letter-spacing: 0.32px;
   }
   .intro-coupon-modal__footer-content {
@@ -1718,7 +1761,8 @@ a.update_delete .discount-content .item-price--original {
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 18px; /* 112.5% */
+    line-height: 18px;
+    /* 112.5% */
     letter-spacing: 0.96px;
   }
   .intro-coupon-modal__btn--start {
@@ -1745,7 +1789,8 @@ a.update_delete .discount-content .item-price--original {
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 22px; /* 137.5% */
+    line-height: 22px;
+    /* 137.5% */
     letter-spacing: 0.32px;
   }
 }/*# sourceMappingURL=iframe_ai_pd_style.css.map */

@@ -33,7 +33,7 @@
       customCSS.type = "text/css";
       // customCSS.href = "./../css/iframe_ai_pd_style.css";
       customCSS.href =
-        window.location.port === "5501"
+        window.location.port === "5503"
           ? "./../css/iframe_ai_pd_style.css"
           : "https://cdn.jsdelivr.net/gh/lmybs112/ts-iframe@1.0.28/css/iframe_ai_pd_style.css";
       document.head.appendChild(customCSS);
@@ -159,7 +159,7 @@
 
           // 確保 iframe 加載完成再傳送 postMessage
           iframeElement.onload = () => {
-            if (window.location.port === "5501") {
+            if (window.location.port === "5503") {
               const iframe_preview_obj = {
                 id: "1746493728203",
                 header: "from_preview",

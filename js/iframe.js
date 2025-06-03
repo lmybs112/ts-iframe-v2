@@ -11,6 +11,7 @@ let all_Route;
 let isFirst = true;
 let throttleTimer = null;
 let formatTagGroupMap = {};
+let isFetchCouponCalled = false;
 let isForPreview = window.location.href
   .toLocaleLowerCase()
   .includes("myinffits");
@@ -267,7 +268,7 @@ const getEmbedded = async () => {
       Imgsrc: jsonDataItem.image_link,
       Link: jsonDataItem.link,
       ItemName: jsonDataItem.title,
-      sale_price: jsonDataItem.sale_price,
+      sale_price:  jsonDataItem.sale_price,
       price: jsonDataItem.price,
       ...jsonDataItem,
     }));
@@ -619,6 +620,8 @@ function deepEqual(obj1, obj2) {
 }
 
 const fetchCoupon = async () => {
+  if (isFetchCouponCalled) return;
+  isFetchCouponCalled = true;
   const requestData = {
     Brand: Brand,
   };
@@ -656,7 +659,7 @@ const fetchCoupon = async () => {
                 </div>
               </div>
             </div>
-      `
+      `;
         })
         .join("")
     );
@@ -668,8 +671,9 @@ const fetchCoupon = async () => {
       customPadding: "0px",
       backgroundColor: "#fff",
       title: "",
-      arrowPosition: 'none', // none, center, top (default: center)
+      arrowPosition: "none", // none, center, top (default: center)
       autoplay: false,
+      hide_discount: true, // 隱藏折扣
       breakpoints: {
         480: {
           slidesPerView: 3.5,
@@ -683,7 +687,7 @@ const fetchCoupon = async () => {
           },
         },
         0: {
-          slidesPerView: 2.5,
+          slidesPerView: 3.5,
           slidesPerGroup: 1,
           spaceBetween: 8,
           speed: 750,
@@ -695,6 +699,46 @@ const fetchCoupon = async () => {
         },
       },
     });
+    // 响应父页面的高度请求
+    window.addEventListener(
+      "message",
+      function (event) {
+        if (event.data && event.data.type === "requestHeight") {
+          // 获取当前文档高度
+          const height =
+            document.documentElement.offsetHeight || document.body.offsetHeight;
+          // 发送高度信息给父页面
+          window.parent.postMessage(
+            {
+              type: "setHeight",
+              height: height,
+            },
+            "*"
+          );
+        }
+      },
+      false
+    );
+
+    // 页面加载和内容变化时也发送高度
+    function sendHeight() {
+      const height =
+        document.documentElement.offsetHeight || document.body.offsetHeight;
+      window.parent.postMessage(
+        {
+          type: "setHeight",
+          height: height,
+        },
+        "*"
+      );
+    }
+
+    // 页面加载完成后发送高度
+    window.addEventListener("load", sendHeight);
+    // 当窗口大小改变时发送高度
+    window.addEventListener("resize", sendHeight);
+    // 定期检查高度变化
+    setInterval(sendHeight, 500);
 
     $(".intro-content.intro-coupon-modal__content").show();
     $(".intro-content.intro-modal__content").hide();
@@ -702,7 +746,6 @@ const fetchCoupon = async () => {
     $(".intro-content.intro-coupon-modal__content").hide();
     $(".intro-content.intro-modal__content").show();
   }
-
 };
 
 const fetchData = async () => {

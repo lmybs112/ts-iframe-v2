@@ -10,6 +10,7 @@
         customPadding: null,
         arrowPosition: "center", // 默認箭頭位置
         autoplay: true, // 默認開啓輪播
+        hide_discount: false, // 默認不隱藏折扣
         breakpoints: {
           768: {
             slidesPerView: 3,
@@ -47,6 +48,7 @@
         brand,
         containerId,
         customEdm,
+        hide_discount,
         backgroundColor,
         title,
         autoplay,
@@ -1098,7 +1100,7 @@
                     ? customEdm
                     : getRandomElements(response["bhv"], 6).map((item) => {
                         let newItem = Object.assign({}, item);
-                        newItem.sale_price = item.sale_price
+                        newItem.sale_price = hide_discount ? null :item.sale_price
                           ? parseInt(
                               item.sale_price.replace(/\D/g, "")
                             ).toLocaleString()
