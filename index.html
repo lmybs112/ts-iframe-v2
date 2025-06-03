@@ -161,21 +161,21 @@
           iframeElement.onload = () => {
             if (window.location.port === "5501") {
               const iframe_preview_obj = {
-                id: "1747032497025",
+                id: "1746493728203",
                 header: "from_preview",
-                brand: "JERSCY",
+                brand: "JSYTEST",
               };
               // 傳送 postMessage 到 iframe
               iframe_container.postMessage(iframe_preview_obj, "*");
             } else {
               // 透過 prompt 輸入 id 和 brand
-              const id = prompt("請輸入 ID：", "1747032497025");
-              const brand = prompt("請輸入品牌名稱：", "JERSCY");
+              const id = prompt("請輸入 ID：", "1746493728203");
+              const brand = prompt("請輸入品牌名稱：", "JSYTEST");
 
               const iframe_preview_obj = {
-                id: id || "1747032497025",
+                id: id || "1746493728203",
                 header: "from_preview",
-                brand: brand || "JERSCY",
+                brand: brand || "JSYTEST",
               };
               // 傳送 postMessage 到 iframe
               iframe_container.postMessage(iframe_preview_obj, "*");
