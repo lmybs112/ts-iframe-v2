@@ -786,9 +786,15 @@
               }
   
               // 调整容器内边距
-              $(show_up_position_before)
-                .css("padding", customPadding ? customPadding : newContainerWidth >= 768 ? "32px" : "8px")
+              if (!!customPadding) {
+                $(show_up_position_before)
+                .css("padding", customPadding)
+              }else{
+                $(show_up_position_before)
+                .css("padding", newContainerWidth >= 768 ? "32px" : "8px")
                 .toggleClass("small-container", newContainerWidth < 768);
+              }
+   
             });
   
             function getGroupByTid(tid) {
