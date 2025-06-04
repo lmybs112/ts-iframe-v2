@@ -786,15 +786,12 @@
               }
   
               // 调整容器内边距
-              if (!!customPadding) {
-                $(show_up_position_before)
-                .css("padding", customPadding)
-              }else{
-                $(show_up_position_before)
-                .css("padding", newContainerWidth >= 768 ? "32px" : "8px")
+              $(show_up_position_before)
+                .css("padding", !!customPadding ? customPadding : newContainerWidth >= 768 ? "32px" : "8px")
                 .toggleClass("small-container", newContainerWidth < 768);
-              }
-   
+                if(!!customPadding){
+                  $(`#${containerId} ,small-container`).css("padding", customPadding);
+                }
             });
   
             function getGroupByTid(tid) {
@@ -811,8 +808,11 @@
               const containerWidth = $(show_up_position_before).width();
               $(show_up_position_before).append(embeddedContainer);
               $(show_up_position_before)
-                .css("padding", containerWidth >= 768 ? "32px" : "8px")
+                .css("padding", !!customPadding ? customPadding : containerWidth >= 768 ? "32px" : "8px")
                 .toggleClass("small-container", containerWidth < 768);
+                if(!!customPadding){
+                  $(`#${containerId} ,small-container`).css("padding", customPadding);
+                }
   
               const newContainerWidth = $(show_up_position_before).width();
               if (arrowPosition === "none") {
