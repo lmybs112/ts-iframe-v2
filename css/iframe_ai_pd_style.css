@@ -1219,7 +1219,7 @@ a.update_delete .discount-content .item-price--original {
       justify-content: flex-start;
   width: 100%;
   position: relative;
-  min-height: 152px;
+  padding-bottom: 8px;
 }
 
 #hot-sale {
@@ -1340,7 +1340,7 @@ a.update_delete .discount-content .item-price--original {
   -ms-flex-align: start;
       align-items: flex-start;
   width: 100%;
-  gap: 8px;
+  gap: 2px;
 }
 
 .intro-coupon-modal__content-container-content-text > p {
@@ -1435,7 +1435,7 @@ a.update_delete .discount-content .item-price--original {
   -ms-flex-align: center;
       align-items: center;
   width: 100%;
-  gap: 2px;
+  gap: 0;
 }
 
 .intro-coupon-modal__footer h3 {
@@ -1528,7 +1528,8 @@ a.update_delete .discount-content .item-price--original {
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
-    padding-bottom: 18px;
+    padding-bottom: 16px;
+    gap: 4px;
   }
   #hot-sale {
     display: -ms-flexbox;
@@ -1575,7 +1576,7 @@ a.update_delete .discount-content .item-price--original {
         align-items: flex-start;
     gap: 12px;
     width: 100%;
-    padding-bottom: 24px;
+    padding-bottom: 16px;
   }
   .intro-coupon-modal__content-container h3 {
     font-family: "Noto Sans TC", "Figtree", sans-serif;
@@ -1640,7 +1641,7 @@ a.update_delete .discount-content .item-price--original {
     -ms-flex-align: start;
         align-items: flex-start;
     width: 100%;
-    gap: 8px;
+    gap: 2px;
   }
   .intro-coupon-modal__content-container-content-text > p {
     color: #1e1e19;
