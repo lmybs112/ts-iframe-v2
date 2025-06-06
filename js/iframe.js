@@ -640,6 +640,51 @@ const fetchCoupon = async () => {
     $("#intro-coupon-modal__content-coupons").html(
       data
         .map((item) => {
+          // 首先檢查 status
+          if (item.status === false) {
+            // 如果 status 為 false，顯示帶蒙層的優惠券
+            return `
+            <div class="intro-coupon-modal__content-container-content" style="position: relative;">
+                <div class="intro-coupon-modal__content-container-content-icon">
+                  <img src="img/coupon-vant.png" alt="coupon icon" width="25" height="25" />
+                </div>
+                <div class="intro-coupon-modal__content-container-content-line">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="2" height="44" viewBox="0 0 2 44" fill="none">
+                    <path d="M1 1V43" stroke="#E0E0DF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 8"/>
+                  </svg>
+                </div>
+                <div class="intro-coupon-modal__content-container-content-text">
+                  <p>${item.Title}</p>
+                  <div class="intro-coupon-modal__content-container-content-footer">
+                    <p>${item.Description}</p>
+                    <button class="intro-coupon-modal__btn--coupon intro-coupon-modal__btn--coupon--disabled">領取</button>
+                  </div>
+                </div>
+                <!-- 蒙層 -->
+                <div style="
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background: rgba(255, 255, 255, 0.75);
+                  backdrop-filter: blur(3px);
+                  -webkit-backdrop-filter: blur(3px);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 16px;
+                  font-weight: bold;
+                  color: #666;
+                  border-radius: 8px;
+                ">
+                  敬請期待
+                </div>
+              </div>
+        `;
+          }
+          
+          // 如果 status 為 true，執行原本的日期判斷邏輯
           // 解析 TimeValid 日期範圍
           const timeValidParts = item.TimeValid ? item.TimeValid.split('~') : [];
           const startDate = timeValidParts[0] ? new Date(timeValidParts[0]) : null;
@@ -1216,7 +1261,7 @@ const fetchData = async () => {
 
         //     if(page==totalPages){
         //         $(`#container-${target} .right-button`).css('display', 'none');
-        //     }else{
+        //     } else {
         //         $(`#container-${target} .right-button`).css('display', 'block');
         //     }
         // }
