@@ -1427,6 +1427,11 @@ a.update_delete .discount-content .item-price--original {
   color: rgba(0, 0, 0, 0.95);
 }
 
+.intro-coupon-modal__content-container-content-footer .intro-coupon-modal__btn--coupon--disabled {
+  background: #f2f2f2;
+  color: rgba(0, 0, 0, 0.95);
+}
+
 .intro-coupon-modal__footer {
   display: -ms-flexbox;
   display: flex;
