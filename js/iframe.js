@@ -964,9 +964,18 @@ const fetchData = async () => {
 
       //first route hide type_backarrow
       if (r === all_Route[0]) {
-        document.getElementById(
+        // document.getElementById(
+        //   `container-${r.replaceAll(" ", "")}-backarrow`
+        // ).style.visibility = "hidden";
+
+       const backarrow = document.getElementById(
           `container-${r.replaceAll(" ", "")}-backarrow`
-        ).style.visibility = "hidden";
+        )
+        $(backarrow).on(tap, function () {
+          $("#intro-page").show();
+          $("#container-" + all_Route[0]).hide();
+          tags_chosen = {};
+        });
       }
 
       var numPerPage = 6;
