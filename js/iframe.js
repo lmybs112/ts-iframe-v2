@@ -640,6 +640,28 @@ const fetchCoupon = async () => {
     $("#intro-coupon-modal__content-coupons").html(
       data
         .map((item) => {
+          // 解析 TimeValid 日期範圍
+          const timeValidParts = item.TimeValid ? item.TimeValid.split('~') : [];
+          const startDate = timeValidParts[0] ? new Date(timeValidParts[0]) : null;
+          const endDate = timeValidParts[1] ? new Date(timeValidParts[1]) : null;
+          const currentDate = new Date();
+          
+          // 判斷按鈕狀態
+          let buttonHtml = '';
+          if (startDate && currentDate < startDate) {
+            // 尚未開始
+            buttonHtml = '<button class="intro-coupon-modal__btn--coupon intro-coupon-modal__btn--coupon--disabled">尚未開始</button>';
+          } else if (endDate && currentDate > endDate) {
+            // 已結束
+            buttonHtml = '<button class="intro-coupon-modal__btn--coupon intro-coupon-modal__btn--coupon--disabled">已結束</button>';
+          } else {
+            // 可以領取
+            buttonHtml = `
+              <button class="intro-coupon-modal__btn--coupon intro-coupon-modal__btn--coupon--copy" onclick="copyCoupon('${item.Code}', this)">領取</button>
+              <button class="intro-coupon-modal__btn--coupon intro-coupon-modal__btn--coupon--copied">已領取</button>
+            `;
+          }
+          
           return `
           <div class="intro-coupon-modal__content-container-content">
               <div class="intro-coupon-modal__content-container-content-icon">
@@ -654,8 +676,7 @@ const fetchCoupon = async () => {
                 <p>${item.Title}</p>
                 <div class="intro-coupon-modal__content-container-content-footer">
                   <p>${item.Description}</p>
-                  <button class="intro-coupon-modal__btn--coupon intro-coupon-modal__btn--coupon--copy" onclick="copyCoupon('${item.Code}', this)">領取</button>
-                  <button class="intro-coupon-modal__btn--coupon intro-coupon-modal__btn--coupon--copied">已領取</button>
+                  ${buttonHtml}
                 </div>
               </div>
             </div>
@@ -674,6 +695,7 @@ const fetchCoupon = async () => {
       arrowPosition: "none", // none, center, top (default: center)
       autoplay: false,
       hide_discount: true, // 隱藏折扣
+      hide_size: true, // 隱藏尺寸
       breakpoints: {
         480: {
           slidesPerView: 3.5,

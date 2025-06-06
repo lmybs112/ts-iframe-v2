@@ -11,6 +11,7 @@
         arrowPosition: "center", // 默認箭頭位置
         autoplay: true, // 默認開啓輪播
         hide_discount: false, // 默認不隱藏折扣
+        hide_size: false, // 默認不隱藏尺寸
         breakpoints: {
           768: {
             slidesPerView: 3,
@@ -49,6 +50,7 @@
         containerId,
         customEdm,
         hide_discount,
+        hide_size,
         backgroundColor,
         title,
         autoplay,
@@ -1045,8 +1047,10 @@
               recom_num: "6",
               PID: ids.skuContent,
               ctype_val: JSON.stringify(["underwear"]),
-              SIZEAI: "True",
             };
+            if(!hide_size){
+              requestData.SIZEAI = "True";
+            }
             const options = {
               method: "POST",
               headers: {
