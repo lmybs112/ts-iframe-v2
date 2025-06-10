@@ -523,13 +523,16 @@
                         }
                         #${containerId} .embeddedAdContainer .embeddedAdImgContainer .embeddedItem .embeddedItem__img .embeddedItem__sizeTag {
                           position:absolute;
-                          bottom:9.5px;
-                          right:9.5px;
+                          // bottom:9.5px;
+                          // right:9.5px;
+                          bottom: 3%;
+                          right: 3%;
                           border-radius: 40px;
                           background: rgba(255, 255, 255, 0.70);
                           backdrop-filter: blur(6px);
                           display: flex;
-                          padding: 7px 14px;
+                          // padding: 7px 14px;
+                          padding: 3% 15%;
                           justify-content: center;
                           align-items: center;
                           gap: 4px;
