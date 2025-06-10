@@ -1,240 +1,264 @@
 (function () {
-    function Product_Recommendation(config = {}) {
-      // 解構參數並設置預設值
-      const defaultConfig = {
-        brand: "JERSCY",
-        containerId: "infFitsFooter",
-        customEdm: [],
-        backgroundColor: "#fff", // 默認背景色為黑色
-        title: "推薦您也可以這樣搭配", // 默認標題文字
-        customPadding: null,
-        arrowPosition: "center", // 默認箭頭位置
-        autoplay: true, // 默認開啓輪播
-        hide_discount: false, // 默認不隱藏折扣
-        hide_size: false, // 默認不隱藏尺寸
-        breakpoints: {
-          768: {
-            slidesPerView: 3,
-            slidesPerGroup: 3 * 2,
-            spaceBetween: 24,
-            grid: {
-              rows: 2,
-              fill: "row",
-            },
-          },
-          0: {
-            slidesPerView: 2,
-            slidesPerGroup: 1,
-            spaceBetween: 24,
-            speed: 750,
-            resistanceRatio: 0,
-            grid: {
-              rows: 3,
-              fill: "row",
-            },
+  function Product_Recommendation(config = {}) {
+    // 解構參數並設置預設值
+    const defaultConfig = {
+      brand: "JERSCY",
+      containerId: "infFitsFooter",
+      customEdm: [],
+      backgroundColor: "#fff", // 默認背景色為黑色
+      title: "推薦您也可以這樣搭配", // 默認標題文字
+      customPadding: null,
+      arrowPosition: "center", // 默認箭頭位置
+      autoplay: true, // 默認開啓輪播
+      hide_discount: false, // 默認不隱藏折扣
+      hide_size: false, // 默認不隱藏尺寸
+      bid: {
+        HV: "163",
+        WV: "50",
+        CC: "97.5_97.5",
+        DataItem: "0100",
+        Shoulder: "",
+        UpChest: "",
+        DnChest: "",
+        Waist: "",
+        Hip: "",
+        Brand: "JERSCY",
+        ClothID: "",
+        Sizes: "",
+        FitP: "0,0,0,0",
+        Gender: "M",
+        FMLpath: "FMLSep",
+        BUS: "0",
+        GVID: "",
+        LGVID: "",
+        MRID: "INF",
+        ga_id: "x",
+        Pattern_Prefer: "1",
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 3,
+          slidesPerGroup: 3 * 2,
+          spaceBetween: 24,
+          grid: {
+            rows: 2,
+            fill: "row",
           },
         },
-      };
-      const finalConfig = {
-        ...defaultConfig,
-        ...config,
-        breakpoints: {
-          ...defaultConfig.breakpoints,
-          ...(config?.breakpoints || {}),
+        0: {
+          slidesPerView: 2,
+          slidesPerGroup: 1,
+          spaceBetween: 24,
+          speed: 750,
+          resistanceRatio: 0,
+          grid: {
+            rows: 3,
+            fill: "row",
+          },
         },
-      };
-  
-      // 解構出常用參數
-      const {
-        brand,
-        containerId,
-        customEdm,
-        hide_discount,
-        hide_size,
-        backgroundColor,
-        title,
-        autoplay,
-        arrowPosition,
-        customPadding,
-      } = finalConfig;
-  
-      // 轉換斷點為排序後的陣列
-      const sortedBreakpoints = Object.keys(finalConfig.breakpoints)
-        .map(Number)
-        .sort((a, b) => b - a) // 從大到小排序
-        .reduce((acc, key) => {
-          acc[key] = finalConfig.breakpoints[key];
-          return acc;
-        }, {});
-      ////Global////
-      var Brand = brand;
-      // var link_included = ['inffits', 'localhost', 'personalizedpage', 'product']
-      var skuContent = shopline_sku(); //plain_me_sku()
-      var show_up_position_before = "#" + containerId;
-      var test = "A";
-      var GA4Key = "";
-  
-      // 移除全局模块注册代码
-  
-      function member_id_91APP() {
-        let i;
-        // 檢查 dataLayer 是否定義
-        if (typeof dataLayer !== "undefined") {
-          for (let i = 0; i < dataLayer.length; i++) {
-            if (dataLayer[i].Action === "Product-Detail") {
-              // 找到了符合條件的項目，執行後續動作
-              console.log('找到了符合 "gtm.load" 的事件，執行後續動作');
-              console.log("FOUND!!");
-              if (dataLayer[i].Uid !== "") member_id = dataLayer[i].Uid;
-              else member_id = "";
-  
-              // 進行其他操作（如果需要的話）
-              break;
-            } else member_id = "";
-          }
+      },
+    };
+    const finalConfig = {
+      ...defaultConfig,
+      ...config,
+      breakpoints: {
+        ...defaultConfig.breakpoints,
+        ...(config?.breakpoints || {}),
+      },
+    };
+
+    // 解構出常用參數
+    const {
+      brand,
+      containerId,
+      customEdm,
+      hide_discount,
+      hide_size,
+      bid,
+      backgroundColor,
+      title,
+      autoplay,
+      arrowPosition,
+      customPadding,
+    } = finalConfig;
+
+    // 轉換斷點為排序後的陣列
+    const sortedBreakpoints = Object.keys(finalConfig.breakpoints)
+      .map(Number)
+      .sort((a, b) => b - a) // 從大到小排序
+      .reduce((acc, key) => {
+        acc[key] = finalConfig.breakpoints[key];
+        return acc;
+      }, {});
+    ////Global////
+    var Brand = brand;
+    // var link_included = ['inffits', 'localhost', 'personalizedpage', 'product']
+    var skuContent = shopline_sku(); //plain_me_sku()
+    var show_up_position_before = "#" + containerId;
+    var test = "A";
+    var GA4Key = "";
+
+    // 移除全局模块注册代码
+
+    function member_id_91APP() {
+      let i;
+      // 檢查 dataLayer 是否定義
+      if (typeof dataLayer !== "undefined") {
+        for (let i = 0; i < dataLayer.length; i++) {
+          if (dataLayer[i].Action === "Product-Detail") {
+            // 找到了符合條件的項目，執行後續動作
+            console.log('找到了符合 "gtm.load" 的事件，執行後續動作');
+            console.log("FOUND!!");
+            if (dataLayer[i].Uid !== "") member_id = dataLayer[i].Uid;
+            else member_id = "";
+
+            // 進行其他操作（如果需要的話）
+            break;
+          } else member_id = "";
         }
-        return member_id;
       }
-      function member_id_Shopline() {
-        //Fake data
-        let member_id = "";
-        // let chklog1 = '"currentUser\\"';
-        // let chklog2 = ':null';
-        // if (!document.documentElement.innerHTML.includes(chklog1 + chklog2)) {
-        //     member_id = document.documentElement.innerHTML.split('href="/users/')[1].split('",')[0].split('/edit"')[0];
-        // }
-        return member_id;
-      }
-      function member_id_plain_me() {
-        let member_id;
-        // 檢查 dataLayer 是否定義
-        if (typeof dataLayer !== "undefined") {
-          for (let i = 0; i < dataLayer.length; i++) {
-            if (dataLayer[i].Action === "Product-Detail") {
-              // 找到了符合條件的項目，執行後續動作
-              console.log('找到了符合 "gtm.load" 的事件，執行後續動作');
-              console.log("FOUND!!");
-              if (dataLayer[i].Uid !== "") member_id = dataLayer[i].Uid;
-              else member_id = "";
-  
-              // 進行其他操作（如果需要的話）
-              break;
-            } else member_id = "";
-          }
+      return member_id;
+    }
+    function member_id_Shopline() {
+      //Fake data
+      let member_id = "";
+      // let chklog1 = '"currentUser\\"';
+      // let chklog2 = ':null';
+      // if (!document.documentElement.innerHTML.includes(chklog1 + chklog2)) {
+      //     member_id = document.documentElement.innerHTML.split('href="/users/')[1].split('",')[0].split('/edit"')[0];
+      // }
+      return member_id;
+    }
+    function member_id_plain_me() {
+      let member_id;
+      // 檢查 dataLayer 是否定義
+      if (typeof dataLayer !== "undefined") {
+        for (let i = 0; i < dataLayer.length; i++) {
+          if (dataLayer[i].Action === "Product-Detail") {
+            // 找到了符合條件的項目，執行後續動作
+            console.log('找到了符合 "gtm.load" 的事件，執行後續動作');
+            console.log("FOUND!!");
+            if (dataLayer[i].Uid !== "") member_id = dataLayer[i].Uid;
+            else member_id = "";
+
+            // 進行其他操作（如果需要的話）
+            break;
+          } else member_id = "";
         }
-        return member_id;
       }
-      function plain_me_sku() {
-        var metaTag = document.querySelector('meta[property="og:sku"]');
-        if (metaTag) {
-          var skuContent = metaTag.getAttribute("content").split("-")[0];
-          console.log(skuContent); // 輸出 "FRP99153"
-        } else if (document.querySelector(".prodnoBox") !== null) {
-          var skuContent = document
-            .querySelector(".prodnoBox")
-            .innerText.split(":")[1]
-            .split("-")[0];
-        } else {
-          console.log("Meta tag not found");
-        }
-        return skuContent;
+      return member_id;
+    }
+    function plain_me_sku() {
+      var metaTag = document.querySelector('meta[property="og:sku"]');
+      if (metaTag) {
+        var skuContent = metaTag.getAttribute("content").split("-")[0];
+        console.log(skuContent); // 輸出 "FRP99153"
+      } else if (document.querySelector(".prodnoBox") !== null) {
+        var skuContent = document
+          .querySelector(".prodnoBox")
+          .innerText.split(":")[1]
+          .split("-")[0];
+      } else {
+        console.log("Meta tag not found");
       }
-      function app91_sku() {
-        var skuContent = document.location.href
-          .split("?")[0]
-          .split("/SalePage/Index/")[1];
-  
-        return skuContent;
-      }
-      function shopline_sku() {
-        //var data = document.documentElement.innerHTML
-        //var skuContent = data.split('"sku":"')[1].split('"')[0].split(':')[0]
-        //Fake data
-        skuContent = "627b5ab044a027000fde0add";
-        return skuContent;
-      }
-  
-      ////Main////
-      // if (link_included.some((link) => document.location.href.includes(link))) {
-      //jQuery
-      function ensureEmbeddedAdJQueryLoaded(callback) {
-        if (typeof jQuery === "undefined") {
-          var embeddedAdjQueryScript = document.createElement("script");
-          embeddedAdjQueryScript.src =
-            "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
-          embeddedAdjQueryScript.type = "text/javascript";
-          embeddedAdjQueryScript.onload = function () {
-            console.log("jQuery 已成功載入");
-            loadSwiperScript(); // 先載入 Swiper
-            callback(); // 再執行嵌入腳本
-          };
-          embeddedAdjQueryScript.onerror = function () {
-            console.error("載入 jQuery 時出錯");
-          };
-          document.head.appendChild(embeddedAdjQueryScript);
-        } else {
-          console.log("jQuery 已經載入");
+      return skuContent;
+    }
+    function app91_sku() {
+      var skuContent = document.location.href
+        .split("?")[0]
+        .split("/SalePage/Index/")[1];
+
+      return skuContent;
+    }
+    function shopline_sku() {
+      //var data = document.documentElement.innerHTML
+      //var skuContent = data.split('"sku":"')[1].split('"')[0].split(':')[0]
+      //Fake data
+      skuContent = "627b5ab044a027000fde0add";
+      return skuContent;
+    }
+
+    ////Main////
+    // if (link_included.some((link) => document.location.href.includes(link))) {
+    //jQuery
+    function ensureEmbeddedAdJQueryLoaded(callback) {
+      if (typeof jQuery === "undefined") {
+        var embeddedAdjQueryScript = document.createElement("script");
+        embeddedAdjQueryScript.src =
+          "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
+        embeddedAdjQueryScript.type = "text/javascript";
+        embeddedAdjQueryScript.onload = function () {
+          console.log("jQuery 已成功載入");
           loadSwiperScript(); // 先載入 Swiper
           callback(); // 再執行嵌入腳本
-        }
-      }
-  
-      //swiper
-      function loadSwiperScript() {
-        var swiperStylesheet = document.createElement("link");
-        swiperStylesheet.rel = "stylesheet";
-        swiperStylesheet.href =
-          "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
-        document.head.appendChild(swiperStylesheet);
-  
-        var SwiperScript = document.createElement("script");
-        SwiperScript.src =
-          "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
-        SwiperScript.onload = function () {
-          console.log("Swiper script loaded successfully");
         };
-        SwiperScript.onerror = function () {
-          console.error("Error loading Swiper script");
+        embeddedAdjQueryScript.onerror = function () {
+          console.error("載入 jQuery 時出錯");
         };
-        document.head.appendChild(SwiperScript);
+        document.head.appendChild(embeddedAdjQueryScript);
+      } else {
+        console.log("jQuery 已經載入");
+        loadSwiperScript(); // 先載入 Swiper
+        callback(); // 再執行嵌入腳本
       }
-      //embedded script
-      function loadEmbeddedScript($) {
-        (function ($) {
-          // 動態添加 Google 字體連結
-          var googleFontLink = document.createElement("link");
-          googleFontLink.rel = "preconnect";
-          googleFontLink.href = "https://fonts.googleapis.com";
-          document.head.appendChild(googleFontLink);
-  
-          var googleFontLink2 = document.createElement("link");
-          googleFontLink2.rel = "preconnect";
-          googleFontLink2.href = "https://fonts.gstatic.com";
-          googleFontLink2.crossorigin = "anonymous";
-          document.head.appendChild(googleFontLink2);
-  
-          var googleFontLink3 = document.createElement("link");
-          googleFontLink3.rel = "stylesheet";
-          googleFontLink3.href =
-            "https://fonts.googleapis.com/css2?family=Chocolate+Classical+Sans&family=Figtree:ital,wght@0,300..900;1,300..900&family=Noto+Sans+TC:wght@100..900&display=swap";
-          document.head.appendChild(googleFontLink3);
-  
-          // 動態添加 Bootstrap Bundle
-          // var bootstrapScript = document.createElement('script')
-          // bootstrapScript.src =
-          //   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'
-          // bootstrapScript.crossorigin = 'anonymous'
-          // document.head.appendChild(bootstrapScript)
-  
-          // bootstrapScript.onload = function () {
-          // 動態添加 Bootstrap scoped CSS
-          // var bootstrapScopedStyle = document.createElement("style");
-          // bootstrapScopedStyle.id = "embedded-ad-bootstrap-scoped";
-          // document.head.appendChild(bootstrapScopedStyle);
-          // 動態添加自定 CSS
-          var customCSS = document.createElement("style");
-          customCSS.type = "text/css";
-          customCSS.innerHTML = `:root {
+    }
+
+    //swiper
+    function loadSwiperScript() {
+      var swiperStylesheet = document.createElement("link");
+      swiperStylesheet.rel = "stylesheet";
+      swiperStylesheet.href =
+        "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
+      document.head.appendChild(swiperStylesheet);
+
+      var SwiperScript = document.createElement("script");
+      SwiperScript.src =
+        "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
+      SwiperScript.onload = function () {
+        console.log("Swiper script loaded successfully");
+      };
+      SwiperScript.onerror = function () {
+        console.error("Error loading Swiper script");
+      };
+      document.head.appendChild(SwiperScript);
+    }
+    //embedded script
+    function loadEmbeddedScript($) {
+      (function ($) {
+        // 動態添加 Google 字體連結
+        var googleFontLink = document.createElement("link");
+        googleFontLink.rel = "preconnect";
+        googleFontLink.href = "https://fonts.googleapis.com";
+        document.head.appendChild(googleFontLink);
+
+        var googleFontLink2 = document.createElement("link");
+        googleFontLink2.rel = "preconnect";
+        googleFontLink2.href = "https://fonts.gstatic.com";
+        googleFontLink2.crossorigin = "anonymous";
+        document.head.appendChild(googleFontLink2);
+
+        var googleFontLink3 = document.createElement("link");
+        googleFontLink3.rel = "stylesheet";
+        googleFontLink3.href =
+          "https://fonts.googleapis.com/css2?family=Chocolate+Classical+Sans&family=Figtree:ital,wght@0,300..900;1,300..900&family=Noto+Sans+TC:wght@100..900&display=swap";
+        document.head.appendChild(googleFontLink3);
+
+        // 動態添加 Bootstrap Bundle
+        // var bootstrapScript = document.createElement('script')
+        // bootstrapScript.src =
+        //   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'
+        // bootstrapScript.crossorigin = 'anonymous'
+        // document.head.appendChild(bootstrapScript)
+
+        // bootstrapScript.onload = function () {
+        // 動態添加 Bootstrap scoped CSS
+        // var bootstrapScopedStyle = document.createElement("style");
+        // bootstrapScopedStyle.id = "embedded-ad-bootstrap-scoped";
+        // document.head.appendChild(bootstrapScopedStyle);
+        // 動態添加自定 CSS
+        var customCSS = document.createElement("style");
+        customCSS.type = "text/css";
+        customCSS.innerHTML = `:root {
                         --inf-embedded-ad-font-9: 9px;
                         --inf-embedded-ad-font-8: 8px;
                         --inf-embedded-ad-font-12: 12px;
@@ -251,9 +275,38 @@
                         --inf-embedded-ad-dark-red: #EB7454;
                         --inf-embedded-ad-light-gray: rgba(59, 59, 50, 0.30);
                         --swiper-wrapper-transition-timing-function: liner !important;
-                        
                         }
-                        
+                        #${containerId} #recommendation-loading {
+                          height: 131.71px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          width: 100%;
+                        }
+                        @media (min-width: 480px) {
+                          #${containerId} #recommendation-loading {
+                            height: 169.14px;
+                          }
+                        }
+                        #${containerId} #recommendation-loading .loading-text {
+                          font-size: 14px;
+                          display: inline-block;
+                          letter-spacing: 2px;
+                          color: black;
+                          box-sizing: border-box;
+                          animation: animloader 1s ease-in infinite alternate;
+                        }
+
+                        @keyframes animloader {
+                          0% {
+                            filter: blur(0px);
+                            transform: skew(0deg);
+                          }
+                          100% {
+                            filter: blur(3px);
+                            transform: skew(-4deg);
+                          }
+                        }
                         #${containerId} .embeddedAdContainer {
                         padding: 0px;
                         margin: 0 auto;
@@ -715,13 +768,18 @@
                           line-height: 16px;
                         }
                         `;
-          document.head.appendChild(customCSS);
-  
-          $(function () {
-            let ids = ids_init();
-  
-            console.log("DOM is ready");
-            var embeddedContainer = `
+        document.head.appendChild(customCSS);
+
+        $(function () {
+          let ids = ids_init();
+
+          console.log("DOM is ready");
+          $(show_up_position_before).append(
+            `<div id="recommendation-loading">
+              <span class="loading-text">Loading...</span>
+            </div>`
+          );
+          var embeddedContainer = `
                       <div class="embeddedAdContainer" id="embedded-ad-container-${containerId}">
                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
                         <h2 class="embeddedAdContainer__title">${title}</h2>
@@ -737,8 +795,8 @@
                       <div
                       <div
                       class="embeddedAdImgContainer carouselContainer swiper swiper-basic-${containerId} ${
-              window.SWIPER_GRID_AVAILABLE ? "swiper-grid" : ""
-            }"
+            window.SWIPER_GRID_AVAILABLE ? "swiper-grid" : ""
+          }"
                       style="overflow: hidden;"
                       >
                         <div class="swiper-wrapper" id="swiper-wrapper-basic-${containerId}">
@@ -757,391 +815,415 @@
                       </div>
                       </div>
                       `;
-  
-            // 添加窗口大小调整事件监听
-            $(window).resize(function () {
-              const newContainerWidth = $(show_up_position_before).width();
-  
-              if (arrowPosition === "none") {
-                $(`#${containerId} .swiper-next`).css("display", "none");
-                $(`#${containerId} .swiper-prev`).css("display", "none");
-                $(`#${containerId} .swiper-next-corr`).css("display", "none");
-                $(`#${containerId} .swiper-prev-corr`).css("display", "block");
-                $(`#${containerId} .title-navigation`).css("display", "none");
-              } else {
-                if (arrowPosition === "center" && newContainerWidth >= 768) {
-                  $(`#${containerId} .swiper-next`).css("display", "block");
-                  $(`#${containerId} .swiper-prev`).css("display", "block");
-                  $(`#${containerId} .swiper-next-corr`).css("display", "block");
-                  $(`#${containerId} .swiper-prev-corr`).css("display", "block");
-                  $(`#${containerId} .title-navigation`).css("display", "none");
-                } else {
-                  $(`#${containerId} .swiper-next`).css("display", "none");
-                  $(`#${containerId} .swiper-prev`).css("display", "none");
-                  $(`#${containerId} .swiper-next-corr`).css("display", "none");
-                  $(`#${containerId} .swiper-prev-corr`).css("display", "none");
-                  $(`#${containerId} .title-navigation`).css(
-                    "display",
-                    "inline-flex"
-                  );
-                }
-              }
-  
-              // 调整容器内边距
-              $(show_up_position_before)
-                .css("padding", !!customPadding ? customPadding : newContainerWidth >= 768 ? "32px" : "8px")
-                .toggleClass("small-container", newContainerWidth < 768);
-                if(!!customPadding){
-                  $(`#${containerId} ,small-container`).css("padding", customPadding);
-                }
-            });
-  
-            function getGroupByTid(tid) {
-              return tid % 2; // 將用戶平均分為 2 組 0 1
-            }
-            const tid = Date.now(); // 使用當前的 Unix 時間戳作為 tid
-            const group = getGroupByTid(tid); // 來進行雙組分流 group == 0 or group == 1
-  
-            //Embedded
-            if (typeof $(show_up_position_before)[0] !== "undefined") {
-              $(show_up_position_before).css("background-color", backgroundColor);
-              $(show_up_position_before).css("border-radius", "8px");
-              // 獲取容器寬度並設置相應的內邊距
-              const containerWidth = $(show_up_position_before).width();
-              $(show_up_position_before).append(embeddedContainer);
-              $(show_up_position_before)
-                .css("padding", !!customPadding ? customPadding : containerWidth >= 768 ? "32px" : "8px")
-                .toggleClass("small-container", containerWidth < 768);
-                if(!!customPadding){
-                  $(`#${containerId} ,small-container`).css("padding", customPadding);
-                }
-  
-              const newContainerWidth = $(show_up_position_before).width();
-              if (arrowPosition === "none") {
-                $(`#${containerId} .swiper-next`).css("display", "none");
-                $(`#${containerId} .swiper-prev`).css("display", "none");
-                $(`#${containerId} .swiper-next-corr`).css("display", "none");
-                $(`#${containerId} .swiper-prev-corr`).css("display", "block");
-                $(`#${containerId} .title-navigation`).css("display", "none");
-              } else {
-                if (arrowPosition === "center" && newContainerWidth >= 768) {
-                  $(`#${containerId} .swiper-next`).css("display", "block");
-                  $(`#${containerId} .swiper-prev`).css("display", "block");
-                  $(`#${containerId} .swiper-next-corr`).css("display", "block");
-                  $(`#${containerId} .swiper-prev-corr`).css("display", "block");
-                  $(`#${containerId} .title-navigation`).css("display", "none");
-                } else {
-                  $(`#${containerId} .swiper-next`).css("display", "none");
-                  $(`#${containerId} .swiper-prev`).css("display", "none");
-                  $(`#${containerId} .swiper-next-corr`).css("display", "none");
-                  $(`#${containerId} .swiper-prev-corr`).css("display", "none");
-                  $(`#${containerId} .title-navigation`).css(
-                    "display",
-                    "inline-flex"
-                  );
-                }
-              }
+
+          // 添加窗口大小调整事件监听
+          $(window).resize(function () {
+            const newContainerWidth = $(show_up_position_before).width();
+
+            if (arrowPosition === "none") {
+              $(`#${containerId} .swiper-next`).css("display", "none");
+              $(`#${containerId} .swiper-prev`).css("display", "none");
+              $(`#${containerId} .swiper-next-corr`).css("display", "none");
+              $(`#${containerId} .swiper-prev-corr`).css("display", "block");
+              $(`#${containerId} .title-navigation`).css("display", "none");
             } else {
-              console.error("找不到容器元素:", show_up_position_before);
+              if (arrowPosition === "center" && newContainerWidth >= 768) {
+                $(`#${containerId} .swiper-next`).css("display", "block");
+                $(`#${containerId} .swiper-prev`).css("display", "block");
+                $(`#${containerId} .swiper-next-corr`).css("display", "block");
+                $(`#${containerId} .swiper-prev-corr`).css("display", "block");
+                $(`#${containerId} .title-navigation`).css("display", "none");
+              } else {
+                $(`#${containerId} .swiper-next`).css("display", "none");
+                $(`#${containerId} .swiper-prev`).css("display", "none");
+                $(`#${containerId} .swiper-next-corr`).css("display", "none");
+                $(`#${containerId} .swiper-prev-corr`).css("display", "none");
+                $(`#${containerId} .title-navigation`).css(
+                  "display",
+                  "inline-flex"
+                );
+              }
             }
-  
-            // Fetch the Bootstrap CSS from CDN
-            // fetch('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css')
-            //   .then((response) => response.text())
-            //   .then((css) => {
-            //     // Scope the Bootstrap CSS to only work under .custom-scope class
-            //     const scopedCSS = css
-            //       .replace(/(^|\})\s*([^{]+)\s*\{/g, function (match, p1, p2) {
-            //         // Ignore keyframes and other special rules
-            //         if (p2.startsWith('@') || p2.startsWith(':root') || p2.startsWith('body')) {
-            //           return match
-            //         }
-            //         return p1 + '.embeddedAdContainer ' + p2 + ' {'
-            //       })
-            //       .replace(/[^}]*\bbody\b[^}]*}/g, '')
-            //       .replace(/\b(h[1-6])\b/g, '')
-  
-            //     // Inject the scoped CSS into the page
-            //     document.getElementById('embedded-ad-bootstrap-scoped').textContent = scopedCSS
-            //   })
-  
-            getEmbeddedAds(ids);
-            // getEmbeddedAds_corr(ids);
+
+            // 调整容器内边距
+            $(show_up_position_before)
+              .css(
+                "padding",
+                !!customPadding
+                  ? customPadding
+                  : newContainerWidth >= 768
+                  ? "32px"
+                  : "8px"
+              )
+              .toggleClass("small-container", newContainerWidth < 768);
+            if (!!customPadding) {
+              $(`#${containerId} ,small-container`).css(
+                "padding",
+                customPadding
+              );
+            }
           });
-  
-          $(document).on("click", `#${containerId} .embeddedItem`, function () {
-            const title = $(this).data("title"); // 取得 data-title 屬性
-            const link = $(this).data("link"); // 取得 data-link 屬性
-  
-            // 觸發 Google Analytics 的事件追蹤
+
+          function getGroupByTid(tid) {
+            return tid % 2; // 將用戶平均分為 2 組 0 1
+          }
+          const tid = Date.now(); // 使用當前的 Unix 時間戳作為 tid
+          const group = getGroupByTid(tid); // 來進行雙組分流 group == 0 or group == 1
+
+          //Embedded
+          if (typeof $(show_up_position_before)[0] !== "undefined") {
+            $(show_up_position_before).css("background-color", backgroundColor);
+            $(show_up_position_before).css("border-radius", "8px");
+            // 獲取容器寬度並設置相應的內邊距
+            const containerWidth = $(show_up_position_before).width();
+            $(show_up_position_before).append(embeddedContainer);
+            $(show_up_position_before)
+              .css(
+                "padding",
+                !!customPadding
+                  ? customPadding
+                  : containerWidth >= 768
+                  ? "32px"
+                  : "8px"
+              )
+              .toggleClass("small-container", containerWidth < 768);
+            if (!!customPadding) {
+              $(`#${containerId} ,small-container`).css(
+                "padding",
+                customPadding
+              );
+            }
+
+            const newContainerWidth = $(show_up_position_before).width();
+            if (arrowPosition === "none") {
+              $(`#${containerId} .swiper-next`).css("display", "none");
+              $(`#${containerId} .swiper-prev`).css("display", "none");
+              $(`#${containerId} .swiper-next-corr`).css("display", "none");
+              $(`#${containerId} .swiper-prev-corr`).css("display", "block");
+              $(`#${containerId} .title-navigation`).css("display", "none");
+            } else {
+              if (arrowPosition === "center" && newContainerWidth >= 768) {
+                $(`#${containerId} .swiper-next`).css("display", "block");
+                $(`#${containerId} .swiper-prev`).css("display", "block");
+                $(`#${containerId} .swiper-next-corr`).css("display", "block");
+                $(`#${containerId} .swiper-prev-corr`).css("display", "block");
+                $(`#${containerId} .title-navigation`).css("display", "none");
+              } else {
+                $(`#${containerId} .swiper-next`).css("display", "none");
+                $(`#${containerId} .swiper-prev`).css("display", "none");
+                $(`#${containerId} .swiper-next-corr`).css("display", "none");
+                $(`#${containerId} .swiper-prev-corr`).css("display", "none");
+                $(`#${containerId} .title-navigation`).css(
+                  "display",
+                  "inline-flex"
+                );
+              }
+            }
+          } else {
+            console.error("找不到容器元素:", show_up_position_before);
+          }
+
+          // Fetch the Bootstrap CSS from CDN
+          // fetch('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css')
+          //   .then((response) => response.text())
+          //   .then((css) => {
+          //     // Scope the Bootstrap CSS to only work under .custom-scope class
+          //     const scopedCSS = css
+          //       .replace(/(^|\})\s*([^{]+)\s*\{/g, function (match, p1, p2) {
+          //         // Ignore keyframes and other special rules
+          //         if (p2.startsWith('@') || p2.startsWith(':root') || p2.startsWith('body')) {
+          //           return match
+          //         }
+          //         return p1 + '.embeddedAdContainer ' + p2 + ' {'
+          //       })
+          //       .replace(/[^}]*\bbody\b[^}]*}/g, '')
+          //       .replace(/\b(h[1-6])\b/g, '')
+
+          //     // Inject the scoped CSS into the page
+          //     document.getElementById('embedded-ad-bootstrap-scoped').textContent = scopedCSS
+          //   })
+
+          getEmbeddedAds(ids);
+          // getEmbeddedAds_corr(ids);
+        });
+
+        $(document).on("click", `#${containerId} .embeddedItem`, function () {
+          const title = $(this).data("title"); // 取得 data-title 屬性
+          const link = $(this).data("link"); // 取得 data-link 屬性
+
+          // 觸發 Google Analytics 的事件追蹤
+          gtag("event", "click_embedded_item" + test, {
+            send_to: GA4Key,
+            event_category: "embedded",
+            event_label: title,
+            event_value: link,
+          });
+        });
+        $(document).on("click", `#${containerId} .a-left`, function () {
+          // 觸發 Google Analytics 的事件追蹤
+          if (typeof gtag === "function") {
             gtag("event", "click_embedded_item" + test, {
               send_to: GA4Key,
               event_category: "embedded",
-              event_label: title,
-              event_value: link,
+              event_label: "arrow-left",
+              event_value: "left",
             });
-          });
-          $(document).on("click", `#${containerId} .a-left`, function () {
+          }
+        });
+        $(document).on("click", `#${containerId} .a-right`, function () {
+          // 觸發 Google Analytics 的事件追蹤
+          if (typeof gtag === "function") {
+            gtag("event", "click_embedded_item" + test, {
+              send_to: GA4Key,
+              event_category: "embedded",
+              event_label: "arrow-right",
+              event_value: "right",
+            });
+          }
+        });
+        $(document).on("click", `#${containerId} .title-nav-prev`, function () {
+          // 觸發上一頁輪播
+          $(`#${containerId} .swiper-prev`).trigger("click");
+        });
+        $(document).on("click", `#${containerId} .title-nav-next`, function () {
+          // 觸發下一頁輪播
+          $(`#${containerId} .swiper-next`).trigger("click");
+        });
+        $(document).on(
+          "click",
+          `#${containerId} #swiper-wrapper-corr .embeddedItem`,
+          function () {
+            const title = $(this).data("title"); // 取得 data-title 屬性
+            const link = $(this).data("link"); // 取得 data-link 屬性
+
             // 觸發 Google Analytics 的事件追蹤
-            if (typeof gtag === "function") {
-              gtag("event", "click_embedded_item" + test, {
-                send_to: GA4Key,
-                event_category: "embedded",
-                event_label: "arrow-left",
-                event_value: "left",
-              });
-            }
-          });
-          $(document).on("click", `#${containerId} .a-right`, function () {
+            gtag("event", "corr_click_embedded_item" + test, {
+              send_to: GA4Key,
+              event_category: "swiper-wrapper-corr-embedded",
+              event_label: "Title: " + title,
+              value: link.length,
+            });
+          }
+        );
+        $(document).on(
+          "click",
+          `#${containerId} #swiper-wrapper-corr .a-left`,
+          function () {
             // 觸發 Google Analytics 的事件追蹤
-            if (typeof gtag === "function") {
-              gtag("event", "click_embedded_item" + test, {
-                send_to: GA4Key,
-                event_category: "embedded",
-                event_label: "arrow-right",
-                event_value: "right",
-              });
+            gtag("event", "corr_click_embedded_item" + test, {
+              send_to: GA4Key,
+              event_category: "swiper-wrapper-corr-embedded",
+              event_label: "arrow-left",
+              value: 10,
+            });
+          }
+        );
+        $(document).on(
+          "click",
+          `#${containerId} #swiper-wrapper-corr .a-right`,
+          function () {
+            // 觸發 Google Analytics 的事件追蹤
+            gtag("event", "corr_click_embedded_item" + test, {
+              send_to: GA4Key,
+              event_category: "swiper-wrapper-corr-embedded",
+              event_label: "arrow-right",
+              value: 10,
+            });
+          }
+        );
+        $(document).on(
+          "click",
+          `#${containerId} #swiper-wrapper-basic .embeddedItem`,
+          function () {
+            const title = $(this).data("title"); // 取得 data-title 屬性
+            const link = $(this).data("link"); // 取得 data-link 屬性
+
+            // 觸發 Google Analytics 的事件追蹤
+            gtag("event", "bhv_click_embedded_item" + test, {
+              send_to: GA4Key,
+              event_category: "swiper-wrapper-basic-embedded",
+              event_label: "Title: " + title,
+              value: link.length,
+            });
+          }
+        );
+        $(document).on(
+          "click",
+          `#${containerId} #swiper-wrapper-basic .a-left`,
+          function () {
+            // 觸發 Google Analytics 的事件追蹤
+            gtag("event", "bhv_click_embedded_item" + test, {
+              send_to: GA4Key,
+              event_category: "swiper-wrapper-basic-embedded",
+              event_label: "arrow-left",
+              value: 10,
+            });
+          }
+        );
+        $(document).on(
+          "click",
+          `#${containerId} #swiper-wrapper-basic .a-right`,
+          function () {
+            // 觸發 Google Analytics 的事件追蹤
+            gtag("event", "bhv_click_embedded_item" + test, {
+              send_to: GA4Key,
+              event_category: "swiper-wrapper-basic-embedded",
+              event_label: "arrow-right",
+              value: 10,
+            });
+          }
+        );
+
+        function ids_init() {
+          var makeid = function (length) {
+            var result = "";
+            var characters =
+              "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var charactersLength = characters.length;
+            for (var i = 0; i < length; i++) {
+              result += characters.charAt(
+                Math.floor(Math.random() * charactersLength)
+              );
             }
-          });
-          $(document).on("click", `#${containerId} .title-nav-prev`, function () {
-            // 觸發上一頁輪播
-            $(`#${containerId} .swiper-prev`).trigger("click");
-          });
-          $(document).on("click", `#${containerId} .title-nav-next`, function () {
-            // 觸發下一頁輪播
-            $(`#${containerId} .swiper-next`).trigger("click");
-          });
-          $(document).on(
-            "click",
-            `#${containerId} #swiper-wrapper-corr .embeddedItem`,
-            function () {
-              const title = $(this).data("title"); // 取得 data-title 屬性
-              const link = $(this).data("link"); // 取得 data-link 屬性
-  
-              // 觸發 Google Analytics 的事件追蹤
-              gtag("event", "corr_click_embedded_item" + test, {
-                send_to: GA4Key,
-                event_category: "swiper-wrapper-corr-embedded",
-                event_label: "Title: " + title,
-                value: link.length,
-              });
-            }
-          );
-          $(document).on(
-            "click",
-            `#${containerId} #swiper-wrapper-corr .a-left`,
-            function () {
-              // 觸發 Google Analytics 的事件追蹤
-              gtag("event", "corr_click_embedded_item" + test, {
-                send_to: GA4Key,
-                event_category: "swiper-wrapper-corr-embedded",
-                event_label: "arrow-left",
-                value: 10,
-              });
-            }
-          );
-          $(document).on(
-            "click",
-            `#${containerId} #swiper-wrapper-corr .a-right`,
-            function () {
-              // 觸發 Google Analytics 的事件追蹤
-              gtag("event", "corr_click_embedded_item" + test, {
-                send_to: GA4Key,
-                event_category: "swiper-wrapper-corr-embedded",
-                event_label: "arrow-right",
-                value: 10,
-              });
-            }
-          );
-          $(document).on(
-            "click",
-            `#${containerId} #swiper-wrapper-basic .embeddedItem`,
-            function () {
-              const title = $(this).data("title"); // 取得 data-title 屬性
-              const link = $(this).data("link"); // 取得 data-link 屬性
-  
-              // 觸發 Google Analytics 的事件追蹤
-              gtag("event", "bhv_click_embedded_item" + test, {
-                send_to: GA4Key,
-                event_category: "swiper-wrapper-basic-embedded",
-                event_label: "Title: " + title,
-                value: link.length,
-              });
-            }
-          );
-          $(document).on(
-            "click",
-            `#${containerId} #swiper-wrapper-basic .a-left`,
-            function () {
-              // 觸發 Google Analytics 的事件追蹤
-              gtag("event", "bhv_click_embedded_item" + test, {
-                send_to: GA4Key,
-                event_category: "swiper-wrapper-basic-embedded",
-                event_label: "arrow-left",
-                value: 10,
-              });
-            }
-          );
-          $(document).on(
-            "click",
-            `#${containerId} #swiper-wrapper-basic .a-right`,
-            function () {
-              // 觸發 Google Analytics 的事件追蹤
-              gtag("event", "bhv_click_embedded_item" + test, {
-                send_to: GA4Key,
-                event_category: "swiper-wrapper-basic-embedded",
-                event_label: "arrow-right",
-                value: 10,
-              });
-            }
-          );
-  
-          function ids_init() {
-            var makeid = function (length) {
-              var result = "";
-              var characters =
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-              var charactersLength = characters.length;
-              for (var i = 0; i < length; i++) {
-                result += characters.charAt(
-                  Math.floor(Math.random() * charactersLength)
-                );
-              }
-              return result;
-            };
-            //given id & member id --begin
-            var member_id = "";
-            var lgiven_id = "";
-  
-            member_id = member_id_Shopline();
-            console.log(member_id);
-  
-            // Always Generate a pair of LGVID
-            lgvid_exist = false;
-            try {
-              if (typeof localStorage["LGVID"] !== "undefined") {
-                lgvid_exist = true;
-              } else {
-                lgvid_exist = false;
-              }
-            } catch (e) {
+            return result;
+          };
+          //given id & member id --begin
+          var member_id = "";
+          var lgiven_id = "";
+
+          member_id = member_id_Shopline();
+          console.log(member_id);
+
+          // Always Generate a pair of LGVID
+          lgvid_exist = false;
+          try {
+            if (typeof localStorage["LGVID"] !== "undefined") {
+              lgvid_exist = true;
+            } else {
               lgvid_exist = false;
             }
-            if (lgvid_exist) {
-              lgiven_id = localStorage["LGVID"];
-            } else {
-              lgiven_id = makeid(20);
-              localStorage.setItem("LGVID", lgiven_id);
-            }
-            return {
-              member_id: member_id,
-              lgiven_id: lgiven_id,
-              skuContent: skuContent,
-            };
+          } catch (e) {
+            lgvid_exist = false;
           }
-          function getEmbeddedAds(ids) {
-            const requestData = {
-              Brand: Brand,
-              LGVID: ids.lgiven_id,
-              MRID: ids.member_id,
-              recom_num: "6",
-              PID: ids.skuContent,
-              ctype_val: JSON.stringify(["underwear"]),
-            };
-            if(!hide_size){
-              requestData.SIZEAI = "True";
+          if (lgvid_exist) {
+            lgiven_id = localStorage["LGVID"];
+          } else {
+            lgiven_id = makeid(20);
+            localStorage.setItem("LGVID", lgiven_id);
+          }
+          return {
+            member_id: member_id,
+            lgiven_id: lgiven_id,
+            skuContent: skuContent,
+          };
+        }
+        function getEmbeddedAds(ids) {
+          const requestData = {
+            Brand: Brand,
+            LGVID: ids.lgiven_id,
+            MRID: ids.member_id,
+            recom_num: "6",
+            PID: ids.skuContent,
+            ctype_val: JSON.stringify(["underwear"]),
+          };
+          if (!hide_size) {
+            requestData.SIZEAI = "True";
+            requestData.bid = bid;
+          }
+          const options = {
+            method: "POST",
+            headers: {
+              accept: "application/json",
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+          };
+          function getRandomElements(arr, count) {
+            const result = [];
+            const usedIndexes = new Set();
+
+            while (result.length < count) {
+              const randomIndex = Math.floor(Math.random() * arr.length);
+              if (!usedIndexes.has(randomIndex)) {
+                result.push(arr[randomIndex]);
+                usedIndexes.add(randomIndex);
+              }
             }
-            const options = {
-              method: "POST",
-              headers: {
-                accept: "application/json",
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(requestData),
-            };
-            function getRandomElements(arr, count) {
-              const result = [];
-              const usedIndexes = new Set();
-  
-              while (result.length < count) {
-                const randomIndex = Math.floor(Math.random() * arr.length);
-                if (!usedIndexes.has(randomIndex)) {
-                  result.push(arr[randomIndex]);
-                  usedIndexes.add(randomIndex);
+
+            return result;
+          }
+          fetch(
+            "https://gha6kqf5ff.execute-api.ap-northeast-1.amazonaws.com/v0/extension/recom_product",
+            options
+          )
+            .then((response) => response.json())
+            .then((response) => {
+              let size_tag = {};
+
+              if (response["SIZEAI_result"]) {
+                size_tag = response["SIZEAI_result"].reduce((acc, item) => {
+                  const itemScores = JSON.parse(item.ITEM);
+                  const bestSize = Object.entries(itemScores)
+                    .map(([size, percent]) => [size, parseFloat(percent)])
+                    .sort((a, b) => b[1] - a[1])[0][0];
+                  acc[item.productid] = bestSize;
+                  return acc;
+                }, {});
+                if (response["bhv"]) {
+                  response["bhv"].forEach((item) => {
+                    item.size_tag = size_tag[item.id];
+                  });
+                }
+                if (response["corr"]) {
+                  response["corr"].forEach((item) => {
+                    item.size_tag = size_tag[item.id];
+                  });
                 }
               }
-  
-              return result;
-            }
-            fetch(
-              "https://gha6kqf5ff.execute-api.ap-northeast-1.amazonaws.com/v0/extension/recom_product",
-              options
-            )
-              .then((response) => response.json())
-              .then((response) => {
-                let size_tag = {};
-  
-                if (response["SIZEAI_result"]) {
-                  size_tag = response["SIZEAI_result"].reduce((acc, item) => {
-                    const itemScores = JSON.parse(item.ITEM);
-                    const bestSize = Object.entries(itemScores)
-                      .map(([size, percent]) => [size, parseFloat(percent)])
-                      .sort((a, b) => b[1] - a[1])[0][0];
-                    acc[item.productid] = bestSize;
-                    return acc;
-                  }, {});
-                  if (response["bhv"]) {
-                    response["bhv"].forEach((item) => {
-                      item.size_tag = size_tag[item.id];
+
+              //corr
+              //or let jsonData_corr = getRandomElements(response['corr'], 12).map((item) => {})
+              //bhv
+              let jsonData =
+                customEdm && customEdm.length > 0
+                  ? customEdm
+                  : getRandomElements(response["bhv"], 6).map((item) => {
+                      let newItem = Object.assign({}, item);
+                      newItem.sale_price = hide_discount
+                        ? null
+                        : item.sale_price
+                        ? parseInt(
+                            item.sale_price.replace(/\D/g, "")
+                          ).toLocaleString()
+                        : "";
+                      newItem.price = parseInt(
+                        item.price.replace(/\D/g, "")
+                      ).toLocaleString();
+                      return newItem;
                     });
-                  }
-                  if (response["corr"]) {
-                    response["corr"].forEach((item) => {
-                      item.size_tag = size_tag[item.id];
-                    });
-                  }
+              $(`#recommendation-loading`).remove();
+              if (window.innerWidth > 992) {
+                if (jsonData.length >= 6) {
+                  $(`#${containerId} .embeddedAdContainer`).show();
+                  updatePopAd(jsonData);
                 }
-  
-                //corr
-                //or let jsonData_corr = getRandomElements(response['corr'], 12).map((item) => {})
-                //bhv
-                let jsonData =
-                  customEdm && customEdm.length > 0
-                    ? customEdm
-                    : getRandomElements(response["bhv"], 6).map((item) => {
-                        let newItem = Object.assign({}, item);
-                        newItem.sale_price = hide_discount ? null :item.sale_price
-                          ? parseInt(
-                              item.sale_price.replace(/\D/g, "")
-                            ).toLocaleString()
-                          : "";
-                        newItem.price = parseInt(
-                          item.price.replace(/\D/g, "")
-                        ).toLocaleString();
-                        return newItem;
-                      });
-                if (window.innerWidth > 992) {
-                  if (jsonData.length >= 6) {
-                    $(`#${containerId} .embeddedAdContainer`).show();
-                    updatePopAd(jsonData);
-                  }
-                } else {
-                  if (jsonData.length >= 4) {
-                    $(`#${containerId} .embeddedAdContainer`).show();
-                    updatePopAd(jsonData);
-                  }
+              } else {
+                if (jsonData.length >= 4) {
+                  $(`#${containerId} .embeddedAdContainer`).show();
+                  updatePopAd(jsonData);
                 }
-              })
-              .catch((err) => {
-                console.error(err);
-              });
-          }
-  
-          function updatePopAd(images, corr_bool) {
-            const items = images
-              .map(
-                (img) =>
-                  `
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+
+        function updatePopAd(images, corr_bool) {
+          const items = images
+            .map(
+              (img) =>
+                `
     <a class="embeddedItem swiper-slide" href="${
       img.link
     }" target="_blank" data-title="${img.title}" data-link="${img.link}">
@@ -1153,8 +1235,8 @@
           : ""
       }
           <img src="${img.image_link}" alt="${
-                    img.description
-                  }" style="width: 100%; height: auto; object-fit: cover;">
+                  img.description
+                }" style="width: 100%; height: auto; object-fit: cover;">
       </div>
       </div>
       <div class="embeddedItemInfo">
@@ -1178,150 +1260,148 @@
       </div>
     </a>
     `
-              )
-              .join("");
-  
-            $(`#swiper-wrapper-basic-${containerId}`).html(items);
-            var swiper = new Swiper(`.swiper-basic-${containerId}`, {
-              direction: "horizontal",
-              loop: false,
-              pagination: false,
-              autoplay: !autoplay
-                ? false
-                : {
-                    delay: 4000,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
-                    // 重要：確保自動播放不會在切換頁面時出錯
-                    stopOnLastSlide: false,
-                    waitForTransition: true,
-                  },
-  
-              // 保持簡單的基礎設定
-              slidesPerView: 1,
-              slidesPerGroup: 1,
-              loopFillGroupWithBlank: true,
-              spaceBetween: 8,
-  
-              // Swiper 11 网格视图配置
-              grid: {
-                rows: finalConfig?.breakpoints[768].gridRows,
-                fill: "row",
-              },
-  
-              // 導航按鈕
-              navigation: {
-                nextEl: `#${containerId} .swiper-next`,
-                prevEl: `#${containerId} .swiper-prev`,
-              },
-  
-              // 简化触摸设置以适应所有设备
-              simulateTouch: true,
-              touchRatio: 1,
-              resistance: true,
-              resistanceRatio: 0.65,
-  
-              // 保留基本的觀察者設定
-              observer: true,
-              observeParents: true,
-  
-              // 事件处理 - 简化与 Swiper 11 兼容的版本
-              on: {
-                init: function () {
-                  this.params.easing = "cubic-bezier(0.25, 0.1, 0.25, 1)";
-  
-                  const swiperEl = this.el;
-                  let isDragging = false;
-                  let moved = false;
-                  let startX;
-                  let startY;
-  
-                  // 只在非觸控設備上添加滑鼠事件處理
-                  if (window.matchMedia("(hover: hover)").matches) {
-                    swiperEl.addEventListener("mousedown", function (e) {
-                      isDragging = true;
-                      moved = false;
-                      startX = e.pageX;
-                      startY = e.pageY;
-                    });
-  
-                    document.addEventListener("mousemove", function (e) {
-                      if (!isDragging) return;
-  
-                      const diffX = Math.abs(e.pageX - startX);
-                      const diffY = Math.abs(e.pageY - startY);
-  
-                      if (diffX > 5 || diffY > 5) {
-                        moved = true;
+            )
+            .join("");
+
+          $(`#swiper-wrapper-basic-${containerId}`).html(items);
+          var swiper = new Swiper(`.swiper-basic-${containerId}`, {
+            direction: "horizontal",
+            loop: false,
+            pagination: false,
+            autoplay: !autoplay
+              ? false
+              : {
+                  delay: 4000,
+                  disableOnInteraction: false,
+                  pauseOnMouseEnter: true,
+                  // 重要：確保自動播放不會在切換頁面時出錯
+                  stopOnLastSlide: false,
+                  waitForTransition: true,
+                },
+
+            // 保持簡單的基礎設定
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+            loopFillGroupWithBlank: true,
+            spaceBetween: 8,
+
+            // Swiper 11 网格视图配置
+            grid: {
+              rows: finalConfig?.breakpoints[768].gridRows,
+              fill: "row",
+            },
+
+            // 導航按鈕
+            navigation: {
+              nextEl: `#${containerId} .swiper-next`,
+              prevEl: `#${containerId} .swiper-prev`,
+            },
+
+            // 简化触摸设置以适应所有设备
+            simulateTouch: true,
+            touchRatio: 1,
+            resistance: true,
+            resistanceRatio: 0.65,
+
+            // 保留基本的觀察者設定
+            observer: true,
+            observeParents: true,
+
+            // 事件处理 - 简化与 Swiper 11 兼容的版本
+            on: {
+              init: function () {
+                this.params.easing = "cubic-bezier(0.25, 0.1, 0.25, 1)";
+
+                const swiperEl = this.el;
+                let isDragging = false;
+                let moved = false;
+                let startX;
+                let startY;
+
+                // 只在非觸控設備上添加滑鼠事件處理
+                if (window.matchMedia("(hover: hover)").matches) {
+                  swiperEl.addEventListener("mousedown", function (e) {
+                    isDragging = true;
+                    moved = false;
+                    startX = e.pageX;
+                    startY = e.pageY;
+                  });
+
+                  document.addEventListener("mousemove", function (e) {
+                    if (!isDragging) return;
+
+                    const diffX = Math.abs(e.pageX - startX);
+                    const diffY = Math.abs(e.pageY - startY);
+
+                    if (diffX > 5 || diffY > 5) {
+                      moved = true;
+                    }
+                  });
+
+                  document.addEventListener("mouseup", function () {
+                    isDragging = false;
+                  });
+
+                  // 只處理連結點擊
+                  const slides = swiperEl.querySelectorAll(".swiper-slide a");
+                  slides.forEach((link) => {
+                    link.addEventListener("click", function (e) {
+                      if (moved) {
+                        e.preventDefault();
                       }
                     });
-  
-                    document.addEventListener("mouseup", function () {
-                      isDragging = false;
-                    });
-  
-                    // 只處理連結點擊
-                    const slides = swiperEl.querySelectorAll(".swiper-slide a");
-                    slides.forEach((link) => {
-                      link.addEventListener("click", function (e) {
-                        if (moved) {
-                          e.preventDefault();
-                        }
-                      });
-                    });
-                  }
-                },
-  
-                // 保留原版的 resize 處理
-                resize: function () {
-                  setTimeout(() => {
-                    this.update();
-                  }, 500);
-                },
+                  });
+                }
               },
-  
-              // 响应式设置，兼容 Swiper 11
-              breakpoints: sortedBreakpoints,
-              on: {
-                init: function () {
-                  // console.log("生效的斷點配置:");
-                },
+
+              // 保留原版的 resize 處理
+              resize: function () {
+                setTimeout(() => {
+                  this.update();
+                }, 500);
               },
-              // breakpoints: {
-              //   768: {
-              //     speed: 750,
-              //     spaceBetween: 24,
-              //     slidesPerView: slidesPerView,
-              //     slidesPerGroup: slidesPerView * gridRows,
-              //     grid: {
-              //       rows: gridRows,
-              //       fill: 'row'
-              //     },
-              //     // 移除 mousewheel 配置，使用单独的模块
-              //     threshold: 10
-              //   },
-              //   0: {
-              //     slidesPerView: mobileSlidesPerView,
-              //     slidesPerGroup: mobileSlidesPerView * mobileGridRows,
-              //     spaceBetween: 24,
-              //     speed: 750,
-              //     resistanceRatio: 0,
-              //     grid: {
-              //       rows: mobileGridRows,
-              //       fill: 'row'
-              //     }
-              //   }
-              // }
-            });
-          }
-          // }
-        })(jQuery);
-      }
-  
-      //jQuery loaded
-      ensureEmbeddedAdJQueryLoaded(loadEmbeddedScript);
-      // }
+            },
+
+            // 响应式设置，兼容 Swiper 11
+            breakpoints: sortedBreakpoints,
+            on: {
+              init: function () {
+                // console.log("生效的斷點配置:");
+              },
+            },
+            // breakpoints: {
+            //   768: {
+            //     speed: 750,
+            //     spaceBetween: 24,
+            //     slidesPerView: slidesPerView,
+            //     slidesPerGroup: slidesPerView * gridRows,
+            //     grid: {
+            //       rows: gridRows,
+            //       fill: 'row'
+            //     },
+            //     // 移除 mousewheel 配置，使用单独的模块
+            //     threshold: 10
+            //   },
+            //   0: {
+            //     slidesPerView: mobileSlidesPerView,
+            //     slidesPerGroup: mobileSlidesPerView * mobileGridRows,
+            //     spaceBetween: 24,
+            //     speed: 750,
+            //     resistanceRatio: 0,
+            //     grid: {
+            //       rows: mobileGridRows,
+            //       fill: 'row'
+            //     }
+            //   }
+            // }
+          });
+        }
+        // }
+      })(jQuery);
     }
-    window.Product_Recommendation = Product_Recommendation;
-  })();
-  
+    //jQuery loaded
+    ensureEmbeddedAdJQueryLoaded(loadEmbeddedScript);
+    // }
+  }
+  window.Product_Recommendation = Product_Recommendation;
+})();

@@ -19,7 +19,6 @@ let isForPreview = window.location.href
 let isForReferral = window.location.href
   .toLocaleLowerCase()
   .includes("referral");
-// console.error('isForPreview------------', isForPreview)
 let firstResult = {};
 
 function throttle(fn, delay) {
@@ -40,10 +39,6 @@ function throttle(fn, delay) {
   };
 }
 
-//finish Loading
-// $('#loadingbar').hide();
-// $('#pback').show();
-// $("#containerback").show();
 $(document).ready(function () {
   // 動態添加 Google 字體連結
   var googleFontLink = document.createElement("link");
@@ -82,16 +77,6 @@ $(document).ready(function () {
     $(".icon-inffits").removeClass("open");
     $(".text-inffits").removeClass("visible");
   });
-
-  // fetchData();
-  // $("#intro-page").show();
-
-  //finish Loading
-  // $("#loadingbar").hide();
-  // $("#pback").show();
-  // $("#containerback").show();
-
-  // fetchData();
 });
 
 let isFetching = false; // 新增標誌
@@ -107,11 +92,6 @@ const get_recom_res = () => {
     window.parent.postMessage(messageData, "*");
   }
 
-  // var resultActions = document.querySelector(".result-actions");
-  // // 禁用該元素的點擊操作
-  // if (resultActions) {
-  //   resultActions.style.pointerEvents = 'none';
-  // }
   const formatTags = Object.fromEntries(
     Object.entries(tags_chosen)
       .map(([key, value]) => [
@@ -159,10 +139,6 @@ const get_recom_res = () => {
   const matchIndex = INFS_ROUTE_ORDER.findIndex((item) =>
     deepEqualWithoutKey(item, current_route_path, ["Record"])
   );
-
-  // console.error("INFS_ROUTE_ORDER", INFS_ROUTE_ORDER);
-  // console.error("current_route_path", current_route_path);
-  // console.error("matchIndex", matchIndex);
 
   // 如果找到了，則將其移到 INFS_ROUTE_RES
   if ((matchIndex !== -1) & !isForPreview) {
@@ -376,82 +352,11 @@ const getEmbeddedForTest = () => {
     });
 };
 
-// const getEmbeddedForTest = () => {
-//   const requestData = {
-//     Brand: "JERSCY",
-//     LGVID: "",
-//     MRID: "",
-//     recom_num: "12",
-//   };
-//   const options = {
-//     method: "POST",
-//     headers: {
-//       accept: "application/json",
-//       "content-type": "application/json",
-//     },
-//     body: JSON.stringify(requestData),
-//   };
-//   fetch(
-//     // "https://ldiusfc4ib.execute-api.ap-northeast-1.amazonaws.com/v0/extension/recom_product",
-//     "https://api.inffits.com/HTTP_inf_bhv_cdp_product_recommendation/extension/recom_product",
-//     // "https://gha6kqf5ff.execute-api.ap-northeast-1.amazonaws.com/v0/extension/recom_product",
-//     options
-//   )
-//     .then((response) => response.json())
-//     .then((response) => {
-//       let jsonData = response.map((item) => {
-//         let newItem = Object.assign({}, item);
-//         newItem.sale_price = item.sale_price
-//           ? parseInt(item.sale_price.replace(/\D/g, "")).toLocaleString()
-//           : "";
-//         newItem.price = parseInt(
-//           item.price.replace(/\D/g, "")
-//         ).toLocaleString();
-//         return newItem;
-//       });
-//       const formatItems = jsonData.map((jsonDataItem) => {
-//         return {
-//           Imgsrc: jsonDataItem.image_link,
-//           Link: jsonDataItem.link,
-//           ItemName: jsonDataItem.title,
-//           sale_price: parseInt(
-//             String(jsonDataItem.sale_price || 0).replace(/\D/g, "")
-//           ).toLocaleString(),
-//           price: parseInt(
-//             String(jsonDataItem.price || 0).replace(/\D/g, "")
-//           ).toLocaleString(),
-//           ...jsonDataItem,
-//         };
-//       });
-
-//       const formatData = {
-//         Item: formatItems,
-//       };
-//       $("#recommend-title").text("猜你可能喜歡");
-//       $("#recommend-desc").text("目前無符合結果，推薦熱門商品給你。");
-//       $("#recommend-btn").text("刷新推薦");
-//       show_results(formatData);
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//     });
-// };
-
 const show_results = (response, isFirst = false) => {
   //只出現其中三個}
   const itemCount = response?.Item?.length || 0;
   // 如果項目數量小於 3，只顯示所有可用的項目
   const displayCount = Math.min(itemCount, 3);
-  // function getRandomNumbers(max, count) {
-  //   let randomNumbers = [];
-  //   while (randomNumbers.length < count) {
-  //     let num = Math.floor(Math.random() * max);
-  //     if (!randomNumbers.includes(num)) {
-  //       randomNumbers.push(num);
-  //     }
-  //   }
-  //   return randomNumbers;
-  // }
 
   function getTopCommonIndices() {
     // 取得排序後的索引值陣列
@@ -624,6 +529,7 @@ const fetchCoupon = async () => {
   isFetchCouponCalled = true;
   const requestData = {
     Brand: Brand,
+    Module: "Personalized_Landing_Widget",
   };
 
   const options = {
@@ -731,7 +637,7 @@ const fetchCoupon = async () => {
     );
 
     Product_Recommendation({
-      brand: "JERSCY",
+      brand: Brand,
       containerId: "hot-sale",
       customEdm: [],
       customPadding: "0px",
@@ -740,7 +646,30 @@ const fetchCoupon = async () => {
       arrowPosition: "none", // none, center, top (default: center)
       autoplay: false,
       hide_discount: true, // 隱藏折扣
-      hide_size: true, // 隱藏尺寸
+      hide_size: false, // 隱藏尺寸
+      bid: {
+        HV: "165",
+        WV: "45",
+        CC: "97.5_97.5",
+        DataItem: "0100",
+        Shoulder: "",
+        UpChest: "",
+        DnChest: "",
+        Waist: "",
+        Hip: "",
+        Brand: Brand,
+        ClothID: "",
+        Sizes: "",
+        FitP: "0,0,0,0",
+        Gender: "M",
+        FMLpath: "FMLSep",
+        BUS: "0",
+        GVID: "",
+        LGVID: "",
+        MRID: "INF",
+        ga_id: "x",
+        Pattern_Prefer: "1",
+      },
       breakpoints: {
         480: {
           slidesPerView: 3.5,
@@ -1092,25 +1021,7 @@ const fetchData = async () => {
           selectionContainer.classList.add("four-elements");
         }
 
-        // selectionContainer.classList.add('four-elements');
-
-        // function handleSwipe(target) {
-
-        //     if (startX - endX > 50 && currentPage < totalPages) {
-        //         console.log('swipe')
-
-        //         currentPage++;
-        //         renderPage(currentPage);
-        //     } else if (endX - startX > 50 && currentPage > 1) {
-        //         console.log('swipe')
-        //         currentPage--;
-        //         renderPage(currentPage);
-        //     }
-        // }
-
         if (itemCount > numPerPage) {
-          // $(`#container-${target}`).find('.slide').css('width', `${100 * totalPages}%`);
-
           createPagination(r);
           $(`.pagination-${target} .dot[data-page="${1}"]`).addClass("active");
           var start = numPerPage;
@@ -1119,7 +1030,6 @@ const fetchData = async () => {
                             <div class="selection swiper-slide four-elements" >
                             <div class="axd_selections selection selection-${i}"></div>
                              </div>
-                               
                             `);
 
             for (let rr = 0; rr < render_num && start < itemCount; rr++) {
@@ -1130,37 +1040,16 @@ const fetchData = async () => {
                                              <img class="axd_img" src="${Route_in_frame[target][start].Imgsrc.S}" onerror="this.style.opacity='0'; this.parentNode.style.backgroundImage='url(./../img/img-default-large.png)';" id="container-x-0" data-item="0">
                                         </div>
                                         <p>${Route_in_frame[target][start].Name.S}</p>
-                                        
-                                        
                                     </div>
                                 </div>
-                               
                             `);
               start++;
             }
           }
-
-          // $(`#container-${target} .selection_scroll`).on('touchstart', function(e) {
-          //     startX = e.originalEvent.touches[0].clientX;
-          // });
-
-          // $(`#container-${target} .selection_scroll`).on('touchmove', function(e) {
-          //     endX = e.originalEvent.touches[0].clientX;
-          // });
-
-          // $(`#container-${target} .selection_scroll`).on('touchend', function(e) {
-          //     if(startX - endX > 50 || endX - startX > 50){
-          //         e.preventDefault();
-          //         e.stopPropagation()
-          //         handleSwipe(target);
-          //     }
-
-          // });
         }
 
         if (itemCount >= 5) {
           // 監聽媒體查詢事件
-          // console.log(target, "listen");
           mediaQuery.addEventListener("change", (event) => {
             handleMediaQueryChange(mediaQuery, target);
           });
@@ -1194,9 +1083,6 @@ const fetchData = async () => {
             resistanceRatio: 0,
             speed: 300,
             on: {
-              // slideChange: function() {
-              //     console.log('幻燈片發生變化，當前幻燈片索引：', this.realIndex);
-              // },
               slideNextTransitionStart: function () {
                 var activePageIndex = $(
                   `.pagination-${target} .dot.active`
@@ -1253,121 +1139,16 @@ const fetchData = async () => {
         }
 
         bind();
-
-        // function renderPage(page) {
-        //     // console.log('page, ', r.replaceAll(' ',''))
-        //     $(`.pagination-${target} .dot`).removeClass('active');
-        //     $(`.pagination-${target} .dot[data-page="${page}"]`).addClass('active');
-        //     $(`#container-${target}`).find('.selection').css('display', 'none');
-        //     $(`#container-${target}`).find(`.selection:eq(${(page - 1)})`).show();
-        //     if(page==1){
-        //         $(`#container-${target} .left-button`).css('display', 'none');
-        //     }
-        //     else
-        //     {
-        //         $(`#container-${target} .left-button`).css('display', 'block');
-        //     }
-
-        //     if(page==totalPages){
-        //         $(`#container-${target} .right-button`).css('display', 'none');
-        //     } else {
-        //         $(`#container-${target} .right-button`).css('display', 'block');
-        //     }
-        // }
-
-        // function renderPage(page) {
-
-        //     $(`.pagination-${target} .dot`).removeClass('active');
-        //     $(`.pagination-${target} .dot[data-page="${page}"]`).addClass('active');
-
-        //     var newLeft = -((page - 1) * 100) + '%'; // 根據頁數計算新的左側位置
-        //     $(`#container-${target} .slide`).animate({left: newLeft}, 500);
-
-        //     // 處理按鈕顯示
-        //     if(page == 1){
-        //         $(`#container-${target} .left-button`).hide();
-        //     } else {
-        //         $(`#container-${target} .left-button`).show();
-        //     }
-
-        //     if(page == totalPages){
-        //         $(`#container-${target} .right-button`).hide();
-        //     } else {
-        //         $(`#container-${target} .right-button`).show();
-        //     }
-        // }
       }
-
       init(r);
-
-      //     function checkVisibility() {
-      //         const container = document.getElementsByClassName('selection')[0];
-      //         const items = container.querySelectorAll('.axd_selection');
-      //         console.log(items)
-      //         items.forEach(item => {
-      //             const rect = item.getBoundingClientRect();
-      //             const containerRect = container.getBoundingClientRect();
-
-      //             if (rect.left < containerRect.left || rect.right > containerRect.right) {
-      //                 item.classList.add('partially-visible');
-      //             } else {
-      //                 item.classList.remove('partially-visible');
-      //             }
-      //         });
-      //     }
-      //     // 監聽滾動事件和初始檢查
-
-      // document.getElementsByClassName('selection')[0].addEventListener('scroll', checkVisibility);
-      // window.addEventListener('load', checkVisibility);
-
-      // checkVisibility()
     }
 
-    //function series
-    // var mytap =  ( window.ontouchstart === null ) ? 'touchend' : 'click';
-    // var mytap = "pointerdown";
     var mytap = window.ontouchstart === null ? "touchend" : "click";
-
-    // $('#container-'+all_Route[0]).show();
-    // 添加開始按鈕的點擊事件處理器
-    //device improve
-    // const buttons = document.querySelectorAll('.button');
-    // let startX, startY, isSwiping;
-
-    // buttons.forEach(button => {
-    //     button.addEventListener('touchstart', function(e) {
-    //         const touch = e.touches[0];
-    //         startX = touch.clientX;
-    //         startY = touch.clientY;
-    //         isSwiping = false;
-    //     });
-
-    //     button.addEventListener('touchmove', function(e) {
-    //         const touch = e.touches[0];
-    //         const diffX = touch.clientX - startX;
-    //         const diffY = touch.clientY - startY;
-    //         if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) {
-    //             isSwiping = true;
-    //         }
-    //     });
-
-    //     button.addEventListener('touchend', function(e) {
-    //         if (!isSwiping) {
-    //             performAction(this.dataset.id);
-    //         }
-    //     });
-    // });
-
-    // function performAction(buttonId) {
-    //     alert('Button ' + buttonId + ' clicked!');
-    // }
 
     function bind() {
       for (var fs = 0; fs < all_Route.length; fs++) {
         (function (fs) {
           const currentRoute = all_Route[fs].replaceAll(" ", "");
-          // console.log(".c-" + currentRoute);
-          // console.log("currentRoute", currentRoute);
           // 檢查並設定預設值
           var INFS_ROUTE_ORDER = !isForPreview
             ? JSON.parse(localStorage.getItem(`INFS_ROUTE_ORDER_${Brand}`)) ||
@@ -1376,7 +1157,6 @@ const fetchData = async () => {
           const match = INFS_ROUTE_ORDER.find((item) =>
             deepEqualWithoutKey(item, current_route_path, ["Record"])
           );
-          // console.error("match", match);
           const skipShowResult = isForPreview || isForReferral;
           if (match && !skipShowResult) {
             tags_chosen = match.Record;
@@ -1384,9 +1164,6 @@ const fetchData = async () => {
           if (skipShowResult) {
             tags_chosen = {};
           }
-          // console.error("has record--------", isForPreview);
-          // console.error(`BIND INFS_ROUTE_ORDER`, INFS_ROUTE_ORDER);
-          // console.error(`BIND current_route_path`, current_route_path);
           if (
             (Object.keys(tags_chosen).length > 0 && !isForPreview) ||
             (Object.keys(tags_chosen).length > 0 && !isForReferral)
@@ -1565,20 +1342,10 @@ const fetchData = async () => {
 
           if (fs == 0) {
             reset = async function () {
-              // $('.tag-selected').removeClass("tag-selected");
-              // $("#intro-page").show();
-              // $('.dot.active').removeClass('active');
-              // $('.dot[data-page="1"]').addClass('active');
-              // $("#container-" +currentRoute).hide();
-              // $("#container-recom").hide();
-              // $(`#container-recom`).find(".axd_selections").children().remove();
-
               const message = {
                 header: "from_preview",
                 id: Route,
                 brand: Brand,
-                // id: "TDA_All",
-                // brand: "TDA"
               };
 
               // 發送消息到接收窗口
@@ -1621,41 +1388,6 @@ $(".icon-reminder").on(tap, function () {
   $(".text-inffits").removeClass("visible");
 });
 
-// if (tap === "click") {
-//   $(".icon-inffits").hover(
-//     function () {
-//       $(".icon-inffits").addClass("open");
-//       $(".text-inffits").addClass("visible");
-//     },
-//     function () {
-//       $(".icon-inffits").removeClass("open");
-//       $(".text-inffits").removeClass("visible");
-//     }
-//   );
-//   $(".text-inffits").hover(
-//     function () {
-//       $(".icon-inffits").addClass("open");
-//       $(".text-inffits").addClass("visible");
-//     },
-//     function () {
-//       $(".icon-inffits").removeClass("open");
-//       $(".text-inffits").removeClass("visible");
-//     }
-//   );
-
-//   $(".icon-reminder").hover(
-//     function () {
-//       $(".icon-reminder").addClass("open");
-//       $(".text-reminder").addClass("visible");
-//     },
-//     function () {
-//       $(".icon-reminder").removeClass("open");
-//       $(".text-reminder").removeClass("visible");
-//     }
-//   );
-
-// }
-
 function copyCoupon(couponCode, btn) {
   navigator.clipboard
     .writeText(couponCode)
@@ -1696,7 +1428,6 @@ $("#start-button").on(tap, function () {
 $("#recommend-btn").on(tap, async function () {
   $("#loadingbar_recom").hide();
 
-  // console.log("firstResult", firstResult);
   const $loadingOverlay = $('<div id="loading-overlay"></div>')
     .css({
       position: "absolute",
@@ -1746,89 +1477,12 @@ $("#recommend-btn").on(tap, async function () {
   }
 });
 
-// FIXME BK
-// $("#recommend-btn").on(tap, function () {
-//   $("#loadingbar_recom").hide();
-//   const $loadingOverlay = $('<div id="loading-overlay"></div>')
-//     .css({
-//       position: "absolute",
-//       top: 0,
-//       left: 0,
-//       width: "100%",
-//       height: "100%",
-//       background:
-//         "rgba(255, 255, 255, 0.9) url('./../img/recom-loading-desktop.gif') no-repeat center center / contain",
-//       zIndex: 9999,
-//     })
-//     .appendTo("#container-recom");
-
-//   const formatTags = Object.fromEntries(
-//     Object.entries(tags_chosen).map(([key, value]) => [
-//       key,
-//       value.filter((item) => item.Name !== "example"),
-//     ])
-//   );
-//   let options = {
-//     method: "POST",
-//     headers: { accept: "application/json", "content-type": "application/json" },
-//     body: JSON.stringify({
-//       Brand: Brand,
-//       Tags: tags_chosen,
-//       NUM: 12,
-//       SpecifyTags: SpecifyTags,
-//       SpecifyKeywords: SpecifyKeywords,
-//     }),
-//   };
-//   const userAgent = navigator.userAgent.toLowerCase();
-//   // const isMobile = /mobile|android|iphone|ipad|phone|tablet|ipod/.test(
-//   //   userAgent
-//   // ); // 手機版的條件，寬度小於等於 768px
-//   const isMobile = /mobile|android|iphone|ipod|phone/.test(userAgent);
-
-//   const backgroundImage = isMobile
-//     ? "./../img/recom-loading-mobile.gif" // 手機版背景
-//     : "./../img/recom-loading-desktop.gif"; // 桌面版背景
-//   $("#loading-overlay").css(
-//     "background",
-//     `rgba(255, 255, 255, 0.9) url('${backgroundImage}') no-repeat center center / contain`
-//   );
-
-//   fetch(
-//     "https://ldiusfc4ib.execute-api.ap-northeast-1.amazonaws.com/v0/extension/recom_product",
-//     options
-//   )
-//     .then((response) => response.json())
-//     .then((response) => {
-//       const messageData = {
-//         type: "result",
-//         value: true,
-//       };
-//       window.parent.postMessage(messageData, "*");
-//       show_results(response);
-//       $("#recommend-title").text("精選推薦商品");
-//       $("#recommend-desc").text("更多您可能喜愛的商品");
-//     })
-//     .catch((err) => {
-//       console.error("err", err);
-//     })
-//     .finally(() => {
-//       setTimeout(() => {
-//         $loadingOverlay.fadeOut(300, function () {
-//           $(this).remove();
-//         });
-//       }, 1000);
-//     });
-// });
-
 $("#startover").on(tap, function () {
   $("#loadingbar_recom").hide();
   Initial();
   reset();
 });
 
-// $("#confirm-button_recom").on(tap, async function () {
-//   reset();
-// });
 const Initial = () => {
   $(".update_delete").remove();
   $("#container-recom").hide();
@@ -1837,23 +1491,16 @@ const Initial = () => {
 };
 
 window.addEventListener("message", async (event) => {
-  console.warn("message", event);
+  // console.warn("message", event);
   if (event.data.header == "from_preview") {
-    // location.reload();
     await Initial();
 
     Route = event.data.id;
     Brand = event.data.brand;
-    // console.log("change Route: brand:", Route, Brand);
 
     fetchData();
     fetchCoupon();
 
     $("#intro-page").fadeIn(800);
-
-    //finish Loading
-    // $("#loadingbar").hide();
-    // $("#pback").show();
-    // $("#containerback").show();
   }
 });

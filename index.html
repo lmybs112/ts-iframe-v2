@@ -112,7 +112,7 @@
                 max-width: 95vw;
                 margin: 0 auto;
             "
-            src="${ "./iframe_container_module.html" }"
+            src="${"./iframe_container_module.html"}"
           ></iframe>
 
         </div>
@@ -161,21 +161,27 @@
           iframeElement.onload = () => {
             if (window.location.port === "5503") {
               const iframe_preview_obj = {
-                id: "1746493728203",
+                // id: "1746493728203",
+                // header: "from_preview",
+                // brand: "JSYTEST",
+                id: "1735529831484",
                 header: "from_preview",
-                brand: "JSYTEST",
+                brand: "JERSCY",
               };
               // 傳送 postMessage 到 iframe
               iframe_container.postMessage(iframe_preview_obj, "*");
             } else {
               // 透過 prompt 輸入 id 和 brand
-              const id = prompt("請輸入 ID：", "1746493728203");
-              const brand = prompt("請輸入品牌名稱：", "JSYTEST");
+              const id = prompt("請輸入 ID：", "1735529831484");
+              const brand = prompt("請輸入品牌名稱：", "JERSCY");
 
               const iframe_preview_obj = {
-                id: id || "1746493728203",
+                id: id || "1735529831484",
                 header: "from_preview",
-                brand: brand || "JSYTEST",
+                brand: brand || "JERSCY",
+                // id: id || "1746493728203",
+                // header: "from_preview",
+                // brand: brand || "JSYTEST",
               };
               // 傳送 postMessage 到 iframe
               iframe_container.postMessage(iframe_preview_obj, "*");
