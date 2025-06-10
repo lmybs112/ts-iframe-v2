@@ -188,7 +188,7 @@
           "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
         embeddedAdjQueryScript.type = "text/javascript";
         embeddedAdjQueryScript.onload = function () {
-          console.log("jQuery 已成功載入");
+          // console.log("jQuery 已成功載入");
           loadSwiperScript(); // 先載入 Swiper
           callback(); // 再執行嵌入腳本
         };
@@ -197,7 +197,7 @@
         };
         document.head.appendChild(embeddedAdjQueryScript);
       } else {
-        console.log("jQuery 已經載入");
+        // console.log("jQuery 已經載入");
         loadSwiperScript(); // 先載入 Swiper
         callback(); // 再執行嵌入腳本
       }
@@ -215,7 +215,7 @@
       SwiperScript.src =
         "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
       SwiperScript.onload = function () {
-        console.log("Swiper script loaded successfully");
+        // console.log("Swiper script loaded successfully");
       };
       SwiperScript.onerror = function () {
         console.error("Error loading Swiper script");
@@ -773,7 +773,7 @@
         $(function () {
           let ids = ids_init();
 
-          console.log("DOM is ready");
+          // console.log("DOM is ready");
           $(show_up_position_before).append(
             `<div id="recommendation-loading">
               <span class="loading-text">Loading...</span>

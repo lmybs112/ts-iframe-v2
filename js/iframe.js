@@ -117,7 +117,7 @@ const get_recom_res = () => {
       [`${Brand}_${current_route_path.Route}`]: tags_chosen,
     };
     window.parent.postMessage(messageData, "*");
-    console.error("messageData", messageData);
+    // console.error("messageData", messageData);
   }
 
   console.warn("tags chosen:", tags_chosen);
@@ -142,8 +142,8 @@ const get_recom_res = () => {
 
   // 如果找到了，則將其移到 INFS_ROUTE_RES
   if ((matchIndex !== -1) & !isForPreview) {
-    console.error("matchIndex", matchIndex);
-    console.error("isForPreview", isForPreview);
+    // console.error("matchIndex", matchIndex);
+    // console.error("isForPreview", isForPreview);
     const matchedItem = INFS_ROUTE_ORDER.splice(matchIndex, 1)[0]; // 移除並取得物件
     INFS_ROUTE_RES.push(matchedItem); // 將物件推到 RES 陣列
 
@@ -174,7 +174,7 @@ const get_recom_res = () => {
         value: true,
       };
       window.parent.postMessage(messageData, "*");
-      console.error("Message", response);
+      // console.error("Message", response);
       firstResult = response;
       await show_results(response, true);
       // }, 1500);
@@ -249,8 +249,8 @@ const getEmbedded = async () => {
       ...jsonDataItem,
     }));
 
-    console.error("jsonData", jsonData);
-    console.error("formatItems", formatItems);
+    // console.error("jsonData", jsonData);
+    // console.error("formatItems", formatItems);
 
     const formatData = {
       Item: formatItems,
@@ -335,8 +335,8 @@ const getEmbeddedForTest = () => {
         };
       });
 
-      console.error("jsonData", jsonData);
-      console.error("formatItems", formatItems);
+      // console.error("jsonData", jsonData);
+      // console.error("formatItems", formatItems);
 
       const formatData = {
         Item: formatItems,
@@ -392,7 +392,7 @@ const show_results = (response, isFirst = false) => {
   const finalitem = isFirst
     ? getTopCommonIndices()
     : getRandomNumbers(itemCount, displayCount);
-  console.error("finalitem", finalitem);
+  // console.error("finalitem", finalitem);
   const finalitemCount = 3;
   $(`#container-recom`).find(".axd_selections").html("");
 
@@ -1197,7 +1197,7 @@ const fetchData = async () => {
           $(".c-" + currentRoute + ".skip")
             .off(mytap)
             .on(mytap, function (e) {
-              console.error("$(this) SKIP", $(this));
+              // console.error("$(this) SKIP", $(this));
               // if ($(this).text() == "略過") {
               var tag = `c-${all_Route[fs]}`;
               $(`.${tag}.tag-selected`).removeClass("tag-selected");
