@@ -120,7 +120,7 @@ const get_recom_res = () => {
     // console.error("messageData", messageData);
   }
 
-  console.warn("tags chosen:", tags_chosen);
+  // console.warn("tags chosen:", tags_chosen);
   var INFS_ROUTE_ORDER = !isForPreview
     ? JSON.parse(localStorage.getItem(`INFS_ROUTE_ORDER_${Brand}`)) || []
     : [];
