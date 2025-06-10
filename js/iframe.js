@@ -1456,7 +1456,7 @@ $("#recommend-btn").on(tap, async function () {
     value: true,
   };
   window.parent.postMessage(messageData, "*");
-  if (firstResult.Item.length <= 3) {
+  if (firstResult.Item?.length <= 3) {
     await getEmbedded().finally(() => {
       setTimeout(() => {
         $loadingOverlay.fadeOut(300, function () {
