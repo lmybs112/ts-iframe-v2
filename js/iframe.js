@@ -646,7 +646,7 @@ const fetchCoupon = async () => {
       arrowPosition: "none", // none, center, top (default: center)
       autoplay: false,
       hide_discount: true, // 隱藏折扣
-      hide_size: false, // 隱藏尺寸
+      hide_size: true, // 隱藏尺寸
       bid: {
         HV: "165",
         WV: "45",
