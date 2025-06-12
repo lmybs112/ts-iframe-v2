@@ -931,12 +931,15 @@ body {
 }
 .c_header .header-text p {
   color: #a3a39f;
-  text-align: center;
+  text-align: left;
+  padding: 0 4px;
   font-family: "Noto Sans TC", "Figtree", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 16px;
+  max-height: 32px;
+  overflow-y: scroll;
   /* 114.286% */
   letter-spacing: 0.84px;
 }
@@ -944,9 +947,13 @@ body {
   .c_header .header-text p {
     font-size: 16px;
     line-height: 18px;
+    max-height: 36px;
     /* 112.5% */
     letter-spacing: 0.8px;
   }
+}
+.c_header .header-text #recommend-desc {
+  text-align: center;
 }
 
 #container-recom .c_header {

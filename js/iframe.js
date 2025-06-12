@@ -203,7 +203,7 @@ const getEmbedded = async () => {
     LGVID: "SObQG1eZ0oxzKmpgT2dc",
     MRID: "",
     recom_num: "12",
-    PID: "627b5ab044a027000fde0add",
+    PID: "",
   };
   const options = {
     method: "POST",
@@ -220,7 +220,7 @@ const getEmbedded = async () => {
       options
     );
     const data = await response.json();
-    let jsonData = getRandomElements(data["bhv"], 6).map((item) => {
+    let jsonData = getRandomElements(data["bhv"], data["bhv"].length < 6 ? data["bhv"].length : 6).map((item) => {
       let newItem = Object.assign({}, item);
       newItem.sale_price = item.sale_price
         ? parseInt(item.sale_price.replace(/\D/g, "")).toLocaleString("en-US", {
@@ -286,7 +286,7 @@ const getEmbeddedForTest = () => {
     LGVID: "SObQG1eZ0oxzKmpgT2dc",
     MRID: "",
     recom_num: "12",
-    PID: "627b5ab044a027000fde0add",
+    PID: "",
   };
   const options = {
     method: "POST",
@@ -302,7 +302,7 @@ const getEmbeddedForTest = () => {
   )
     .then((response) => response.json())
     .then((response) => {
-      let jsonData = getRandomElements(response["bhv"], 6).map((item) => {
+      let jsonData = getRandomElements(response["bhv"], response["bhv"].length < 6 ? response["bhv"].length : 6).map((item) => {
         let newItem = Object.assign({}, item);
         newItem.sale_price = item.sale_price
           ? parseInt(item.sale_price.replace(/\D/g, "")).toLocaleString(
