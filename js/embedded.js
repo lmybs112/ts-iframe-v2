@@ -1190,7 +1190,7 @@
               let jsonData =
                 customEdm && customEdm.length > 0
                   ? customEdm
-                  : getRandomElements(response["bhv"], 6).map((item) => {
+                  : getRandomElements(response["bhv"],response["bhv"].length < 6 ? response["bhv"].length : 6).map((item) => {
                       let newItem = Object.assign({}, item);
                       newItem.sale_price = hide_discount
                         ? null

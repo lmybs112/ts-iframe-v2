@@ -221,6 +221,7 @@ const getEmbedded = async () => {
     );
     const data = await response.json();
     let jsonData = getRandomElements(data["bhv"], data["bhv"].length < 6 ? data["bhv"].length : 6).map((item) => {
+      console.log('jsonData----', jsonData)
       let newItem = Object.assign({}, item);
       newItem.sale_price = item.sale_price
         ? parseInt(item.sale_price.replace(/\D/g, "")).toLocaleString("en-US", {
@@ -244,13 +245,13 @@ const getEmbedded = async () => {
       Imgsrc: jsonDataItem.image_link,
       Link: jsonDataItem.link,
       ItemName: jsonDataItem.title,
-      sale_price:  jsonDataItem.sale_price,
+      sale_price: jsonDataItem.sale_price,
       price: jsonDataItem.price,
       ...jsonDataItem,
     }));
 
-    // console.error("jsonData", jsonData);
-    // console.error("formatItems", formatItems);
+    console.error("jsonData", jsonData);
+    console.error("formatItems", formatItems);
 
     const formatData = {
       Item: formatItems,
@@ -303,6 +304,8 @@ const getEmbeddedForTest = () => {
     .then((response) => response.json())
     .then((response) => {
       let jsonData = getRandomElements(response["bhv"], response["bhv"].length < 6 ? response["bhv"].length : 6).map((item) => {
+      console.log('jsonData----2', jsonData)
+
         let newItem = Object.assign({}, item);
         newItem.sale_price = item.sale_price
           ? parseInt(item.sale_price.replace(/\D/g, "")).toLocaleString(
@@ -538,10 +541,15 @@ const fetchCoupon = async () => {
     body: JSON.stringify(requestData),
   };
   const response = await fetch(
-    "https://api.inffits.com/mkt_discount_info_derive/GetItems",
+    "https://api.inffits.com/mkt_brand_config_proc/GetItems",
     options
   );
-  const data = await response.json();
+  const responseData = await response.json();
+  console.log('responseData', responseData)
+  const currentData = responseData.find(item => item.Module === 'Personalized_Landing_Widget');
+  console.log('currentData', currentData)
+  const data = currentData?.ConfigData?.Discount_Info;
+  console.log('data-----',data);
   if (data && data.length > 0) {
     $("#intro-coupon-modal__content-coupons").html(
       data
@@ -635,8 +643,7 @@ const fetchCoupon = async () => {
         })
         .join("")
     );
-
-    Product_Recommendation({
+    window.Product_Recommendation({
       brand: Brand,
       containerId: "hot-sale",
       customEdm: [],

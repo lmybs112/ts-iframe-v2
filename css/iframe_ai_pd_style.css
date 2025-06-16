@@ -1375,6 +1375,9 @@ a.update_delete .discount-content .item-price--original {
   display: flex;
   -ms-flex-align: center;
       align-items: center;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  width: 100%;
   gap: 4px;
 }
 
