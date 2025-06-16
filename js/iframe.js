@@ -969,10 +969,11 @@ const fetchData = async () => {
 
         for (let rr = 0; rr < render_num; rr++) {
           // console.log(Route_in_frame[target][rr], "dog");
+          const innerDivStyle = Route_in_frame[target][rr].Imgsrc.S.includes('img-default')?  'display:none':'' ;
           $(`#container-${target}`).find(".axd_selections").append(`
-                            <div class="axd_selection ">
+                            <div class="axd_selection">
                                 <div class="image-container c-${target} tagId-${Route_in_frame[target][rr].Tag.S}">
-                                <div>
+                                <div style="${innerDivStyle}">
                                     <img class="axd_img" src="${Route_in_frame[target][rr].Imgsrc.S}" onerror="this.style.opacity='0'; this.parentNode.style.backgroundImage='url(./../img/img-default-large.png)';"  id="container-x-0" data-item="0">
                                 </div>
                                 
