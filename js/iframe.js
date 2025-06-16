@@ -221,7 +221,6 @@ const getEmbedded = async () => {
     );
     const data = await response.json();
     let jsonData = getRandomElements(data["bhv"], data["bhv"].length < 6 ? data["bhv"].length : 6).map((item) => {
-      console.log('jsonData----', jsonData)
       let newItem = Object.assign({}, item);
       newItem.sale_price = item.sale_price
         ? parseInt(item.sale_price.replace(/\D/g, "")).toLocaleString("en-US", {
@@ -304,8 +303,6 @@ const getEmbeddedForTest = () => {
     .then((response) => response.json())
     .then((response) => {
       let jsonData = getRandomElements(response["bhv"], response["bhv"].length < 6 ? response["bhv"].length : 6).map((item) => {
-      console.log('jsonData----2', jsonData)
-
         let newItem = Object.assign({}, item);
         newItem.sale_price = item.sale_price
           ? parseInt(item.sale_price.replace(/\D/g, "")).toLocaleString(
