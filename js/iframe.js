@@ -408,7 +408,7 @@ const show_results = (response, isFirst = false) => {
    response.Item[i].Link
  }" target="_blank" class="update_delete" style="text-decoration: none;">
     <div style="overflow: hidden;">
-         <img class="c-recom" id="container-recom-${i}" data-item="0"  src="./../../img/img-default-large.png" data-src=" ${
+         <img loading="lazy" class="c-recom" id="container-recom-${i}" data-item="0"  src="./../../img/img-default-large.png" data-src=" ${
       response.Item[i].Imgsrc
     }" onerror="this.onerror=null;this.src='./../../img/img-default-large.png'"
          ></div>
@@ -974,7 +974,7 @@ const fetchData = async () => {
                             <div class="axd_selection">
                                 <div class="image-container c-${target} tagId-${Route_in_frame[target][rr].Tag.S}">
                                 <div style="${innerDivStyle}">
-                                    <img class="axd_img" src="${Route_in_frame[target][rr].Imgsrc.S}" onerror="this.style.opacity='0'; this.parentNode.style.backgroundImage='url(./../img/img-default-large.png)';"  id="container-x-0" data-item="0">
+                                    <img loading="lazy" class="axd_img" src="${Route_in_frame[target][rr].Imgsrc.S}" onerror="this.style.opacity='0'; this.parentNode.style.backgroundImage='url(./../img/img-default-large.png)';"  id="container-x-0" data-item="0">
                                 </div>
                                 
                                     <p>${Route_in_frame[target][rr].Name.S}</p>
@@ -1042,7 +1042,7 @@ const fetchData = async () => {
                                 <div class="axd_selection ">
                                     <div class="image-container c-${target} tagId-${Route_in_frame[target][start].Tag.S}">
                                          <div>
-                                             <img class="axd_img" src="${Route_in_frame[target][start].Imgsrc.S}" onerror="this.style.opacity='0'; this.parentNode.style.backgroundImage='url(./../img/img-default-large.png)';" id="container-x-0" data-item="0">
+                                             <img loading="lazy" class="axd_img" src="${Route_in_frame[target][start].Imgsrc.S}" onerror="this.style.opacity='0'; this.parentNode.style.backgroundImage='url(./../img/img-default-large.png)';" id="container-x-0" data-item="0">
                                         </div>
                                         <p>${Route_in_frame[target][start].Name.S}</p>
                                     </div>

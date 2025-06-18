@@ -1237,7 +1237,7 @@
           ? `<div class="embeddedItem__sizeTag">${img.size_tag}</div>`
           : ""
       }
-          <img src="${img.image_link}" alt="${
+          <img src="${img.image_link}" loading="lazy" alt="${
                   img.description
                 }" style="width: 100%; height: auto; object-fit: cover;">
       </div>
