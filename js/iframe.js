@@ -861,11 +861,13 @@ const fetchData = async () => {
                         <div class="header-text">
                             <span style="margin-bottom: 0.3em">${r}</span>
                             <p class="desc-container">${
-                              formatTagGroupMap?.[r] ??
-                              (Array.isArray(Route_in_frame?.[r]) &&
-                              Route_in_frame[r].length > 0
-                                ? Route_in_frame[r][0]?.Description?.S ?? ""
-                                : "")
+                              formatTagGroupMap?.[r] && formatTagGroupMap[r] !== ""
+                              ? formatTagGroupMap[r]
+                              : (
+                                  Array.isArray(Route_in_frame?.[r]) && Route_in_frame[r].length > 0
+                                    ? Route_in_frame[r][0]?.Description?.S ?? ""
+                                    : ""
+                                )
                             }</p>
                         </div>
                         <img class='c-${r.replaceAll(
