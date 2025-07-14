@@ -744,6 +744,8 @@ const fetchCoupon = async () => {
     $(".intro-content.intro-modal__content").hide();
   } else {
     alert('沒有設置模組');
+    $(".intro-content.intro-coupon-modal__content").show();
+    $(".intro-content.intro-modal__content").hide();
     // $(".intro-content.intro-coupon-modal__content").hide();
     // $(".intro-content.intro-modal__content").show();
   }
