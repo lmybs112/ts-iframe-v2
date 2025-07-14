@@ -1127,7 +1127,7 @@
             MRID: ids.member_id,
             recom_num: "6",
             PID: ids.skuContent,
-            ctype_val: JSON.stringify(["underwear"]),
+            // ctype_val: JSON.stringify(["underwear"]),
           };
           if (!hide_size) {
             requestData.SIZEAI = "True";

@@ -545,9 +545,14 @@ const fetchCoupon = async () => {
   console.log('responseData', responseData)
   const currentData = responseData.find(item => item.Module === 'Personalized_Landing_Widget');
   console.log('currentData', currentData)
-  const data = currentData?.ConfigData?.Discount_Info;
-  console.log('data-----',data);
-  if (data && data.length > 0) {
+  const data = currentData?.ConfigData?.Discount_Info || [{
+    Title: '敬請期待',
+    Description: '敬請期待',
+    TimeValid: null,
+    Code: '敬請期待',
+    status: false,
+  }];;
+  if (data && data.length > 0) {}
     $("#intro-coupon-modal__content-coupons").html(
       data
         .map((item) => {
@@ -742,13 +747,13 @@ const fetchCoupon = async () => {
 
     $(".intro-content.intro-coupon-modal__content").show();
     $(".intro-content.intro-modal__content").hide();
-  } else {
-    alert('沒有設置模組');
-    $(".intro-content.intro-coupon-modal__content").show();
-    $(".intro-content.intro-modal__content").hide();
-    // $(".intro-content.intro-coupon-modal__content").hide();
-    // $(".intro-content.intro-modal__content").show();
-  }
+  // } else {
+  //   alert('沒有設置模組');
+  //   $(".intro-content.intro-coupon-modal__content").show();
+  //   $(".intro-content.intro-modal__content").hide();
+  //   // $(".intro-content.intro-coupon-modal__content").hide();
+  //   // $(".intro-content.intro-modal__content").show();
+  // }
 };
 
 const fetchData = async () => {
