@@ -262,7 +262,7 @@ const getEmbedded = async () => {
     show_results(formatData);
   } catch (err) {
     console.error(err);
-    getEmbeddedForTest();
+    getEmbeddedForBackup();
   }
 };
 
@@ -280,13 +280,14 @@ function getRandomElements(arr, count) {
 
   return result;
 }
-const getEmbeddedForTest = () => {
+const getEmbeddedForBackup = () => {
   const requestData = {
-    Brand: "JERSCY",
-    LGVID: "SObQG1eZ0oxzKmpgT2dc",
-    MRID: "",
+    Brand: Brand,
+    LGVID:"2Zdl1XTfRX3FdvPqGEhs",
+    MRID:"",
+    PID:"搭配商品的pid",
     recom_num: "12",
-    PID: "",
+    SP_PID:"xxSOCIAL PROOF"
   };
   const options = {
     method: "POST",
@@ -346,6 +347,11 @@ const getEmbeddedForTest = () => {
       $("#recommend-btn").text("刷新推薦");
       show_results(formatData);
       $("#container-recom").show();
+
+      localStorage.setItem(
+        `INFS_ROUTE_RES_${Brand}`,
+        JSON.stringify([])
+      );
     })
     .catch((err) => {
       console.error(err);
@@ -384,6 +390,10 @@ const show_results = (response, isFirst = false) => {
 
   if (itemCount === 0 || !response) {
     getEmbedded();
+    localStorage.setItem(
+      `INFS_ROUTE_RES_${Brand}`,
+      JSON.stringify([])
+    );
     return;
   } else {
     $("#container-recom").show();
