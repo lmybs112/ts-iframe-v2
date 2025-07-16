@@ -1477,6 +1477,7 @@ a.update_delete .discount-content .item-price--original {
   -ms-flex-pack: justify;
       justify-content: space-between;
   padding-left: 8px;
+  gap: 4px;
 }
 
 .intro-coupon-modal__footer-content > div {
@@ -1491,12 +1492,15 @@ a.update_delete .discount-content .item-price--original {
   display: block;
   color: #1e1e19;
   font-family: "Noto Sans TC", "Figtree", sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
-  /* 128.571% */
-  letter-spacing: 0.84px;
+  /* 150% */
+  letter-spacing: 0.72px;
+  text-align: left;
+  max-height: 36px; /* 兩行文字的高度 (18px * 2) */
+  overflow-y: auto; /* 超出部分可垂直滾動 */
 }
 
 .intro-coupon-modal__btn--start {
@@ -1505,25 +1509,36 @@ a.update_delete .discount-content .item-price--original {
   text-align: center;
   /* Noto Sans TC 14 */
   font-family: "Noto Sans TC", "Figtree", sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 18px;
-  /* 128.571% */
+  /* 150% */
   display: -ms-flexbox;
   display: flex;
-  width: 90px;
-  height: 30px;
+  width: 92px;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  height: 36px;
   -ms-flex-pack: center;
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
-  gap: 10px;
   -ms-flex-negative: 0;
       flex-shrink: 0;
   border-radius: 100px;
   background: #19917f;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-coupon-modal__btn--start-arrow {
+  padding-top: 1px;
+  width: 14px;
+  height: 14px;
 }
 
 @media screen and (min-width: 480px) {
@@ -1763,29 +1778,33 @@ a.update_delete .discount-content .item-price--original {
     -ms-flex-pack: justify;
         justify-content: space-between;
     padding-left: 12px;
+    gap: 4px;
   }
   .intro-coupon-modal__footer-content > div {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
         align-items: center;
-    gap: 22px;
+    gap: 8px;
   }
   .intro-coupon-modal__footer-content > div > p {
     display: block;
     color: var(--Black-Primary, #1e1e19);
     font-family: "Noto Sans TC", "Figtree", sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: 18px;
     /* 112.5% */
     letter-spacing: 0.96px;
+    text-align: left;
+    max-height: 36px; /* 兩行文字的高度 (18px * 2) */
+    overflow-y: auto; /* 超出部分可垂直滾動 */
   }
   .intro-coupon-modal__btn--start {
     display: -ms-flexbox;
     display: flex;
-    width: 150px;
+    width: 120px;
     height: 45px;
     min-width: -webkit-fit-content;
     min-width: -moz-fit-content;
@@ -1794,20 +1813,27 @@ a.update_delete .discount-content .item-price--original {
         justify-content: center;
     -ms-flex-align: center;
         align-items: center;
-    gap: 10px;
     -ms-flex-negative: 0;
         flex-shrink: 0;
     border-radius: 100px;
     background: var(--Teal-Tertiary, #19917f);
     color: var(--White-Primary, #fff);
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* Noto Sans TC 16 */
     font-family: "Noto Sans TC", "Figtree", sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 700;
     line-height: 22px;
     /* 137.5% */
     letter-spacing: 0.32px;
+  }
+  .intro-coupon-modal__btn--start-arrow {
+    padding-top: 1px;
+    width: 14px;
+    height: 14px;
   }
 }/*# sourceMappingURL=iframe_ai_pd_style.css.map */

@@ -1140,7 +1140,7 @@ body {
       font-weight: 400;
       line-height: 16px;
       max-height: 32px;
-      overflow-y:scroll;
+      overflow-y: scroll;
       /* 114.286% */
       letter-spacing: 0.84px;
 
@@ -1152,12 +1152,13 @@ body {
         // letter-spacing: 0.75px;
         font-size: 16px;
         line-height: 18px;
-        max-height:36px;
+        max-height: 36px;
         /* 112.5% */
         letter-spacing: 0.8px;
       }
     }
-    #recommend-desc{
+
+    #recommend-desc {
       text-align: center;
     }
   }
@@ -1632,10 +1633,12 @@ a.update_delete {
   background: #f2f2f2;
   color: rgba(0, 0, 0, 0.95);
 }
+
 .intro-coupon-modal__content-container-content-footer .intro-coupon-modal__btn--coupon--disabled {
   background: #f2f2f2;
   color: rgba(0, 0, 0, 0.95);
 }
+
 .intro-coupon-modal__footer {
   display: flex;
   flex-direction: column;
@@ -1665,6 +1668,7 @@ a.update_delete {
   align-items: center;
   justify-content: space-between;
   padding-left: 8px;
+  gap: 4px;
 }
 
 .intro-coupon-modal__footer-content>div {
@@ -1677,12 +1681,21 @@ a.update_delete {
   display: block;
   color: #1e1e19;
   font-family: "Noto Sans TC", "Figtree", sans-serif;
-  font-size: 14px;
+  // font-size: 14px;
+  // font-style: normal;
+  // font-weight: 500;
+  // line-height: 18px;
+  // /* 128.571% */
+  // letter-spacing: 0.84px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
-  /* 128.571% */
-  letter-spacing: 0.84px;
+  /* 150% */
+  letter-spacing: 0.72px;
+  text-align: left;
+  max-height: 36px; /* 兩行文字的高度 (18px * 2) */
+  overflow-y: auto; /* 超出部分可垂直滾動 */
 }
 
 .intro-coupon-modal__btn--start {
@@ -1691,21 +1704,30 @@ a.update_delete {
   text-align: center;
   /* Noto Sans TC 14 */
   font-family: "Noto Sans TC", "Figtree", sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 18px;
-  /* 128.571% */
+  /* 150% */
   display: flex;
-  width: 90px;
-  height: 30px;
+  width: 92px;
+  min-width: fit-content;
+  height: 36px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   flex-shrink: 0;
   border-radius: 100px;
   background: #19917f;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-coupon-modal__btn--start-arrow {
+  padding-top: 1px;
+  width: 14px;
+  height: 14px;
 }
 
 @media screen and (min-width: 480px) {
@@ -1719,7 +1741,7 @@ a.update_delete {
     min-height: fit-content;
     height: fit-content;
     padding-bottom: 16px;
-    gap:4px;
+    gap: 4px;
   }
 
   #hot-sale {
@@ -1930,47 +1952,59 @@ a.update_delete {
     align-items: center;
     justify-content: space-between;
     padding-left: 12px;
+    gap: 4px;
   }
 
   .intro-coupon-modal__footer-content>div {
     display: flex;
     align-items: center;
-    gap: 22px;
+    gap: 8px;
   }
 
   .intro-coupon-modal__footer-content>div>p {
     display: block;
     color: var(--Black-Primary, #1e1e19);
     font-family: "Noto Sans TC", "Figtree", sans-serif;
-    font-size: 16px;
+    // font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: 18px;
     /* 112.5% */
     letter-spacing: 0.96px;
+    text-align: left;
+    max-height: 36px; /* 兩行文字的高度 (18px * 2) */
+    overflow-y: auto; /* 超出部分可垂直滾動 */
   }
 
   .intro-coupon-modal__btn--start {
     display: flex;
-    width: 150px;
+    width: 120px;
     height: 45px;
     min-width: fit-content;
     justify-content: center;
     align-items: center;
-    gap: 10px;
     flex-shrink: 0;
     border-radius: 100px;
     background: var(--Teal-Tertiary, #19917f);
     color: var(--White-Primary, #fff);
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     /* Noto Sans TC 16 */
     font-family: "Noto Sans TC", "Figtree", sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 700;
     line-height: 22px;
     /* 137.5% */
     letter-spacing: 0.32px;
+  }
+  .intro-coupon-modal__btn--start-arrow {
+    padding-top: 1px;
+    width: 14px;
+    height: 14px;
   }
 }
