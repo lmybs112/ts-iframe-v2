@@ -1095,7 +1095,7 @@
           var lgiven_id = "";
 
           member_id = member_id_Shopline();
-          console.log(member_id);
+          // console.log(member_id);
 
           // Always Generate a pair of LGVID
           lgvid_exist = false;

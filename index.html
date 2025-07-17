@@ -108,7 +108,7 @@
       document.head.appendChild(customCSS);
 
       $(function () {
-        console.log("DOM is ready");
+        // console.log("DOM is ready");
         $(window).on("message", function (event) {
           var origin = event.originalEvent.origin;
           // if (origin !== 'https://iframe所在的網址') return; // 避免跨域攻擊

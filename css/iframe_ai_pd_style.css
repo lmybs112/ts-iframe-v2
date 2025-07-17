@@ -1084,28 +1084,25 @@ a.update_delete p {
 a.update_delete .item-title.line-ellipsis-2 {
   color: #3c3c39;
   font-family: "Noto Sans TC", "Figtree", sans-serif;
-  font-size: 13px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18px;
-  /* 138.462% */
-  letter-spacing: 1.3px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.26px !important;
   font-style: normal;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   line-clamp: 2;
   -webkit-line-clamp: 2;
-  height: 2.8em;
+  height: 32px;
+  min-height: 32px !important;
+  max-height: 32px !important;
   margin-bottom: 8px;
 }
 @media screen and (min-width: 480px) {
   a.update_delete .item-title.line-ellipsis-2 {
     margin-bottom: 14px;
-    font-size: 15px;
-    line-height: 20px;
-    /* 133.333% */
-    letter-spacing: 1.5px;
   }
 }
 a.update_delete .item-price {

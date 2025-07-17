@@ -409,9 +409,9 @@ const show_results = (response, isFirst = false) => {
   for (let ii in finalitem) {
     let i = finalitem[ii];
     var ItemName = response.Item[i].ItemName;
-    if (ItemName.length >= 16) {
-      ItemName = ItemName.substring(0, 15) + "...";
-    }
+    // if (ItemName.length >= 16) {
+    //   ItemName = ItemName.substring(0, 15) + "...";
+    // }
     $(`#container-recom`).find(".axd_selections").append(`
       <div class="axd_selection cursor-pointer update_delete">
  <a href="${
@@ -552,9 +552,9 @@ const fetchCoupon = async () => {
     options
   );
   const responseData = await response.json();
-  console.log('responseData', responseData)
+  // console.log('responseData', responseData)
   const currentData = responseData.find(item => item.Module === 'Personalized_Landing_Widget');
-  console.log('currentData', currentData)
+  // console.log('currentData', currentData)
   const data = currentData?.ConfigData?.Discount_Info || [{
     Title: '敬請期待',
     Description: '敬請期待',
