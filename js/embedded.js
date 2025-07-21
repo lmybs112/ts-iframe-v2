@@ -769,6 +769,7 @@
                         #${containerId}.small-container .embeddedAdContainer .embeddedAdImgContainer .embeddedItem .embeddedItemInfo .embeddedItemInfo__content .embeddedItemInfo__price--original {
                           font-size: 12px;
                           line-height: 16px;
+                          letter-spacing: 0.5px;
                         }
                         `;
         document.head.appendChild(customCSS);

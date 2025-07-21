@@ -1088,7 +1088,7 @@ a.update_delete .item-title.line-ellipsis-2 {
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  letter-spacing: 0.26px !important;
+  letter-spacing: 0.5px !important;
   font-style: normal;
   overflow: hidden;
   display: -webkit-box;
