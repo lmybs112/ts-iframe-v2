@@ -879,7 +879,12 @@ const fetchData = async () => {
                         )}-backarrow" src="${iconNext}" width="100%"
                         height="100%" >
                         <div class="header-text">
-                            <span style="margin-bottom: 0.3em">${r}</span>
+                            <span class="header-text-title" style="margin-bottom: 0.3em; display: ${
+                              (formatTagGroupMap?.[r] && formatTagGroupMap[r] !== "") ||
+                              (Array.isArray(Route_in_frame?.[r]) && Route_in_frame[r].length > 0 && Route_in_frame[r][0]?.Description?.S)
+                                ? 'none'
+                                : 'block'
+                            }">${r}</span>
                             <p class="desc-container">${
                               formatTagGroupMap?.[r] && formatTagGroupMap[r] !== ""
                               ? formatTagGroupMap[r]
