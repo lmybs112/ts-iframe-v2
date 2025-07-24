@@ -1223,9 +1223,7 @@
               $("#loadingbar").hide();
             })
             .catch((err) => {
-              console.error(err);
-              console.log("getEmbeddedAds 發生錯誤");
-              
+              console.error(err);              
               // 動態生成 intro-content-simple 來取代 intro-content-advanced
               const simpleContent = `
                 <div id="intro-content-simple" class="intro-content intro-modal__content" style="opacity: 0; transition: opacity 0.3s ease-in-out;">
@@ -1236,7 +1234,7 @@
                     <img src="img/start-animation.gif" alt="start animation" loading="lazy" />
                   </div>
                   <p class="intro-modal__title">開啟精準購物之旅</p>
-                  <button id="start-button-simple" class="intro-modal__btn--start">
+                  <button id="start-button" class="intro-modal__btn--start">
                     <div>開始</div>
                     <img
                       src="img/start-arrow.svg"
@@ -1313,29 +1311,6 @@
                   }, 100);
                 }
               }
-              // 為新的 start-button-simple 綁定事件
-              $("#start-button-simple").on("click", function() {
-                $("#recommend-title").text("專屬商品推薦");
-                $("#recommend-desc").text("根據您的偏好，精選以下單品。");
-                $("#recommend-btn").text("刷新推薦");
-                $("#intro-page").hide();
-                $("#container-" + all_Route[0]).show();
-              });
-              
-              // 為動態生成的圖標綁定事件
-              $("#intro-content-simple .icon-inffits").on("click", function () {
-                $("#intro-content-simple .icon-inffits").toggleClass("open");
-                $("#intro-content-simple .text-inffits").toggleClass("visible");
-                $("#intro-content-simple .icon-reminder").removeClass("open");
-                $("#intro-content-simple .text-reminder").removeClass("visible");
-              });
-              
-              $("#intro-content-simple .icon-reminder").on("click", function () {
-                $("#intro-content-simple .icon-reminder").toggleClass("open");
-                $("#intro-content-simple .text-reminder").toggleClass("visible");
-                $("#intro-content-simple .icon-inffits").removeClass("open");
-                $("#intro-content-simple .text-inffits").removeClass("visible");
-              });
             });
         }
 
