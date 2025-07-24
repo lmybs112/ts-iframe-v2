@@ -755,8 +755,10 @@ const fetchCoupon = async () => {
     // 定期检查高度变化
     setInterval(sendHeight, 500);
 
-    $(".intro-content.intro-coupon-modal__content").show();
-    $(".intro-content.intro-modal__content").hide();
+    //FIXME
+    // $(".intro-content.intro-coupon-modal__content").show();
+    // $(".intro-content.intro-modal__content").hide();
+
   // } else {
   //   alert('沒有設置模組');
   //   $(".intro-content.intro-coupon-modal__content").show();
@@ -779,7 +781,6 @@ const fetchData = async () => {
       options
     );
     const data = await response.json();
-    $("#loadingbar").hide();
     $("#pback").show();
     $("#containerback").show();
     $("#intro_page").show();
