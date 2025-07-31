@@ -204,6 +204,7 @@ const getEmbedded = async () => {
     MRID: "",
     recom_num: "12",
     PID: "",
+    SP_PID:'skip'
   };
   const options = {
     method: "POST",
@@ -220,7 +221,17 @@ const getEmbedded = async () => {
       options
     );
     const data = await response.json();
-    let jsonData = getRandomElements(data["bhv"], data["bhv"].length < 6 ? data["bhv"].length : 6).map((item) => {
+    
+    // 檢查 bhv 是否為空陣列，如果是則使用 sp_atc
+    const dataSource = (data["bhv"] && data["bhv"].length > 0) ? data["bhv"] : data["sp_atc"];
+    
+    // 如果兩個資料源都為空，則呼叫 getEmbeddedForBackup
+    if (!dataSource || dataSource.length === 0) {
+      getEmbeddedForBackup();
+      return;
+    }
+    
+    let jsonData = getRandomElements(dataSource, dataSource.length < 6 ? dataSource.length : 6).map((item) => {
       let newItem = Object.assign({}, item);
       newItem.sale_price = item.sale_price
         ? parseInt(item.sale_price.replace(/\D/g, "")).toLocaleString("en-US", {
@@ -249,8 +260,8 @@ const getEmbedded = async () => {
       ...jsonDataItem,
     }));
 
-    console.error("jsonData", jsonData);
-    console.error("formatItems", formatItems);
+    // console.error("jsonData", jsonData);
+    // console.error("formatItems", formatItems);
 
     const formatData = {
       Item: formatItems,
@@ -303,7 +314,17 @@ const getEmbeddedForBackup = () => {
   )
     .then((response) => response.json())
     .then((response) => {
-      let jsonData = getRandomElements(response["bhv"], response["bhv"].length < 6 ? response["bhv"].length : 6).map((item) => {
+      // 檢查 bhv 是否為空陣列，如果是則使用 sp_atc
+      const dataSource = (response["bhv"] && response["bhv"].length > 0) ? response["bhv"] : response["sp_atc"];
+      
+      // 如果兩個資料源都為空，則點擊重新開始按鈕
+      if (!dataSource || dataSource.length === 0) {
+        // 點擊重新開始按鈕
+        $("#startover").click();
+        return;
+      }
+      
+      let jsonData = getRandomElements(dataSource, dataSource.length < 6 ? dataSource.length : 6).map((item) => {
         let newItem = Object.assign({}, item);
         newItem.sale_price = item.sale_price
           ? parseInt(item.sale_price.replace(/\D/g, "")).toLocaleString(
@@ -347,7 +368,6 @@ const getEmbeddedForBackup = () => {
       $("#recommend-btn").text("刷新推薦");
       show_results(formatData);
       $("#container-recom").show();
-
       localStorage.setItem(
         `INFS_ROUTE_RES_${Brand}`,
         JSON.stringify([])

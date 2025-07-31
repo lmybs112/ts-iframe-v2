@@ -1128,6 +1128,7 @@
             MRID: ids.member_id,
             recom_num: "6",
             PID: ids.skuContent,
+            SP_PID:'skip'
             // ctype_val: JSON.stringify(["underwear"]),
           };
           if (!hide_size) {
@@ -1173,8 +1174,12 @@
                   acc[item.productid] = bestSize;
                   return acc;
                 }, {});
-                if (response["bhv"]) {
-                  response["bhv"].forEach((item) => {
+                
+                // 檢查 bhv 是否為空陣列，如果是則使用 sp_atc
+                const dataSource = (response["bhv"] && response["bhv"].length > 0) ? response["bhv"] : response["sp_atc"];
+                
+                if (dataSource) {
+                  dataSource.forEach((item) => {
                     item.size_tag = size_tag[item.id];
                   });
                 }
@@ -1188,10 +1193,13 @@
               //corr
               //or let jsonData_corr = getRandomElements(response['corr'], 12).map((item) => {})
               //bhv
+              // 檢查 bhv 是否為空陣列，如果是則使用 sp_atc
+              const dataSource = (response["bhv"] && response["bhv"].length > 0) ? response["bhv"] : response["sp_atc"];
+              
               let jsonData =
                 customEdm && customEdm.length > 0
                   ? customEdm
-                  : getRandomElements(response["bhv"],response["bhv"].length < 6 ? response["bhv"].length : 6).map((item) => {
+                  : getRandomElements(dataSource, dataSource.length < 6 ? dataSource.length : 6).map((item) => {
                       let newItem = Object.assign({}, item);
                       newItem.sale_price = hide_discount
                         ? null
@@ -1217,100 +1225,102 @@
                   updatePopAd(jsonData);
                 }
               }
-              // 移除可能存在的動態生成的 intro-content-simple
-              $("#intro-content-simple").remove();
-              $("#intro-content-advanced").show();
-              $("#loadingbar").hide();
+                            $("#intro-content-simple").remove();
+                            $("#intro-content-advanced").show();
+                            $("#loadingbar").hide();
             })
             .catch((err) => {
-              console.error(err);              
-              // 動態生成 intro-content-simple 來取代 intro-content-advanced
-              const simpleContent = `
-                <div id="intro-content-simple" class="intro-content intro-modal__content" style="opacity: 0; transition: opacity 0.3s ease-in-out;">
-                  <div class="intro-logo intro-modal__logo intro-modal__logo--inf">
-                    <img src="img/intro-logo.png" alt="intro logo" />
-                  </div>
-                  <div class="intro-logo intro-modal__logo">
-                    <img src="img/start-animation.gif" alt="start animation" loading="lazy" />
-                  </div>
-                  <p class="intro-modal__title">開啟精準購物之旅</p>
-                  <button id="start-button" class="intro-modal__btn--start">
-                    <div>開始</div>
-                    <img
-                      src="img/start-arrow.svg"
-                      alt="start arrow"
-                      class="intro-modal__btn--arrow"
-                    />
-                  </button>
-                  <div class="intro-modal__icon">
-                    <div class="intro-modal__icon--inffits">
-                      <div class="icon-inffits"></div>
-                      <div class="text-inffits">
-                        <p>
-                          使用本服務，即代表您同意 infFITS
-                          <a href="https://inffits.com/Privacy.html" target="_blank"
-                            >隱私權聲明</a
-                          >
-                          及
-                          <a href="https://inffits.com/Terms.html" target="_blank"
-                            >使用條款</a
-                          >。
-                        </p>
-                      </div>
-                    </div>
-                    <div class="intro-modal__icon--reminder">
-                      <div class="icon-reminder"></div>
-                      <div class="text-reminder">
-                        <p>
-                          您可以跳過部分提問，但我們建議完成整個選購流程，推薦結果將更精準。
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              `;
-              
-              // 移除 intro-content-advanced 並插入動態生成的內容
-              $("#intro-content-advanced").remove();
-              $("#intro-page").append(simpleContent);
-              $("#loadingbar").hide();
-              
-              // 等待圖片加載完成後再顯示內容
-              const $simpleContent = $("#intro-content-simple");
-              const $images = $simpleContent.find("img");
-              let loadedImages = 0;
-              const totalImages = $images.length;
-              
-              if (totalImages === 0) {
-                // 如果沒有圖片，直接顯示
-                $simpleContent.css("opacity", "1");
-              } else {
-                // 監聽所有圖片加載完成
-                $images.each(function() {
-                  const $img = $(this);
-                  if ($img[0].complete) {
-                    loadedImages++;
-                    checkAllImagesLoaded();
-                  } else {
-                    $img.on("load", function() {
-                      loadedImages++;
-                      checkAllImagesLoaded();
-                    }).on("error", function() {
-                      loadedImages++;
-                      checkAllImagesLoaded();
-                    });
-                  }
-                });
-              }
-              
-              function checkAllImagesLoaded() {
-                if (loadedImages >= totalImages) {
-                  // 所有圖片加載完成，平滑顯示內容
-                  setTimeout(() => {
-                    $simpleContent.css("opacity", "1");
-                  }, 100);
-                }
-              }
+              console.error(err);
+                            // 動態生成 intro-content-simple 來取代 intro-content-advanced
+                            const simpleContent = `
+                            <div id="intro-content-simple" class="intro-content intro-modal__content" style="opacity: 0; transition: opacity 0.3s ease-in-out;">
+                              <div class="intro-logo intro-modal__logo intro-modal__logo--inf">
+                                <img src="img/intro-logo.png" alt="intro logo" />
+                              </div>
+                              <div class="intro-logo intro-modal__logo">
+                                <img src="img/start-animation.gif" alt="start animation" loading="lazy" />
+                              </div>
+                              <p class="intro-modal__title">開啟精準購物之旅</p>
+                              <button id="start-button" class="intro-modal__btn--start">
+                                <div>開始</div>
+                                <img
+                                  src="img/start-arrow.svg"
+                                  alt="start arrow"
+                                  class="intro-modal__btn--arrow"
+                                />
+                              </button>
+                              <div class="intro-modal__icon">
+                                <div class="intro-modal__icon--inffits">
+                                  <div class="icon-inffits"></div>
+                                  <div class="text-inffits">
+                                    <p>
+                                      使用本服務，即代表您同意 infFITS
+                                      <a href="https://inffits.com/Privacy.html" target="_blank"
+                                        >隱私權聲明</a
+                                      >
+                                      及
+                                      <a href="https://inffits.com/Terms.html" target="_blank"
+                                        >使用條款</a
+                                      >。
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="intro-modal__icon--reminder">
+                                  <div class="icon-reminder"></div>
+                                  <div class="text-reminder">
+                                    <p>
+                                      您可以跳過部分提問，但我們建議完成整個選購流程，推薦結果將更精準。
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          `;
+                          
+                          // 移除 intro-content-advanced 並插入動態生成的內容
+                          $("#intro-content-advanced").remove();
+                          $("#intro-page").append(simpleContent);
+                          $("#loadingbar").hide();
+                          
+                          // 等待圖片加載完成後再顯示內容
+                          const $simpleContent = $("#intro-content-simple");
+                          const $images = $simpleContent.find("img");
+                          let loadedImages = 0;
+                          const totalImages = $images.length;
+                          
+                          if (totalImages === 0) {
+                            // 如果沒有圖片，直接顯示
+                            $simpleContent.css("opacity", "1");
+                          } else {
+                            // 監聽所有圖片加載完成
+                            $images.each(function() {
+                              const $img = $(this);
+                              if ($img[0].complete) {
+                                loadedImages++;
+                                checkAllImagesLoaded();
+                              } else {
+                                $img.on("load", function() {
+                                  loadedImages++;
+                                  checkAllImagesLoaded();
+                                }).on("error", function() {
+                                  loadedImages++;
+                                  checkAllImagesLoaded();
+                                });
+                              }
+                            });
+                          }
+                          
+                          function checkAllImagesLoaded() {
+                            if (loadedImages >= totalImages) {
+                              // 所有圖片加載完成，平滑顯示內容
+                              setTimeout(() => {
+                                $simpleContent.css("opacity", "1");
+                              }, 100);
+                            }
+                          }
+                          // 移除重複的事件綁定，iframe.js 中已有完整的 start-button 事件處理邏輯
+                          
+                          // 移除重複的圖標事件綁定，iframe.js 中已有完整的圖標事件處理邏輯
             });
         }
 
