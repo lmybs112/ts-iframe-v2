@@ -12,12 +12,9 @@ let isFirst = true;
 let throttleTimer = null;
 let formatTagGroupMap = {};
 let isFetchCouponCalled = false;
-let isForPreview = window.location.href
+let isForPreview = true || window.location.href
   .toLocaleLowerCase()
-  .includes("myinffits") || window.location.href
-  .toLocaleLowerCase()
-  .includes("norecommend");
-
+  .includes("myinffits");
 let isForReferral = window.location.href
   .toLocaleLowerCase()
   .includes("referral");
