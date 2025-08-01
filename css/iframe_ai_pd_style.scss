@@ -1539,7 +1539,8 @@ a.update_delete {
 }
 
 .intro-coupon-modal__content-container-content-line {
-  padding: 0 12px;
+  padding-left: 4px;
+  padding-right: 12px;
 }
 
 .intro-coupon-modal__content-container-content-text {
@@ -1601,7 +1602,7 @@ a.update_delete {
 .intro-coupon-modal__content-container-content-footer .intro-coupon-modal__btn--coupon {
   text-align: center;
   font-family: "Noto Sans TC", "Figtree", sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
@@ -1840,7 +1841,8 @@ a.update_delete {
   }
 
   .intro-coupon-modal__content-container-content-line {
-    padding: 0 12px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   .intro-coupon-modal__content-container-content-text {
@@ -1895,14 +1897,12 @@ a.update_delete {
   }
 
   .intro-coupon-modal__content-container-content-footer .intro-coupon-modal__btn--coupon {
-    /* Noto Sans TC 16 */
     font-family: "Noto Sans TC", "Figtree", sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
-    font-weight: 700;
-    line-height: 22px;
-    /* 137.5% */
-    letter-spacing: 0.32px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.28px;
     width: fit-content;
     height: fit-content;
     display: flex;
