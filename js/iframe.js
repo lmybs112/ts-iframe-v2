@@ -950,9 +950,10 @@ const fetchData = async () => {
     const userAgent = navigator.userAgent.toLowerCase();
     const isMobile = /mobile|android|iphone|ipod|phone/.test(userAgent);
 
-    const iconNext = isMobile
-      ? "./../img/icon-next.svg"
-      : "./../img/icon-next-large.svg";
+    // 將 SVG 圖標轉換為 base64 格式，避免外部文件依賴
+    const iconNextMobile = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjEwIiB2aWV3Qm94PSIwIDAgOSAxMCIgZmlsbD0ibm9uZSI+CiAgPHBhdGggZD0iTTQuMyAxLjVMMSA0LjhMNC4zIDguMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtY2FwPSJyb3VuZCIgc3Ryb2tlLWpvaW49InJvdW5kIi8+CiAgPHBhdGggZD0iTTcuNiA0Ljc5OThIMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtY2FwPSJyb3VuZCIgc3Ryb2tlLWpvaW49InJvdW5kIi8+Cjwvc3ZnPg==";
+    const iconNextDesktop = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzciIGhlaWdodD0iMzciIHZpZXdCb3g9IjAgMCAzNyAzNyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE4LjY2NjcgMTEuM0wxMS40NjY3IDE4LjVMMTguNjY2NyAyNS43IiBzdHJva2U9IiM3ODc5NzQiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWNhcD0icm91bmQiIHN0cm9rZS1qb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNMjUuODY2NyAxOC41SDExLjQ2NjciIHN0cm9rZT0iIzc4Nzk3NCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtY2FwPSJyb3VuZCIgc3Ryb2tlLWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=";
+    const iconNext = isMobile ? iconNextMobile : iconNextDesktop;
 
     for (var r in Route_in_frame) {
       // console.log("TagGroup : " + r);
