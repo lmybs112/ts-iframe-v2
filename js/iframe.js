@@ -196,6 +196,36 @@ const get_recom_res = () => {
     });
 };
 
+const analyzeGenderInTags = (tags_chosen) => {
+  let maleCount = 0;
+  let femaleCount = 0;
+  const maleNames = [];
+  const femaleNames = [];
+  
+  // 遍歷所有標籤群組
+  Object.values(tags_chosen).forEach(tagGroup => {
+    tagGroup.forEach(tag => {
+      const name = tag.Name;
+      if (name.includes('男')) {
+        maleCount++;
+        maleNames.push(name);
+      }
+      if (name.includes('女')) {
+        femaleCount++;
+        femaleNames.push(name);
+      }
+    });
+  });
+  
+  return {
+    maleCount,
+    femaleCount,
+    maleNames,
+    femaleNames,
+    result: maleCount > femaleCount ?  "[\"男\"]" : femaleCount > maleCount ? "[\"女\"]" : null
+  };
+}
+
 const getEmbedded = async () => {
   let requestData = {
     Brand: Brand,
