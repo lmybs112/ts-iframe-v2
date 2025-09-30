@@ -197,7 +197,7 @@ const get_recom_res = () => {
 };
 
 const getEmbedded = async () => {
-  const requestData = {
+  let requestData = {
     Brand: Brand,
     LGVID: "SObQG1eZ0oxzKmpgT2dc",
     MRID: "",
@@ -205,6 +205,15 @@ const getEmbedded = async () => {
     PID: "",
     SP_PID:'skip'
   };
+  const api_recom_product_url = Brand.toLocaleUpperCase() === 'VER' ? 'HTTP_stock_cdp_product_recommendation' : 'HTTP_inf_bhv_cdp_product_recommendation';
+  const apiUrl = `https://api.inffits.com/${api_recom_product_url}/extension/recom_product`;
+
+  if(Brand.toLocaleUpperCase() === 'VER'){
+    const series_in = analyzeGenderInTags(tags_chosen).result;
+    if(series_in){
+      requestData.series_in = series_in;
+    }
+  }
   const options = {
     method: "POST",
     headers: {
@@ -216,7 +225,7 @@ const getEmbedded = async () => {
 
   try {
     const response = await fetch(
-      "https://api.inffits.com/HTTP_inf_bhv_cdp_product_recommendation/extension/recom_product",
+      apiUrl,
       options
     );
     const data = await response.json();
@@ -291,7 +300,7 @@ function getRandomElements(arr, count) {
   return result;
 }
 const getEmbeddedForBackup = () => {
-  const requestData = {
+  let requestData = {
     Brand: Brand,
     LGVID:"2Zdl1XTfRX3FdvPqGEhs",
     MRID:"",
@@ -299,6 +308,16 @@ const getEmbeddedForBackup = () => {
     recom_num: "12",
     SP_PID:"xxSOCIAL PROOF"
   };
+
+  const api_recom_product_url = Brand.toLocaleUpperCase() === 'VER' ? 'HTTP_stock_cdp_product_recommendation' : 'HTTP_inf_bhv_cdp_product_recommendation';
+  const apiUrl = `https://api.inffits.com/${api_recom_product_url}/extension/recom_product`;
+
+  if(Brand.toLocaleUpperCase() === 'VER'){
+    const series_in = analyzeGenderInTags(tags_chosen).result;
+    if(series_in){
+      requestData.series_in = series_in;
+    }
+  }
   const options = {
     method: "POST",
     headers: {
@@ -308,7 +327,7 @@ const getEmbeddedForBackup = () => {
     body: JSON.stringify(requestData),
   };
   fetch(
-    "https://api.inffits.com/HTTP_inf_bhv_cdp_product_recommendation/extension/recom_product",
+    apiUrl,
     options
   )
     .then((response) => response.json())
