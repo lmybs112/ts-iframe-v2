@@ -1009,13 +1009,13 @@ const fetchData = async () => {
       document.getElementById("pback").insertAdjacentHTML(
         "beforebegin",
         `<div class='container mbinfo animX update_delete' id="container-${r.replaceAll(
-          " ",
+          /[\s\.]/g,
           ""
         )}">
                     <div class="c_header" id="container-x-header" style="border-bottom: 4px solid #F5F5F4">
                         
                         <img class="type_backarrow" id="container-${r.replaceAll(
-                          " ",
+                          /[\s\.]/g,
                           ""
                         )}-backarrow" src="${iconNext}" width="100%"
                         height="100%" >
@@ -1037,14 +1037,14 @@ const fetchData = async () => {
                             }</p>
                         </div>
                         <img class='c-${r.replaceAll(
-                          " ",
+                          /[\s\.]/g,
                           ""
                         )} skip icon-next type_backarrow flipped-image' src="${iconNext}" width="100%"
                         height="100%" >
                     </div>
 
                         <div class="selection_scroll slide swiper-container-${r.replaceAll(
-                          " ",
+                          /[\s\.]/g,
                           ""
                         )}">
                             <div class="swiper-wrapper" >
@@ -1052,12 +1052,12 @@ const fetchData = async () => {
                         </div>
                     
                          <div class="pagination-${r.replaceAll(
-                           " ",
+                           /[\s\.]/g,
                            ""
                          )} pag-margin dot-btns" style="text-align: center; ">
                         </div>
                      <div class="con-footer">
-                        <a class='c-${r.replaceAll(" ", "")} skip'>略過</a>
+                        <a class='c-${r.replaceAll(/[\s\.]/g, "")} skip'>略過</a>
                      </div>
                        
                     </div>`
@@ -1070,7 +1070,7 @@ const fetchData = async () => {
         // ).style.visibility = "hidden";
 
        const backarrow = document.getElementById(
-          `container-${r.replaceAll(" ", "")}-backarrow`
+          `container-${r.replaceAll(/[\s\.]/g, "")}-backarrow`
         )
         $(backarrow).on(tap, function () {
           $("#intro-page").show();
@@ -1107,7 +1107,7 @@ const fetchData = async () => {
 
       function init(tar) {
         let currentPage = 1;
-        var target = tar.replaceAll(" ", "");
+        var target = tar.replaceAll(/[\s\.]/g, "");
 
         // console.log(numPerPage, "numPerPage");
 
@@ -1136,16 +1136,16 @@ const fetchData = async () => {
           );
 
         for (let rr = 0; rr < render_num; rr++) {
-          // console.log(Route_in_frame[target][rr], "dog");
-          const innerDivStyle = Route_in_frame[target][rr].Imgsrc.S.includes('img-default')?  'display:none':'' ;
+          // console.log(Route_in_frame[tar][rr], "dog");
+          const innerDivStyle = Route_in_frame[tar][rr].Imgsrc.S.includes('img-default')?  'display:none':'' ;
           $(`#container-${target}`).find(".axd_selections").append(`
                             <div class="axd_selection">
-                                <div class="image-container c-${target} tagId-${Route_in_frame[target][rr].Tag.S}">
+                                <div class="image-container c-${target} tagId-${Route_in_frame[tar][rr].Tag.S}">
                                 <div style="${innerDivStyle}">
-                                    <img loading="lazy" class="axd_img" src="${Route_in_frame[target][rr].Imgsrc.S}" onerror="this.style.opacity='0'; this.parentNode.style.backgroundImage='url(./../img/img-default-large.png)';"  id="container-x-0" data-item="0">
+                                    <img loading="lazy" class="axd_img" src="${Route_in_frame[tar][rr].Imgsrc.S}" onerror="this.style.opacity='0'; this.parentNode.style.backgroundImage='url(./../img/img-default-large.png)';"  id="container-x-0" data-item="0">
                                 </div>
                                 
-                                    <p>${Route_in_frame[target][rr].Name.S}</p>
+                                    <p>${Route_in_frame[tar][rr].Name.S}</p>
                                     
                                 </div>
                                 
@@ -1208,11 +1208,11 @@ const fetchData = async () => {
             for (let rr = 0; rr < render_num && start < itemCount; rr++) {
               $(`#container-${target}`).find(`.selection-${i}`).append(`
                                 <div class="axd_selection ">
-                                    <div class="image-container c-${target} tagId-${Route_in_frame[target][start].Tag.S}">
+                                    <div class="image-container c-${target} tagId-${Route_in_frame[tar][start].Tag.S}">
                                          <div>
-                                             <img loading="lazy" class="axd_img" src="${Route_in_frame[target][start].Imgsrc.S}" onerror="this.style.opacity='0'; this.parentNode.style.backgroundImage='url(./../img/img-default-large.png)';" id="container-x-0" data-item="0">
+                                             <img loading="lazy" class="axd_img" src="${Route_in_frame[tar][start].Imgsrc.S}" onerror="this.style.opacity='0'; this.parentNode.style.backgroundImage='url(./../img/img-default-large.png)';" id="container-x-0" data-item="0">
                                         </div>
-                                        <p>${Route_in_frame[target][start].Name.S}</p>
+                                        <p>${Route_in_frame[tar][start].Name.S}</p>
                                     </div>
                                 </div>
                             `);
@@ -1321,7 +1321,7 @@ const fetchData = async () => {
     function bind() {
       for (var fs = 0; fs < all_Route.length; fs++) {
         (function (fs) {
-          const currentRoute = all_Route[fs].replaceAll(" ", "");
+          const currentRoute = all_Route[fs].replaceAll(/[\s\.]/g, "");
           // 檢查並設定預設值
           var INFS_ROUTE_ORDER = !isForPreview
             ? JSON.parse(localStorage.getItem(`INFS_ROUTE_ORDER_${Brand}`)) ||
@@ -1375,7 +1375,7 @@ const fetchData = async () => {
               var tag = `c-${all_Route[fs]}`;
               $(`.${tag}.tag-selected`).removeClass("tag-selected");
               $(".tag-selected").removeClass("tag-selected");
-              tags_chosen[all_Route[fs].replaceAll(" ", "")] = [
+              tags_chosen[all_Route[fs].replaceAll(/[\s\.]/g, "")] = [
                 {
                   Description: "example",
                   Imgsrc: "https://example.com/imageB1.png",
@@ -1415,7 +1415,7 @@ const fetchData = async () => {
                     .first();
                   var tagid = firstEl.attr("class").match(/tagId-(\d+)/)[1];
                   // console.warn("tagid", tagid);
-                  tags_chosen[all_Route[fs].replaceAll(" ", "")] = [
+                  tags_chosen[all_Route[fs].replaceAll(/[\s\.]/g, "")] = [
                     {
                       Description: "example",
                       Imgsrc: "https://example.com/imageB1.png",
@@ -1427,9 +1427,9 @@ const fetchData = async () => {
                 }
                 get_recom_res();
               } else {
-                // console.log(".c-" + all_Route[fs + 1].replaceAll(" ", ""));
+                // console.log(".c-" + all_Route[fs + 1].replaceAll(/[\s\.]/g, ""));
                 $("#container-" + currentRoute).hide();
-                $("#container-" + all_Route[fs + 1].replaceAll(" ", "")).show();
+                $("#container-" + all_Route[fs + 1].replaceAll(/[\s\.]/g, "")).show();
               }
             });
 
@@ -1446,7 +1446,7 @@ const fetchData = async () => {
               if (fs == all_Route.length - 1) {
                 $("#container-" + currentRoute).hide();
 
-                tags_chosen[all_Route[fs].replaceAll(" ", "")] = [
+                tags_chosen[all_Route[fs].replaceAll(/[\s\.]/g, "")] = [
                   {
                     Description: $(
                       `#container-${all_Route[fs]} .desc-container`
@@ -1469,8 +1469,8 @@ const fetchData = async () => {
                 }
               } else {
                 $("#container-" + currentRoute).hide();
-                $("#container-" + all_Route[fs + 1].replaceAll(" ", "")).show();
-                tags_chosen[all_Route[fs].replaceAll(" ", "")] = [
+                $("#container-" + all_Route[fs + 1].replaceAll(/[\s\.]/g, "")).show();
+                tags_chosen[all_Route[fs].replaceAll(/[\s\.]/g, "")] = [
                   {
                     Description: $(
                       `#container-${all_Route[fs]} .desc-container`
@@ -1503,12 +1503,12 @@ const fetchData = async () => {
                 );
               }
             });
-          $(`#container-${all_Route[fs].replaceAll(" ", "")}-backarrow`).on(
+          $(`#container-${all_Route[fs].replaceAll(/[\s\.]/g, "")}-backarrow`).on(
             mytap,
             function (e) {
               if (fs != 0) {
                 $("#container-" + currentRoute).hide();
-                $("#container-" + all_Route[fs - 1].replaceAll(" ", "")).show();
+                $("#container-" + all_Route[fs - 1].replaceAll(/[\s\.]/g, "")).show();
               }
             }
           );
