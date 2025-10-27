@@ -1683,5 +1683,6 @@ window.addEventListener("message", async (event) => {
     fetchData();
     fetchCoupon();
     $("#intro-page").fadeIn(800);
+    console.warn('from_preview', event.data);
   }
 });
