@@ -1674,16 +1674,15 @@ const Initial = () => {
 window.addEventListener("message", async (event) => {
   // console.warn("message", event);
   if (event.data.header == "from_preview") {
-    await Initial();
 
     Route = event.data.id;
     Brand = event.data.brand;
     MRID = event.data.MRID || "";
     GVID = event.data.GVID || "";
     LGVID = event.data.LGVID || "";
-
-    fetchData();
-    fetchCoupon();
+    await Initial();
+    await fetchData();
+    await fetchCoupon();
     $("#intro-page").fadeIn(800);
   }
 });
