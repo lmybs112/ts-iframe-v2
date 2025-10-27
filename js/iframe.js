@@ -1,6 +1,9 @@
 var reset;
 var Route = "";
 var Brand = "";
+var MRID = "";
+var GVID = "";
+var LGVID = "";
 var SpecifyTags = [];
 var SpecifyKeywords = [];
 var tags_chosen = {};
@@ -229,8 +232,8 @@ const analyzeGenderInTags = (tags_chosen) => {
 const getEmbedded = async () => {
   let requestData = {
     Brand: Brand,
-    LGVID: "SObQG1eZ0oxzKmpgT2dc",
-    MRID: "",
+    LGVID: LGVID || "SObQG1eZ0oxzKmpgT2dc",
+    MRID: MRID || "",
     recom_num: "12",
     PID: "",
     SP_PID:'skip'
@@ -332,8 +335,8 @@ function getRandomElements(arr, count) {
 const getEmbeddedForBackup = () => {
   let requestData = {
     Brand: Brand,
-    LGVID:"2Zdl1XTfRX3FdvPqGEhs",
-    MRID:"",
+    LGVID: LGVID || "2Zdl1XTfRX3FdvPqGEhs",
+    MRID: MRID || "",
     PID:"搭配商品的pid",
     recom_num: "12",
     SP_PID:"xxSOCIAL PROOF"
@@ -815,9 +818,9 @@ const fetchCoupon = async () => {
         Gender: "M",
         FMLpath: "FMLSep",
         BUS: "0",
-        GVID: "",
-        LGVID: "",
-        MRID: "INF",
+        GVID: GVID || "",
+        LGVID: LGVID || "",
+        MRID: MRID || "INF",
         ga_id: "x",
         Pattern_Prefer: "1",
       },
@@ -1519,6 +1522,9 @@ const fetchData = async () => {
                 header: "from_preview",
                 id: Route,
                 brand: Brand,
+                MRID: MRID,
+                GVID: GVID,
+                LGVID: LGVID,
               };
 
               // 發送消息到接收窗口
@@ -1670,6 +1676,9 @@ window.addEventListener("message", async (event) => {
 
     Route = event.data.id;
     Brand = event.data.brand;
+    MRID = event.data.MRID || "";
+    GVID = event.data.GVID || "";
+    LGVID = event.data.LGVID || "";
 
     fetchData();
     fetchCoupon();
