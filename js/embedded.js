@@ -1124,8 +1124,9 @@
         function getEmbeddedAds(ids) {
           const requestData = {
             Brand: Brand,
-            LGVID: ids.lgiven_id,
-            MRID: ids.member_id,
+            LGVID: bid.LGVID || ids.lgiven_id,
+            MRID: bid.MRID || ids.member_id,
+            GVID: bid.GVID || "",
             recom_num: "6",
             PID: ids.skuContent,
             SP_PID:'skip'

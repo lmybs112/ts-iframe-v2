@@ -232,8 +232,9 @@ const analyzeGenderInTags = (tags_chosen) => {
 const getEmbedded = async () => {
   let requestData = {
     Brand: Brand,
-    LGVID: LGVID || "SObQG1eZ0oxzKmpgT2dc",
+    LGVID: LGVID || "",
     MRID: MRID || "",
+    GVID: GVID || "",
     recom_num: "12",
     PID: "",
     SP_PID:'skip'
@@ -335,8 +336,9 @@ function getRandomElements(arr, count) {
 const getEmbeddedForBackup = () => {
   let requestData = {
     Brand: Brand,
-    LGVID: LGVID || "2Zdl1XTfRX3FdvPqGEhs",
+    LGVID: LGVID || "",
     MRID: MRID || "",
+    GVID: GVID || "",
     PID:"搭配商品的pid",
     recom_num: "12",
     SP_PID:"xxSOCIAL PROOF"
@@ -1683,6 +1685,5 @@ window.addEventListener("message", async (event) => {
     fetchData();
     fetchCoupon();
     $("#intro-page").fadeIn(800);
-    console.warn('from_preview', event.data);
   }
 });
