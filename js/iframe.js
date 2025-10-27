@@ -111,6 +111,9 @@ const get_recom_res = () => {
       NUM: 12,
       SpecifyTags: SpecifyTags,
       SpecifyKeywords: SpecifyKeywords,
+      LGVID: LGVID,
+      MRID: MRID,
+      GVID: GVID,
     }),
   };
   if (isForReferral) {
