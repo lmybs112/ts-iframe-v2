@@ -650,6 +650,15 @@
     <script src="js/iframe.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="js/embedded.js"></script>
+    <script src="js/embedded.js"></script>
+    <!-- 載入 Google OAuth 登入組件 -->
+    <script src="https://inf-g-login.vercel.app/infFITS-oauth.js"></script>
+    <script>
+      // 初始化 Google 登入組件（等待 iframe 載入完成）
+      if (typeof initGoogleLoginWithDynamicListener === 'function') {
+          initGoogleLoginWithDynamicListener('product');
+      }
+    </script>
     <style>
       .image-container.tag-selected {
         border: 0.5px solid rgba(59, 59, 50, 0.18) !important;
