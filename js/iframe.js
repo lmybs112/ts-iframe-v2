@@ -18,6 +18,7 @@ let isFetchCouponCalled = false;
 let isForPreview = true || window.location.href
   .toLocaleLowerCase()
   .includes("myinffits");
+var resList;
 let isForReferral = window.location.href
   .toLocaleLowerCase()
   .includes("referral");
@@ -27,6 +28,11 @@ function throttle(fn, delay) {
   let isFirstCall = true; // 用來判斷是否是第一次調用
   return function (...args) {
     if (isFirstCall) {
+      const messageData = {
+        type: "removeLoading",
+        value: true,
+      };
+      window.parent.postMessage(messageData, "*");
       fn.apply(this, args); // 第一次調用立即執行
       isFirstCall = false;
       throttleTimer = setTimeout(() => {
@@ -480,6 +486,7 @@ const show_results = (response, isFirst = false) => {
     : getRandomNumbers(itemCount, displayCount);
   // console.error("finalitem", finalitem);
   const finalitemCount = 3;
+  resList = response.Item;
   $(`#container-recom`).find(".axd_selections").html("");
 
   for (let ii in finalitem) {
@@ -492,7 +499,7 @@ const show_results = (response, isFirst = false) => {
       <div class="axd_selection cursor-pointer update_delete">
  <a href="${
    response.Item[i].Link
- }" target="_blank" class="update_delete" style="text-decoration: none;">
+ }" target="_blank" class="update_delete" style="text-decoration: none;" onclick="openDetailDialog()">
     <div style="overflow: hidden;">
          <img loading="lazy" class="c-recom" id="container-recom-${i}" data-item="0"  src="./../../img/img-default-large.png" data-src=" ${
       response.Item[i].Imgsrc
@@ -579,6 +586,16 @@ const show_results = (response, isFirst = false) => {
   }
 };
 
+function openDetailDialog (){
+  if(window.location.href.toLocaleLowerCase().includes("omo_v1")){
+    event.preventDefault(); // 阻止 a 標籤的預設行為
+    const messageData = {
+      type: "openDetailDialog",
+      value: true,
+    };
+    window.parent.postMessage(messageData, "*");
+  }
+}
 // 深度比較函數（排除指定屬性）
 function deepEqualWithoutKey(obj1, obj2, ignoreKeys = []) {
   const filteredObj1 = Object.fromEntries(
@@ -1609,6 +1626,101 @@ $(document).on(tap, "#start-button", function () {
   $("#container-" + all_Route[0]).show();
 });
 
+$("#coupon-btn").on(tap, function () {
+  $("#loadingbar_recom").show();
+  const $couponOverlay = $(`<div id="coupon-overlay"></div>`)
+    .css({
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      background: "rgba(0, 0, 0, 0.20)",
+      zIndex: 9999,
+    })
+    .appendTo("#container-recom");
+  const $couponContent = $(`<div id="coupon-content">
+  <div id="qrcode-container"></div>
+<div class="coupon-text">2025 XYZ 優惠 (限今日使用)</div></div>`).css({
+    position: "absolute",
+    bottom: "-231px", // 先隱藏在畫面外
+    left: 0,
+    width: "100%",
+    height: "231px",
+    background: "rgba(255, 255, 255, 0.90)",
+    borderRadius: '18px 18px 0px 0px',
+    backdropFilter: 'blur(12.25px)',
+    paddingTop: '16px',
+    paddingBottom: '16px',
+    zIndex: 99991,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    rowGap: '8px'
+  })
+    .appendTo("#container-recom");
+  
+  // 動態生成 QR code（使用 "XYZ" 文字）
+  const qrText = "XYZ"; // 要轉換成 QR code 的文字
+  const qrcodeContainer = document.getElementById("qrcode-container");
+  
+  // 確保 QRCode 庫已載入的函數
+  const generateQRCode = function() {
+    if (qrcodeContainer && typeof QRCode !== 'undefined') {
+      try {
+        // 使用 qrcodejs 庫生成 QR code
+        const qrcode = new QRCode(qrcodeContainer, {
+          text: qrText,
+          width: 140,
+          height: 140,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      } catch (error) {
+        console.error("生成 QR code 時發生錯誤:", error);
+        qrcodeContainer.innerHTML = '<div style="color: red;">QR code 生成失敗</div>';
+      }
+    } else {
+      // 如果庫未載入，嘗試動態載入
+      if (typeof QRCode === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+        script.onload = function() {
+          generateQRCode();
+        };
+        script.onerror = function() {
+          console.error("無法載入 QR code 庫");
+          if (qrcodeContainer) {
+            qrcodeContainer.innerHTML = '<div style="color: red;">QR code 庫載入失敗</div>';
+          }
+        };
+        document.head.appendChild(script);
+      } else {
+        console.error("QR code 容器不存在");
+        if (qrcodeContainer) {
+          qrcodeContainer.innerHTML = '<div style="color: red;">QR code 容器不存在</div>';
+        }
+      }
+    }
+  };
+  
+  // 延遲執行以確保 DOM 已準備好
+  setTimeout(generateQRCode, 100);
+  
+  $couponContent.animate({ bottom: "0px" }, 500);
+})
+
+$("#coupon-recommend-btn").on(tap, function () {
+  const messageData = {
+    type: "openCouponDialog",
+    list: resList,
+    value: true,
+  };
+  window.parent.postMessage(messageData, "*");
+})
+
 $("#recommend-btn").on(tap, async function () {
   $("#loadingbar_recom").hide();
 
@@ -1661,6 +1773,15 @@ $("#recommend-btn").on(tap, async function () {
   }
 });
 
+$(document).on("click", function (event) {
+  if ($("#coupon-content").css("bottom") === "0px") {
+    $("#coupon-content").animate({ bottom: "-231px" }, 500, function () {
+      $("#coupon-content").remove(); // 動畫結束後移除 DOM
+      $("#coupon-overlay").remove();
+    });
+  }
+});
+
 $("#startover").on(tap, function () {
   $("#loadingbar_recom").hide();
   Initial();
@@ -1687,5 +1808,32 @@ window.addEventListener("message", async (event) => {
     await fetchData();
     await fetchCoupon();
     $("#intro-page").fadeIn(800);
+  }
+
+  if (event.data.header == "close_coupon") {
+    if (
+      !$(event.target).closest("#coupon-content").length && // 點擊 #coupon-content 外部
+      !$(event.target).is("#coupon-btn") // 不是點擊 #coupon-btn
+    ) {
+      if ($("#coupon-content") && $("#coupon-overlay")) {
+        $("#coupon-content").animate({ bottom: "-231px" }, 500, function () {
+          $("#coupon-content").remove(); // 動畫結束後移除 DOM
+          $("#coupon-overlay").remove();
+        });
+      }
+    }
+  }
+  if (event.data.header == "close_coupon_recommend") {
+    if (
+      !$(event.target).closest("#coupon-content").length && // 點擊 #coupon-content 外部
+      !$(event.target).is("#coupon-recommend-btn") // 不是點擊 #coupon-recommend-btn
+    ) {
+      if ($("#coupon-content") && $("#coupon-overlay")) {
+        $("#coupon-content").animate({ bottom: "-231px" }, 500, function () {
+          $("#coupon-content").remove(); // 動畫結束後移除 DOM
+          $("#coupon-overlay").remove();
+        });
+      }
+    }
   }
 });

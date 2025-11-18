@@ -920,6 +920,8 @@ body {
       margin-bottom: 26px;
     }
 
+    #coupon-btn,
+    #coupon-recommend-btn,
     #recommend-btn {
       border-radius: 100px;
       color: #fcfcf8;
@@ -944,6 +946,14 @@ body {
       @media screen and (min-width: 480px) {
         height: 45px;
       }
+    }
+
+    #coupon-btn,
+    #coupon-recommend-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 5px;
     }
 
     .icon--recom {

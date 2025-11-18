@@ -756,6 +756,8 @@ body {
     margin-bottom: 26px;
   }
 }
+.footer .result-actions #coupon-btn,
+.footer .result-actions #coupon-recommend-btn,
 .footer .result-actions #recommend-btn {
   border-radius: 100px;
   color: #fcfcf8;
@@ -774,13 +776,29 @@ body {
   box-shadow: none;
   transition: all 300ms ease-out;
 }
+.footer .result-actions #coupon-btn:hover,
+.footer .result-actions #coupon-recommend-btn:hover,
 .footer .result-actions #recommend-btn:hover {
   background-color: #666;
 }
 @media screen and (min-width: 480px) {
+  .footer .result-actions #coupon-btn,
+  .footer .result-actions #coupon-recommend-btn,
   .footer .result-actions #recommend-btn {
     height: 45px;
   }
+}
+.footer .result-actions #coupon-btn,
+.footer .result-actions #coupon-recommend-btn {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -webkit-column-gap: 5px;
+     -moz-column-gap: 5px;
+          column-gap: 5px;
 }
 .footer .result-actions .icon--recom {
   box-shadow: none;

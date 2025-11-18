@@ -1,0 +1,863 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>infFITS_iframe</title>
+    <!-- <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600&display=swap"
+      rel="stylesheet"
+    /> -->
+    <!-- <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Chocolate+Classical+Sans&family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    /> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex" />
+    <link href="./css/iframe_style.min.css" rel="stylesheet" type="text/css" />
+    <link
+      href="./css/iframe_ai_pd_style.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <style>
+      /* .intro-logo{
+    width:60%
+} */
+
+      /* .intro-logo img {
+    width: 100%;
+    height: auto;
+} */
+
+      .type_backarrow {
+        position: relative;
+        left: 0%;
+        top: auto;
+        height: 11px;
+        width: 11px;
+      }
+
+      /* .intro-content p {
+    color: black;
+    font-size: 16px;
+    margin: 20px 0;
+    letter-spacing: 1.8px;
+    font-weight: 500;
+} */
+
+      /* #start-button {
+    background-color: #ffffcc;
+    border: 1px solid #666;
+    color: #000;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#start-button:hover {
+    background-color: #000;
+    border: 1px solid #000;
+    color: #fff;
+} */
+      .break-word2 {
+        word-break: break-word;
+        max-height: 36px;
+        overflow: hidden !important;
+      }
+
+      @keyframes dot-blink {
+        0% {
+          content: "";
+        }
+
+        25% {
+          content: ".";
+        }
+
+        50% {
+          content: "..";
+        }
+
+        75% {
+          content: "...";
+        }
+
+        100% {
+          content: "";
+        }
+      }
+
+      .loading-text .dots::after {
+        content: "";
+        animation: dot-blink 1.5s steps(1, end) infinite;
+      }
+
+      .loading-text {
+        display: flex;
+      }
+
+      .axd_selections {
+        /* padding: 0px 15px; */
+        /* height: inherit; */
+        height: fit-content;
+      }
+
+      .axd_selection {
+        background-color: transparent !important;
+      }
+
+      .pag-margin {
+        margin-top: 2em;
+      }
+
+      @media (min-width: 400px) {
+        .pag-margin {
+          margin-top: 3em;
+        }
+      }
+
+      .four-elements .axd_selection {
+        height: 49%;
+      }
+
+      .four-elements .axd_selections {
+        justify-content: flex-start;
+      }
+
+      .four-elements .image-container {
+        aspect-ratio: 1 / 1 !important;
+      }
+
+      .image-container {
+        /* height: inherit; */
+        /* aspect-ratio: 5/12; */
+        height: 224px;
+        box-sizing: border-box;
+      }
+
+      @media (min-width: 400px) {
+        .image-container {
+          /* aspect-ratio: 6/19; */
+          height: 280px;
+        }
+      }
+
+      .image-container img {
+        object-fit: cover;
+      }
+
+      .four-elements .image-container {
+        height: auto;
+      }
+
+      .image-container {
+        flex-direction: column;
+        padding: 0.2rem;
+      }
+
+      .image-container p {
+        /* width: 100%;
+        text-align: center;
+        color: black;
+        font-size: 20px;
+        margin: 0; */
+        font-size: 12px;
+      }
+
+      .four-elements .image-container {
+        padding: 1.25rem;
+      }
+
+      .four-elements .image-container img {
+        height: 100%;
+      }
+
+      .three-elements .image-container > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .three-elements .image-container img {
+        height: auto !important;
+        object-fit: contain;
+      }
+
+      .three-elements .axd_selection {
+        width: 33.33333333333333%;
+        height: 100%;
+      }
+
+      /* .three-elements .axd_selection img:not(.c-recom) {
+        min-height: 220px;
+      } */
+
+      @media (min-width: 480px) {
+        .four-elements .axd_selection {
+          width: 33.33333333333333%;
+          height: 49%;
+        }
+      }
+
+      .selection_scroll {
+        top: 16px !important;
+      }
+      .selection_scroll:has(.four-elements .axd_selections){
+        top: 8px !important;
+      }
+
+      @media (min-width: 480px) {
+        .selection_scroll {
+          /* top: 28px !important; */
+          top: 30px !important;
+          /* top: 24px !important; */
+        }
+
+        #container-recom .selection_scroll {
+          top: 24px !important;
+        }
+      }
+
+      .axd_selection {
+        transition: transform 0.5s, opacity 0.5s;
+        /* 平滑過渡效果 */
+      }
+
+      .three-elements .axd_selections {
+        padding: 0;
+      }
+
+      @media (max-width: 400px) {
+        .three-elements .axd_selections {
+          flex-wrap: nowrap !important;
+          overflow-x: scroll !important;
+          justify-content: flex-start !important;
+          align-items: flex-start !important;
+        }
+
+        .three-elements .axd_selection {
+          box-sizing: border-box;
+          padding-bottom: 8px;
+          width: 36.5%;
+          /* justify-content: flex-start !important; */
+        }
+
+        .three-elements .axd_selection:first-child {
+          margin-left: 45px;
+        }
+
+        .three-elements .axd_selection:last-child {
+          margin-right: 45px;
+        }
+
+        /* .overflow-opacity {
+          opacity: 0.5; /* 半透明 */
+        /* } */
+
+        .four-elements .axd_selection {
+          /* width: 43.6%; */
+          /* width: 40%; */
+          /* width: 36%; */
+          /* width: 38%; */
+          /* width: 30%; */
+          transform: scale(0.99);
+          aspect-ratio: 1;
+          max-width: 38%;
+          flex: 1 1 38%;
+          /* 添加一個偽元素用來佔據剩餘空間 */
+          box-sizing: border-box;
+        }
+
+        .four-elements .axd_selections {
+          justify-content: center;
+          /* align-items: flex-start; */
+          /* margin: 0 auto; */
+        }
+
+        .four-elements .axd_selections::after {
+          content: "";
+          max-width: 38%;
+          flex: 1 1 38%;
+          /* 添加一個偽元素用來佔據剩餘空間 */
+        }
+
+        /* .selection_scroll::before,
+    .selection_scroll::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 60px;      
+        height: 100%;
+        pointer-events: none; 
+    }
+
+    .selection_scroll::before {
+        left: 0;
+        background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    }
+
+    .selection_scroll::after {
+        right: 0;
+        background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    } */
+
+        .partially-visible {
+          opacity: 0.5;
+        }
+
+        #startover {
+          margin-top: 2em;
+        }
+
+        .selection_scroll {
+          top: 20px;
+        }
+      }
+
+      /* .selection img{
+    max-height: 250px;
+} */
+
+      /* try */
+      .container {
+        overflow: hidden;
+      }
+
+      .slide {
+        width: 100%;
+        position: relative;
+        left: 0;
+      }
+
+      .selection {
+        /* display: grid;
+    gap: 20px; */
+        display: flex;
+      }
+
+      .axd_img {
+        width: 100%;
+        height: auto;
+      }
+
+      /* .axd_selection{
+    max-height: 58% ;
+} */
+      .selection_scroll {
+        /* width:auto; */
+        margin: auto;
+        /* overflow: hidden ; */
+        overflow-y: visible;
+        display: flex;
+        /* align-items: center; */
+      }
+
+      .selection {
+        /* width: 50%; if you have 3 pages */
+        /* float: left; */
+        overflow-y: visible;
+      }
+
+      .dot-btns.pag-margin {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 4px;
+        margin-top: 20px;
+      }
+
+      @media screen and (min-width: 400px) {
+        .dot-btns.pag-margin {
+          margin-top: 48px;
+          display: none !important;
+        }
+      }
+
+      .dot {
+        display: block;
+        /* width: 10px;
+        height: 10px; */
+        width: 8px;
+        height: 8px;
+        /* margin: 0 5px; */
+        background-color: #bbb;
+        border-radius: 50%;
+        cursor: pointer !important;
+      }
+
+      .dot.active {
+        background-color: #717171;
+      }
+
+      .nav-button:hover {
+        background-color: #e0e0df;
+      }
+
+      .nav-button {
+        position: absolute;
+        bottom: 37px;
+        background-color: transparent;
+        color: white;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+        z-index: 1000;
+        border-radius: 50%;
+        height: 28px;
+        width: 28px;
+        display: flex;
+        font-size: 12px;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease-out;
+        background: rgba(30, 30, 25, 0.07);
+        backdrop-filter: blur(20px);
+        --webkit-backdrop-filter: blur(20px);
+      }
+
+      .left-button {
+        left: 43%;
+        background: rgba(30, 30, 25, 0.07);
+        backdrop-filter: blur(20px);
+      }
+
+      .left-button > div {
+        background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M12.8%2014.8L8.00005%2010L12.8%205.2%22%20stroke%3D%22%23FCFCF8%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 100%;
+        height: 100%;
+      }
+
+      .right-button {
+        right: 43%;
+        background: rgba(30, 30, 25, 0.07);
+        backdrop-filter: blur(20px);
+      }
+
+      .right-button > div {
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2219%22%20height%3D%2218%22%20viewBox%3D%220%200%2019%2018%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M7.32001%2013.48L11.8%209L7.32001%204.52%22%20stroke%3D%22%23FCFCF8%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+
+      #loadingbar,
+      .container {
+        box-sizing: border-box !important;
+        border-radius: 21px;
+        width: 100vw !important;
+        min-height: 365px !important;
+      }
+      #loadingbar {
+        overflow: hidden !important;
+      }
+
+      @media screen and (min-width: 365px) and (max-width: 479px) {
+        #loadingbar,
+        .container {
+          width: 365px !important;
+          height: 365px !important;
+        }
+      }
+
+      @media screen and (min-width: 480px) {
+        #loadingbar,
+        .container {
+          border-radius: 28px;
+          height: 480px !important;
+          width: 480px !important;
+        }
+      }
+
+      /* .img-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    height: 100%;
+    
+} */
+
+      .image-container {
+        overflow: hidden;
+
+        /* padding: 2px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: solid 1px transparent;
+        transition: all 0.5s;
+        border-radius: 5px;
+      }
+
+      .image-container:hover {
+        border: solid 1px gray;
+      }
+
+      .axd_img:hover {
+        border: none;
+      }
+
+      .axd_img {
+        border: none;
+      }
+
+      .image-container img,
+      #container-recom a img {
+        max-width: 100%;
+        /* 圖片最大寬度為容器的100% */
+        object-fit: cover;
+        object-position: center;
+        /* 圖片置中 */
+      }
+
+      .image-container img {
+        height: inherit;
+        border-radius: 8px !important;
+      }
+
+      /* 
+      #container-recom a {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: inherit;
+
+        box-shadow: rgba(0, 0, 0, 0.15) 0 2px 8px;
+        transition: all 0.5s;
+        border-radius: 5px;
+        overflow: hidden;
+      } */
+
+      #container-recom a img {
+        height: inherit;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--  Initial Loading  -->
+    <div class="loadingbar" id="loadingbar">
+      <div class="spinner spinner-circle"></div>
+    </div>
+    <!-- load recom -->
+    <div class="mbinfo" id="loadingbar_recom" style="display: none">
+      <div class="intro-content">
+        <div class="intro-logo intro-modal__logo">
+          <!-- <img
+            src="img/product suggestion loading animation (better).gif"
+            alt="logo"
+          /> -->
+          <img src="img/loading-animation.gif" alt="loading animation" loading="lazy" />
+        </div>
+        <p class="loading-text">
+          翻箱倒櫃找好物中，心動清單即將送上!
+          <!-- <span class="dots"></span> -->
+        </p>
+      </div>
+    </div>
+
+    <!-- container -->
+    <div class="container back" id="containerback"></div>
+    <div class="container mbinfo animFadeIn" id="container-recom">
+      <div class="c_header" id="container-container-recom-header">
+        <div class="header-text">
+          <span id="recommend-title">專屬商品推薦</span>
+          <p id="recommend-desc">根據您的偏好，精選以下單品。</p>
+        </div>
+      </div>
+      <div class="selection_scroll">
+        <div class="selection">
+          <div class="axd_selections selection"></div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="result-actions">
+          <button id="startover" class="startover enabled">
+            <div class="iconContainer--recom">
+              <div class="icon--recom"></div>
+            </div>
+          </button>
+          <!-- <button id="recommend-btn">刷新推薦</button> -->
+          <button id="coupon-btn">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_5537_3580)">
+                <path
+                  d="M9.81494 11.6667V18.3334H6.48161C5.81857 18.3334 5.18268 18.07 4.71384 17.6012C4.245 17.1323 3.98161 16.4965 3.98161 15.8334V12.5001C3.98161 12.2791 4.06941 12.0671 4.22569 11.9108C4.38197 11.7545 4.59393 11.6667 4.81494 11.6667H9.81494ZM16.4816 11.6667C16.7026 11.6667 16.9146 11.7545 17.0709 11.9108C17.2271 12.0671 17.3149 12.2791 17.3149 12.5001V15.8334C17.3149 16.4965 17.0515 17.1323 16.5827 17.6012C16.1139 18.07 15.478 18.3334 14.8149 18.3334H11.4816V11.6667H16.4816ZM14.3983 1.66675C14.8904 1.66665 15.3745 1.79105 15.8056 2.02839C16.2366 2.26572 16.6007 2.60827 16.8637 3.02414C17.1268 3.44001 17.2804 3.91568 17.3102 4.40687C17.34 4.89806 17.245 5.3888 17.0341 5.83342H17.3149C17.757 5.83342 18.1809 6.00901 18.4935 6.32157C18.806 6.63413 18.9816 7.05805 18.9816 7.50008V8.33342C18.9816 8.77544 18.806 9.19937 18.4935 9.51193C18.1809 9.82449 17.757 10.0001 17.3149 10.0001H11.4816V5.83342H9.81494V10.0001H3.98161C3.53958 10.0001 3.11566 9.82449 2.8031 9.51193C2.49054 9.19937 2.31494 8.77544 2.31494 8.33342V7.50008C2.31494 7.05805 2.49054 6.63413 2.8031 6.32157C3.11566 6.00901 3.53958 5.83342 3.98161 5.83342H4.26244C4.07697 5.44284 3.98103 5.01579 3.98161 4.58342C3.98161 2.97258 5.28744 1.66675 6.88411 1.66675C8.34661 1.64175 9.64411 2.57675 10.5349 4.11175L10.6483 4.31425C11.5091 2.71925 12.7816 1.71925 14.2241 1.66842L14.3983 1.66675ZM6.89827 3.33342C6.56675 3.33342 6.24881 3.46511 6.01439 3.69953C5.77997 3.93395 5.64827 4.25189 5.64827 4.58342C5.64827 4.91494 5.77997 5.23288 6.01439 5.4673C6.24881 5.70172 6.56675 5.83342 6.89827 5.83342H9.51744C8.89994 4.24592 7.89327 3.31675 6.89827 3.33342ZM14.3841 3.33342C13.4008 3.31675 12.3966 4.24675 11.7791 5.83342H14.3983C14.7298 5.83154 15.047 5.69804 15.2801 5.46229C15.5132 5.22654 15.6431 4.90785 15.6412 4.57633C15.6393 4.24481 15.5058 3.92762 15.2701 3.69452C15.0343 3.46143 14.7156 3.33154 14.3841 3.33342Z"
+                  fill="white" />
+              </g>
+              <defs>
+                <clipPath id="clip0_5537_3580">
+                  <rect width="20" height="20" fill="white" transform="translate(0.648438)" />
+                </clipPath>
+              </defs>
+            </svg>
+            <div>當日優惠</div>
+          </button>
+        </div>
+        <!-- <div id="confirm-button_recom" class="c-recom"></div> -->
+      </div>
+    </div>
+
+    <!-- Intro Page -->
+    <div id="intro-page" class="intro-page intro-modal mbinfo animX">
+      <div
+        id="intro-content-advanced"
+        class="intro-content intro-coupon-modal__content"
+        style="display: none"
+      >
+        <p class="intro-coupon-modal__title">專屬資訊</p>
+        <div class="intro-coupon-modal__header" style="max-width: 100%;">
+          <h3>熱銷排行榜</h3>
+          <div id="hot-sale"></div>
+        </div>
+
+        <div class="intro-coupon-modal__content-container">
+          <h3>優惠折扣</h3>
+          <div id="intro-coupon-modal__content-coupons"></div>
+        </div>
+        <div class="intro-coupon-modal__footer">
+          <h3>專屬旅程</h3>
+          <div class="intro-coupon-modal__footer-content">
+            <div>
+              <div class="intro-logo intro-coupon-modal__logo">
+                <img
+                  src="img/start-animation.gif"
+                  alt="start animation"
+                  width="43"
+                  height="43"
+                  loading="lazy"
+                />
+              </div>
+              <p id="intro-coupon-modal__footer-content-text">開啟個人化購物之旅</p>
+            </div>
+            <button id="start-button" class="intro-coupon-modal__btn--start">
+                <div>
+                個人化購物
+                </div>
+                <div class="intro-coupon-modal__btn--start-arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 14 14" fill="none">
+                  <path d="M4.90039 10.5L8.40039 7L4.90039 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- background -->
+
+    <div id="pback" style="display: none !important"></div>
+    <!-- <script src="https://sdk.amazonaws.com/js/aws-sdk-2.243.1.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/pep/0.4.1/pep.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/iframe.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="js/embedded.js"></script>
+    <script src="js/embedded.js"></script>
+    <!-- 載入 Google OAuth 登入組件 -->
+    <!-- <script src="https://inf-g-login.vercel.app/infFITS-oauth.js"></script>
+    <script>
+      // 初始化 Google 登入組件（等待 iframe 載入完成）
+      if (typeof initGoogleLoginWithDynamicListener === 'function') {
+          initGoogleLoginWithDynamicListener('product');
+      }
+    </script> -->
+    <style>
+      .image-container.tag-selected {
+        border: 0.5px solid rgba(59, 59, 50, 0.18) !important;
+        background: #f3f3ef !important;
+        box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.12);
+      }
+
+      #pback {
+        opacity: 0;
+      }
+
+      .axd_selection {
+        transition: all 0.2s;
+        width: 50%;
+        height: 100%;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+        /* padding: 5px; */
+        padding: 0 8px;
+        flex-direction: column;
+        flex: 0 0 auto;
+        display: flex !important;
+        /* transform: scale(0.9); */
+        /* margin: 0 auto; */
+      }
+
+      .selection_scroll {
+        /* top:24px; */
+        /* height: inherit; */
+        /* max-height: 300px; */
+        /* overflow: scroll; */
+        scroll-behavior: smooth;
+        /* 平滑滚动效果 */
+      }
+
+      .selection {
+        /* height: 90%; */
+        /* justify-content: flex-start !important; */
+        justify-content: center;
+        flex-wrap: wrap;
+        /* gap: 16px 0; */
+
+        /* align-items: flex-start; */
+        /* gap: 2px 0; */
+      }
+
+      @media screen and (min-width: 480px) {
+        .selection {
+          gap: 20px 0;
+        }
+      }
+
+      /* .axd_selection p {
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        margin: 8px;
+        pointer-events: none;
+      } */
+      .axd_img {
+        border-radius: 5px;
+      }
+
+      /* .c-recom {
+        max-height: 300px;
+        box-shadow: rgba(0, 0, 0, 0.15) 0 2px 8px;
+        transition: all 0.5s;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      } */
+      .recom-text {
+        letter-spacing: 0.1em !important;
+        color: black;
+        font-size: 12px;
+        font-weight: 500 !important;
+        line-height: 1.4em;
+        color: #0a0101;
+        text-transform: none;
+        text-align: left;
+        /* margin-top: 8px !important; */
+        max-height: 48px;
+        overflow: scroll;
+        margin-bottom: 1rem;
+      }
+
+      .recom-price {
+        /* letter-spacing: 0 !important;
+        color: gray;
+        font-size: 12px;
+        font-weight: 400;
+        color: #0a0101;
+        text-align: left;
+        line-height: 1.2em; */
+        /* font-family: 'Noto Sans TC'; */
+        text-align: left;
+        color: #3c3c39;
+        font-family: "Noto Sans TC", "Figtree", sans-serif;
+        font-size: 12px !important;
+        line-height: 16px !important;
+        letter-spacing: 0.5px !important;
+        font-weight: 700;
+        /* 100% */
+      }
+
+      #container-recom .axd_selection:hover {
+        transform: scale(1.025);
+      }
+
+      .intro-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+      }
+      .intro-page {
+        width: inherit;
+        display: flex;
+        justify-content: center;
+      }
+
+      .line-ellipsis-2 {
+        word-break: break-word;
+        line-height: 1.5em;
+        max-height: 3em;
+        overflow: hidden !important;
+        min-height: 36px;
+      }
+
+      .line-ellipsis-2::after {
+        content: "...";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding-left: 20px;
+        background: white;
+        display: none;
+        /* Initially hidden */
+      }
+
+      .recom-price,
+      .recom-text {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      /* try */
+      .c_header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 1.8em;
+        padding-right: 1.8em;
+        padding-top: 0.8em;
+        padding-bottom: 0.8em;
+      }
+
+      .header-text {
+        text-align: center;
+        flex-grow: 1;
+      }
+
+      span {
+        display: block;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      p {
+        margin: 0;
+        font-size: 14px;
+        color: #777;
+      }
+
+      .flipped-image {
+        transform: scaleX(-1);
+      }
+
+      .flipped-image:hover {
+        transform: scaleX(-1.1) scaleY(1.1);
+      }
+    </style>
+  </body>
+</html>
